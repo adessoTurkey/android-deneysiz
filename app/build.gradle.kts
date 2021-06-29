@@ -4,6 +4,7 @@ plugins {
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     kotlin("plugin.serialization")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -78,14 +79,16 @@ dependencies {
     implementation(Dependencies.AndroidX.Compose.runtimeLivedata)
 
     implementation(Dependencies.Dagger.hilt)
+    implementation(Dependencies.Dagger.hiltNavigationCompose)
     kapt(Dependencies.Dagger.hiltKapt)
 
     implementation(Dependencies.Accompanist.coil)
     implementation(Dependencies.Accompanist.insets)
+    implementation(Dependencies.Accompanist.systemUiController)
 
     implementation(Dependencies.timber)
-    implementation(Dependencies.retrofit)
-    implementation(Dependencies.retrofitSerializer)
+    implementation(Dependencies.Retrofit.retrofit)
+    implementation(Dependencies.Retrofit.retrofitSerializer)
 
     implementation(platform(Dependencies.OkHttp.bom))
     implementation(Dependencies.OkHttp.okHttp)
