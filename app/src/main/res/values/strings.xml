@@ -19,4 +19,11 @@
     <string name="discover_category_mom_baby_care">Anne ve Bebek Bakım</string>
     <string name="discover_category_home_care">Ev Bakım</string>
     <string name="search_brand">Marka ara</string>
+    <string name="category_detail_found_count">%d marka bulundu</string>
+    <string name="category_detail_score">%d/10</string>
+    <string name="alphabetical_ascending">A\'dan Z\'ye</string>
+    <string name="alphabetical_descending">Z\'dan A\'ye</string>
+    <string name="score_ascending">En Düşük Puan</string>
+    <string name="score_descending">En Yüksek Puan</string>
+    <string name="category_detail_sort">Sırala</string>
 </resources>
