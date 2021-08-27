@@ -3,9 +3,9 @@ package com.deneyehayir.deneysiz.internal.injection
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.deneyehayir.deneysiz.BuildConfig
-import com.deneyehayir.deneysiz.data.remote.api.DummyService
-import com.deneyehayir.deneysiz.internal.util.api.DummyNetworkInterceptor
+import com.deneyehayir.deneysiz.data.remote.api.CategoryService
 import com.deneyehayir.deneysiz.internal.util.api.ErrorHandlingInterceptor
+import com.deneyehayir.deneysiz.internal.util.api.LocalResponseInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -50,13 +50,14 @@ object NetworkModule {
     internal fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         chuckerInterceptor: ChuckerInterceptor,
-        errorHandlingInterceptor: ErrorHandlingInterceptor
+        errorHandlingInterceptor: ErrorHandlingInterceptor,
+        localResponseInterceptor: LocalResponseInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(chuckerInterceptor)
             .addInterceptor(errorHandlingInterceptor)
-            .addInterceptor(DummyNetworkInterceptor())
+            .addInterceptor(localResponseInterceptor)
             .build()
     }
 
@@ -65,6 +66,7 @@ object NetworkModule {
     internal fun provideJson() = Json {
         ignoreUnknownKeys = true
         isLenient = true
+        coerceInputValues = true
     }
 
     @ExperimentalSerializationApi
@@ -83,5 +85,5 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    internal fun provideDummyService(retrofit: Retrofit): DummyService = retrofit.create()
+    internal fun providesCategoryService(retrofit: Retrofit): CategoryService = retrofit.create()
 }

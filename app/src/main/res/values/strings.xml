@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Deneysiz</string>
+    <string name="bottom_nav_tab_search_brand">Marka Ara</string>
+    <string name="bottom_nav_tab_discover">Keşfet</string>
+    <string name="bottom_nav_tab_do_you_know">Biliyor Musun?</string>
+    <string name="bottom_nav_tab_following">Takiptekiler</string>
+    <string name="top_bar_title_search_brand">Arama</string>
+    <string name="top_bar_title_discover">Keşfet</string>
+    <string name="top_bar_title_who_we_are">Biz Kimiz?</string>
+    <string name="top_bar_title_do_you_know">Biliyor Musun?</string>
+    <string name="top_bar_action_who_we_are">Biz Kimiz</string>
+    <string name="discover_category_all_brands">Bütün\nMarkalar</string>
+    <string name="discover_category_makeup">Makyaj</string>
+    <string name="discover_category_hair_care">Saç Bakım</string>
+    <string name="discover_category_skin_care">Cilt ve Yüz Bakım</string>
+    <string name="discover_category_fragrance">Deodorant ve Parfüm</string>
+    <string name="discover_category_personal_care">Kişisel Hijyen ve Bakım</string>
+    <string name="discover_category_dental_care">Ağız ve Diş Bakım</string>
+    <string name="discover_category_mom_baby_care">Anne ve Bebek Bakım</string>
+    <string name="discover_category_home_care">Ev Bakım</string>
+    <string name="search_brand">Marka ara</string>
 </resources>
