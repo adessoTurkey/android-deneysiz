@@ -28,14 +28,7 @@ fun MainTopAppBar(
     modifier: Modifier = Modifier,
     @StringRes titleRes: Int,
     titleColor: Color,
-    actionsColor: Color = Color.White,
-    navigateToWhoWeAre: () -> Unit,
-    actions: @Composable RowScope.() -> Unit = {
-        TopAppBarWhoWeAreAction(
-            color = actionsColor,
-            navigateToWhoWeAre = navigateToWhoWeAre
-        )
-    },
+    actions: @Composable RowScope.() -> Unit,
     backgroundColor: Color = Color.White,
     contentColor: Color = contentColorFor(backgroundColor),
     elevation: Dp = 0.dp

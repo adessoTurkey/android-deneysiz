@@ -1,0 +1,156 @@
+{
+  "status": 200,
+  "message": "Success",
+  "data": [
+    {
+      "id": 73,
+      "name": "Hawaiian Tropic",
+      "parentCompany": "Rossmann",
+      "score" : 9,
+      "offerInChina": false,
+      "categoryId": "0",
+      "parentCompanySafe": true,
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "isSafe": true,
+      "vegan": true,
+      "hasVeganProduct": true
+    },
+    {
+      "id": 74,
+      "name": "Flink & Sauber",
+      "parentCompany": "Dirk Rossmann",
+      "score" : 7,
+      "offerInChina": false,
+      "categoryId": "0",
+      "parentCompanySafe": true,
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "isSafe": true,
+      "vegan": true,
+      "hasVeganProduct": true
+    },
+    {
+      "id": 75,
+      "name": "Sunozon",
+      "parentCompany": "L’Oréal",
+      "score" : 6,
+      "offerInChina": false,
+      "categoryId": "0",
+      "parentCompanySafe": true,
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "isSafe": true,
+      "vegan": true,
+      "hasVeganProduct": true
+    },
+    {
+      "id": 76,
+      "name": "Diadermine",
+      "parentCompany": "Gliss",
+      "score" : 3,
+      "offerInChina": false,
+      "categoryId": "0",
+      "parentCompanySafe": true,
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "isSafe": true,
+      "vegan": true,
+      "hasVeganProduct": true
+    },
+    {
+      "id": 77,
+      "name": "Procsin",
+      "parentCompany": "Isana",
+      "score" : 2,
+      "offerInChina": false,
+      "categoryId": "0",
+      "parentCompanySafe": true,
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "isSafe": true,
+      "vegan": true,
+      "hasVeganProduct": true
+    }
+  ]
+}

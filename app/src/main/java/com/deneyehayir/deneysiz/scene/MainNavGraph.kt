@@ -1,5 +1,6 @@
 package com.deneyehayir.deneysiz.scene
 
+import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material.BottomNavigation
@@ -16,15 +17,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.data.remote.model.CategoryType
-import com.deneyehayir.deneysiz.scene.category.CategoryScreen
+import com.deneyehayir.deneysiz.domain.model.CategoryItemUiModel
+import com.deneyehayir.deneysiz.scene.categorydetail.CategoryDetailScreen
 import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.Gray
@@ -51,9 +50,7 @@ sealed class MainScreen(
 sealed class DetailScreen(
     val route: String
 ) {
-    object Category : DetailScreen(route = "detail/category/{categoryType}") {
-        fun createRoute(categoryType: CategoryType): String = "detail/category/$categoryType"
-    }
+    object Category : DetailScreen(route = "detail/category")
 }
 
 @Composable
@@ -110,7 +107,12 @@ fun MainNavGraph(
                 modifier = modifier,
                 navigateToSearch = {},
                 navigateToCategory = { categoryItem ->
-                    navController.navigate(DetailScreen.Category.createRoute(categoryItem))
+                    navController.apply {
+                        currentBackStackEntry?.arguments = Bundle().apply {
+                            putParcelable("categoryItem", categoryItem)
+                        }
+                        navigate(DetailScreen.Category.route)
+                    }
                 },
                 navigateToWhoWeAre = {}
             )
@@ -122,17 +124,16 @@ fun MainNavGraph(
                 navigateToWhoWeAre = {}
             )
         }
-        composable(
-            route = DetailScreen.Category.route,
-            arguments = listOf(
-                navArgument("categoryType") {
-                    type = NavType.EnumType(CategoryType::class.java)
-                }
-            )
-        ) { backStackEntry ->
-            backStackEntry.arguments?.get("categoryType")?.let {
-                CategoryScreen(
-                    it as CategoryType
+        composable(route = DetailScreen.Category.route) {
+            // TODO can be improved regarding https://issuetracker.google.com/issues/182194894#comment14
+            navController.previousBackStackEntry?.arguments?.getParcelable<CategoryItemUiModel>(
+                "categoryItem"
+            )?.let { categoryItem ->
+                CategoryDetailScreen(
+                    modifier = modifier,
+                    categoryItem,
+                    onBack = { navController.navigateUp() },
+                    onSuggestBrand = {}
                 )
             }
         }

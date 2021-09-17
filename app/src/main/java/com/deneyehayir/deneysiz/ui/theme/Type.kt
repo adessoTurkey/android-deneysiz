@@ -14,5 +14,5 @@ private val Poppins = FontFamily(
 )
 
 val Typography = Typography(
-    defaultFontFamily = Poppins
+    defaultFontFamily = FontFamily.Default
 )

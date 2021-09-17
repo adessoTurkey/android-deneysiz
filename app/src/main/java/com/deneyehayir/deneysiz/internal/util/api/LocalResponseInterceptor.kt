@@ -26,6 +26,9 @@ class LocalResponseInterceptor @Inject constructor(
                 LocalRequestType.CATEGORIES -> createLocalResponse(
                     this, CategoryService.CATEGORIES
                 )
+                LocalRequestType.CATEGORY_DETAIL -> createLocalResponse(
+                    this, CategoryService.CATEGORY_DETAIL
+                )
                 LocalRequestType.NONE -> chain.proceed(this)
             }
         }

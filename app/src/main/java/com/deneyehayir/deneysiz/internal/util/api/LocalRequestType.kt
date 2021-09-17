@@ -5,6 +5,7 @@ import okhttp3.Request
 
 enum class LocalRequestType(val endpoint: String) {
     CATEGORIES(CategoryService.CATEGORIES),
+    CATEGORY_DETAIL(CategoryService.CATEGORY_DETAIL),
     NONE("none");
 
     companion object {
