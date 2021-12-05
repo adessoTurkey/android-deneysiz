@@ -1,22 +1,15 @@
 package com.deneyehayir.deneysiz.domain.usecase
 
-import com.deneyehayir.deneysiz.data.remote.Failure
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-abstract class UseCase<DataSourceType, DomainType, Params> {
+abstract class UseCase<T, in Params>(
+    private val dispatcher: CoroutineDispatcher
+) {
 
-    protected abstract suspend fun buildUseCase(params: Params): DataSourceType
+    suspend operator fun invoke(params: Params): Result<T> = withContext(dispatcher) {
+        runCatching { execute(params) }
+    }
 
-    protected abstract fun map(dataSourceType: DataSourceType): DomainType
-
-    suspend operator fun invoke(params: Params): Result<DomainType> =
-        withContext(Dispatchers.IO) {
-            try {
-                Result.success(buildUseCase(params))
-                    .map { map(it) }
-            } catch (failure: Failure) {
-                Result.failure(failure)
-            }
-        }
+    protected abstract suspend fun execute(params: Params): T
 }

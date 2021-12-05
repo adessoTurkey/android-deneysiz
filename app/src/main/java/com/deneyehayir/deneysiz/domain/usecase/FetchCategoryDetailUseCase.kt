@@ -1,23 +1,20 @@
 package com.deneyehayir.deneysiz.domain.usecase
 
-import com.deneyehayir.deneysiz.data.remote.model.CategoryDetailResponse
-import com.deneyehayir.deneysiz.data.repository.CategoryRepository
-import com.deneyehayir.deneysiz.domain.mapper.categorydetail.CategoryDetailUiModelMapper
-import com.deneyehayir.deneysiz.domain.model.CategoryDetailUiModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
+import com.deneyehayir.deneysiz.domain.repository.CategoryRepository
+import com.deneyehayir.deneysiz.internal.injection.DefaultDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 class FetchCategoryDetailUseCase @Inject constructor(
     private val repository: CategoryRepository,
-    private val mapper: CategoryDetailUiModelMapper
-) : UseCase<CategoryDetailResponse, CategoryDetailUiModel, FetchCategoryDetailUseCase.Params>() {
+    @DefaultDispatcher dispatcher: CoroutineDispatcher
+) : UseCase<CategoryDetailDomainModel, FetchCategoryDetailUseCase.Params>(dispatcher) {
 
-    override suspend fun buildUseCase(params: Params): CategoryDetailResponse =
+    override suspend fun execute(params: Params): CategoryDetailDomainModel =
         repository.fetchCategoryDetail(
-            params.categoryId
+            categoryId = params.categoryId
         )
-
-    override fun map(dataSourceType: CategoryDetailResponse): CategoryDetailUiModel =
-        mapper.mapToUiModel(dataSourceType)
 
     data class Params(
         val categoryId: String

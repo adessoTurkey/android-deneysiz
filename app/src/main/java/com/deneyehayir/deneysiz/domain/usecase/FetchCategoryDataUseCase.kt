@@ -1,19 +1,15 @@
 package com.deneyehayir.deneysiz.domain.usecase
 
-import com.deneyehayir.deneysiz.data.remote.model.CategoryResponse
-import com.deneyehayir.deneysiz.data.repository.CategoryRepository
-import com.deneyehayir.deneysiz.domain.mapper.category.CategoryUiModelMapper
-import com.deneyehayir.deneysiz.domain.model.CategoryUiModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
+import com.deneyehayir.deneysiz.domain.repository.CategoryRepository
+import com.deneyehayir.deneysiz.internal.injection.DefaultDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 class FetchCategoryDataUseCase @Inject constructor(
     private val repository: CategoryRepository,
-    private val mapper: CategoryUiModelMapper
-) : UseCase<CategoryResponse, CategoryUiModel, Unit>() {
+    @DefaultDispatcher dispatcher: CoroutineDispatcher
+) : UseCase<CategoryDomainModel, Unit>(dispatcher) {
 
-    override suspend fun buildUseCase(params: Unit): CategoryResponse =
-        repository.fetchCategories()
-
-    override fun map(dataSourceType: CategoryResponse): CategoryUiModel =
-        mapper.mapToUiModel(dataSourceType)
+    override suspend fun execute(params: Unit): CategoryDomainModel = repository.fetchCategories()
 }
