@@ -1,15 +1,18 @@
 <resources>
     <string name="app_name">Deneysiz</string>
     <string name="empty"/>
+    
     <string name="bottom_nav_tab_search_brand">Marka Ara</string>
     <string name="bottom_nav_tab_discover">Keşfet</string>
     <string name="bottom_nav_tab_do_you_know">Biliyor Musun?</string>
     <string name="bottom_nav_tab_following">Takiptekiler</string>
+    
     <string name="top_bar_title_search_brand">Arama</string>
     <string name="top_bar_title_discover">Keşfet</string>
     <string name="top_bar_title_who_we_are">Biz Kimiz?</string>
     <string name="top_bar_title_do_you_know">Biliyor Musun?</string>
     <string name="top_bar_action_who_we_are">Biz Kimiz</string>
+    
     <string name="discover_category_all_brands">Bütün Markalar</string>
     <string name="discover_category_makeup">Makyaj</string>
     <string name="discover_category_hair_care">Saç Bakım</string>
@@ -19,9 +22,12 @@
     <string name="discover_category_dental_care">Ağız ve Diş Bakım</string>
     <string name="discover_category_mom_baby_care">Anne ve Bebek Bakım</string>
     <string name="discover_category_home_care">Ev Bakım</string>
+    
     <string name="search_brand">Marka ara</string>
+    
     <string name="category_detail_found_count">%d marka bulundu</string>
     <string name="category_detail_score">%d/10</string>
+    
     <string name="alphabetical_ascending">A\'dan Z\'ye</string>
     <string name="alphabetical_descending">Z\'dan A\'ye</string>
     <string name="score_ascending">Artan Puan</string>
@@ -33,4 +39,29 @@
     <string name="category_detail_sort">Sırala(%s)</string>
     <string name="support_mail_address">iletisim@deneyehayir.org</string>
     <string name="support_subject_suggest">Yeni Marka Öner</string>
+    <string name="support_confirmation_approve">Yeni Marka Öner</string>
+    <string name="support_confirmation_deny">İptal</string>
+
+    <string name="brand_detail_info_vegan_product">Vegan Ürünler</string>
+    <string name="brand_detail_info_china_offer">Çin’de Satış Yapmıyor</string>
+    <string name="brand_detail_info_parent_company_safe">Çatı Firma Deneysiz</string>
+    <string name="brand_detail_pop_up_description">Deutsches Ipsum Dolor quo lucilius Freude schöner</string>
+    <string name="brand_detail_pop_up_title_safe_brand">Marka Deneysiz</string>
+    <string name="brand_detail_pop_up_title_parent_company_safe">Çatı Marka Deneysiz</string>
+    <string name="brand_detail_pop_up_title_brand_vegan">Marka Vegan</string>
+    <string name="brand_detail_pop_up_title_china_offer">Çin\’de Satış</string>
+    <string name="brand_detail_pop_up_title_vegan_product">Vegan Ürün Var Mı?</string>
+    <string name="brand_detail_pop_up_subtitle_yes">Evet</string>
+    <string name="brand_detail_pop_up_subtitle_no">Hayır</string>
+    <string name="brand_detail_pop_up_subtitle_none">Yok</string>
+    <string name="brand_detail_update_date">Güncellenme Tarihi: %s</string>
+    <string name="brand_detail_support_mail_address">iletisim@deneyehayir.org</string>
+    <string name="brand_detail_support_mail_subject">Yanlış/eksik veri bildir</string>
+    <string name="brand_detail_support_approve">yanlış/eksik veri bildir</string>
+    <string name="brand_detail_support_deny">İptal</string>
+
+    <string name="certificate_detail_description_leaping_bunny">Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per Freude schöner Götterfunken in mei ullum gloriatur. Id Entschuldigung recteque accommodare sed. Id nec 99 Luftballons argumentum, te melius erroribus.\n\n Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per Freude schöner Götterfunken in mei ullum gloriatur. Id Entschuldigung recteque accommodare sed. Id nec 99 Luftballons argumentum, te melius erroribus.</string>
+    <string name="certificate_detail_description_beauty_without_bunnies">Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per Freude schöner Götterfunken in mei ullum gloriatur. Id Entschuldigung recteque accommodare sed. Id nec 99 Luftballons argumentum, te melius erroribus.\n\n Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per Freude schöner Götterfunken in mei ullum gloriatur. Id Entschuldigung recteque accommodare sed. Id nec 99 Luftballons argumentum, te melius erroribus.</string>
+    <string name="certificate_detail_description_vegan_society">Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per Freude schöner Götterfunken in mei ullum gloriatur. Id Entschuldigung recteque accommodare sed. Id nec 99 Luftballons argumentum, te melius erroribus.\n\n Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per Freude schöner Götterfunken in mei ullum gloriatur. Id Entschuldigung recteque accommodare sed. Id nec 99 Luftballons argumentum, te melius erroribus.</string>
+    <string name="certificate_detail_description_v_label">Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per Freude schöner Götterfunken in mei ullum gloriatur. Id Entschuldigung recteque accommodare sed. Id nec 99 Luftballons argumentum, te melius erroribus.\n\n Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per Freude schöner Götterfunken in mei ullum gloriatur. Id Entschuldigung recteque accommodare sed. Id nec 99 Luftballons argumentum, te melius erroribus.</string>
 </resources>

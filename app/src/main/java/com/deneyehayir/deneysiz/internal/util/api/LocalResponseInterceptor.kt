@@ -1,7 +1,7 @@
 package com.deneyehayir.deneysiz.internal.util.api
 
 import android.content.Context
-import com.deneyehayir.deneysiz.data.remote.api.CategoryService
+import com.deneyehayir.deneysiz.data.remote.api.ApiService
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -24,10 +24,13 @@ class LocalResponseInterceptor @Inject constructor(
         return chain.request().run {
             when (LocalRequestType.fromRequest(this)) {
                 LocalRequestType.CATEGORIES -> createLocalResponse(
-                    this, CategoryService.CATEGORIES
+                    this, ApiService.CATEGORIES
                 )
                 LocalRequestType.CATEGORY_DETAIL -> createLocalResponse(
-                    this, CategoryService.CATEGORY_DETAIL
+                    this, ApiService.CATEGORY_DETAIL
+                )
+                LocalRequestType.BRANDS_DETAIL -> createLocalResponse(
+                    this, ApiService.BRANDS_DETAIL
                 )
                 LocalRequestType.NONE -> chain.proceed(this)
             }

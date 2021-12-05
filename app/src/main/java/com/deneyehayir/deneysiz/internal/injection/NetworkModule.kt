@@ -3,7 +3,7 @@ package com.deneyehayir.deneysiz.internal.injection
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.deneyehayir.deneysiz.BuildConfig
-import com.deneyehayir.deneysiz.data.remote.api.CategoryService
+import com.deneyehayir.deneysiz.data.remote.api.ApiService
 import com.deneyehayir.deneysiz.internal.util.api.ErrorHandlingInterceptor
 import com.deneyehayir.deneysiz.internal.util.api.LocalResponseInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -85,5 +85,5 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    internal fun providesCategoryService(retrofit: Retrofit): CategoryService = retrofit.create()
+    internal fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create()
 }

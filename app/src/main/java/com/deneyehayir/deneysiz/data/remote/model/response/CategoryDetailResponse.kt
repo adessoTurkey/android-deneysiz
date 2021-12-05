@@ -1,4 +1,4 @@
-package com.deneyehayir.deneysiz.data.remote.model
+package com.deneyehayir.deneysiz.data.remote.model.response
 
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailItemDomainModel
@@ -23,12 +23,6 @@ data class CategoryDetailItemResponse(
     val isSafe: Boolean?,
     val vegan: Boolean?,
     val hasVeganProduct: Boolean?,
-)
-
-@Serializable
-data class CertificateResponse(
-    val name: String?,
-    val valid: Boolean?
 )
 
 fun CategoryDetailResponse.toDomain() = CategoryDetailDomainModel(

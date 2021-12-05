@@ -1,0 +1,20 @@
+{
+  "certificates": [
+    {
+      "name": "Leaping Bunny",
+      "url": "https://www.leapingbunny.org"
+    },
+    {
+      "name": "Beauty Without Bunnies",
+      "url": "https://crueltyfree.peta.org"
+    },
+    {
+      "name": "Vegan Society",
+      "url": "https://www.vegansociety.com"
+    },
+    {
+      "name": "V-Label",
+      "url": "https://www.v-label.eu"
+    }
+  ]
+}

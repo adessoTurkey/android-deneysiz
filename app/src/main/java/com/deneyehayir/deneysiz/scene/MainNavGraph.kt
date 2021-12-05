@@ -1,6 +1,5 @@
 package com.deneyehayir.deneysiz.scene
 
-import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material.BottomNavigation
@@ -16,18 +15,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.scene.discover.model.CategoryItemUiModel
+import com.deneyehayir.deneysiz.scene.branddetail.BrandDetailScreen
 import com.deneyehayir.deneysiz.scene.categorydetail.CategoryDetailScreen
+import com.deneyehayir.deneysiz.scene.certificatedetail.CertificateDetailScreen
 import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
 import com.deneyehayir.deneysiz.ui.theme.BottomNavColor
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.Gray
 import com.deneyehayir.deneysiz.ui.theme.Orange
+
+const val navCategoryId = "categoryId"
+const val navCategoryStringRes = "categoryStringRes"
+const val navBrandDetailBrandId = "brandId"
+const val navCertificateName = "certificateName"
 
 sealed class MainScreen(
     val route: String,
@@ -50,7 +57,31 @@ sealed class MainScreen(
 sealed class DetailScreen(
     val route: String
 ) {
-    object Category : DetailScreen(route = "detail/category")
+    object Category : DetailScreen(
+        route = "detail/category?categoryId={categoryId}&categoryStringRes={categoryStringRes}"
+    ) {
+        fun createRoute(
+            categoryId: String,
+            @StringRes categoryStringRes: Int
+        ): String =
+            "detail/category?categoryId=$categoryId&categoryStringRes=$categoryStringRes"
+    }
+
+    object BrandDetail : DetailScreen(
+        route = "brandDetail/brandId={brandId}"
+    ) {
+        fun createRoute(
+            brandId: Int
+        ): String = "brandDetail/brandId=$brandId"
+    }
+
+    object CertificateDetail : DetailScreen(
+        route = "certificateDetail/certificateName={certificateName}"
+    ) {
+        fun createRoute(
+            certificateName: String
+        ): String = "certificateDetail/certificateName=$certificateName"
+    }
 }
 
 @Composable
@@ -107,12 +138,12 @@ fun MainNavGraph(
                 modifier = modifier,
                 navigateToSearch = {},
                 navigateToCategory = { categoryItem ->
-                    navController.apply {
-                        currentBackStackEntry?.arguments = Bundle().apply {
-                            putParcelable("categoryItem", categoryItem)
-                        }
-                        navigate(DetailScreen.Category.route)
-                    }
+                    navController.navigate(
+                        DetailScreen.Category.createRoute(
+                            categoryId = categoryItem.type.type,
+                            categoryStringRes = categoryItem.nameResource
+                        )
+                    )
                 },
                 navigateToWhoWeAre = {}
             )
@@ -124,15 +155,69 @@ fun MainNavGraph(
                 navigateToWhoWeAre = {}
             )
         }
-        composable(route = DetailScreen.Category.route) {
-            // TODO can be improved regarding https://issuetracker.google.com/issues/182194894#comment14
-            navController.previousBackStackEntry?.arguments?.getParcelable<CategoryItemUiModel>(
-                "categoryItem"
-            )?.let { categoryItem ->
+        composable(
+            route = DetailScreen.Category.route,
+            arguments = listOf(
+                navArgument(navCategoryId) {
+                    type = NavType.StringType
+                },
+                navArgument(navCategoryStringRes) {
+                    type = NavType.IntType
+                }
+            )
+        ) { backstackEntry ->
+            val categoryId = backstackEntry.arguments?.getString(navCategoryId)
+            val categoryStringRes = backstackEntry.arguments?.getInt(navCategoryStringRes)
+            if (categoryId != null && categoryStringRes != null) {
                 CategoryDetailScreen(
                     modifier = modifier,
-                    categoryItem,
+                    onBrandDetail = { brandId ->
+                        navController.navigate(
+                            DetailScreen.BrandDetail.createRoute(
+                                brandId = brandId
+                            )
+                        )
+                    },
                     onBack = { navController.navigateUp() },
+                )
+            }
+        }
+        composable(
+            route = DetailScreen.BrandDetail.route,
+            arguments = listOf(
+                navArgument(navBrandDetailBrandId) {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val brandId = backStackEntry.arguments?.getInt(navBrandDetailBrandId)
+            if (brandId != null) {
+                BrandDetailScreen(
+                    modifier = modifier,
+                    onBack = { navController.navigateUp() },
+                    onNavigateCertificateDetail = { certificateName ->
+                        navController.navigate(
+                            DetailScreen.CertificateDetail.createRoute(
+                                certificateName = certificateName
+                            )
+                        )
+                    }
+                )
+            }
+        }
+        composable(
+            route = DetailScreen.CertificateDetail.route,
+            arguments = listOf(
+                navArgument(navCertificateName) {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val certificateName = backStackEntry.arguments?.getString(navCertificateName)
+            if (certificateName != null) {
+                CertificateDetailScreen(
+                    modifier = modifier,
+                    onBack = { navController.navigateUp() }
                 )
             }
         }
