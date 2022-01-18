@@ -5,10 +5,10 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val LightColorPalette = lightColors(
-    primary = White,
-    primaryVariant = White,
+    primary = White0,
+    primaryVariant = White0,
     secondary = Orange,
-    surface = White
+    surface = White0
 )
 
 @Composable

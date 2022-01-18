@@ -1,6 +1,5 @@
 package com.deneyehayir.deneysiz.scene.categorydetail
 
-import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -8,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,54 +17,64 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetState
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.domain.model.CategoryDetailItemUiModel
-import com.deneyehayir.deneysiz.domain.model.CategoryItemUiModel
+import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
+import com.deneyehayir.deneysiz.scene.discover.model.CategoryItemUiModel
+import com.deneyehayir.deneysiz.internal.extension.navigateToEmailApp
 import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
+import com.deneyehayir.deneysiz.scene.categorydetail.model.SortOption
+import com.deneyehayir.deneysiz.ui.theme.Blue
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.Gray
-import com.deneyehayir.deneysiz.ui.theme.TextDark
+import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
+import com.deneyehayir.deneysiz.ui.theme.DividerColor
+import com.deneyehayir.deneysiz.ui.theme.RowColor
+import com.deneyehayir.deneysiz.ui.theme.ScoreDarkGreen
+import com.deneyehayir.deneysiz.ui.theme.ScoreLightGreen
+import com.deneyehayir.deneysiz.ui.theme.White0
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun CategoryDetailScreen(
     modifier: Modifier = Modifier,
     categoryItem: CategoryItemUiModel,
-    onBack: () -> Unit,
-    onSuggestBrand: () -> Unit
+    onBack: () -> Unit
 ) {
     val categoryDetailViewModel = hiltViewModel<CategoryDetailViewModel>()
     val viewState by rememberFlowWithLifecycle(categoryDetailViewModel.viewState)
         .collectAsState(initial = CategoryDetailViewState.Initial)
+    val context = LocalContext.current
 
     Scaffold(
         modifier = modifier,
@@ -72,15 +82,20 @@ fun CategoryDetailScreen(
             CategoryDetailTopBar(
                 titleRes = categoryItem.nameResource,
                 onBack = onBack,
-                onSuggestBrand = onSuggestBrand
+                onSuggestBrand = {
+                    context.navigateToEmailApp(
+                        mailAddressRes = R.string.support_mail_address,
+                        subjectRes = R.string.support_subject_suggest
+                    )
+                }
             )
         }
     ) {
         CategoryDetailScreen(
-            categoryDetails = viewState.brandsList,
+            categoryDetails = viewState.sortedBrandsList,
             currentSortOption = viewState.sortOption,
             onSortSelected = { sortOption ->
-                categoryDetailViewModel.sortOption.value = sortOption
+                categoryDetailViewModel.onSortSelected(sortOption)
             }
         )
     }
@@ -91,51 +106,135 @@ private fun CategoryDetailScreen(
     categoryDetails: List<CategoryDetailItemUiModel>,
     onSortSelected: (SortOption) -> Unit,
     currentSortOption: SortOption
-
 ) {
     if (categoryDetails.isNotEmpty()) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 12.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    SortSelectionButton(
-                        sortOptions = SortOption.values().toList(),
-                        onSortSelected = onSortSelected,
-                        currentSortOption = currentSortOption
-                    )
+        val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+        val scope = rememberCoroutineScope()
+
+        ModalBottomSortSelection(
+            state = state,
+            scope = scope,
+            sortOptions = SortOption.values().toList(), // get from VM
+            onSortSelected = onSortSelected,
+            content = {
+                CategoryDetailList(
+                    state = state,
+                    scope = scope,
+                    categoryDetails = categoryDetails,
+                    currentSortOption = currentSortOption,
+                    navigateToBrandDetail = { } // pass brandId
+                )
+            }
+        )
+    }
+}
+
+@Composable
+private fun CategoryDetailList(
+    state: ModalBottomSheetState,
+    scope: CoroutineScope,
+    categoryDetails: List<CategoryDetailItemUiModel>,
+    currentSortOption: SortOption,
+    navigateToBrandDetail: (Int) -> Unit
+) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                SortSelectionButton(currentSortOption.sortLabelRes) {
+                    scope.launch { state.show() }
                 }
             }
-            item {
-                Text(
-                    modifier = Modifier.padding(
-                        top = 16.dp,
-                        start = 16.dp,
-                        bottom = 8.dp
-                    ),
-                    text = stringResource(
-                        id = R.string.category_detail_found_count,
-                        categoryDetails.size
-                    ),
-                    color = DarkBlue,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 12.sp
-                )
-            }
-            items(categoryDetails) { item ->
-                BrandRow(
-                    backgroundColorRes = item.scoreBackgroundColorRes,
-                    brandId = item.id,
-                    brandName = item.brandName,
-                    brandParentCompanyName = item.parentCompanyName,
-                    score = item.score
-                )
-                Divider(color = Color(0xFFECF0F1), thickness = 1.dp)
+        }
+        item {
+            Text(
+                modifier = Modifier.padding(
+                    top = 16.dp,
+                    start = 16.dp,
+                    bottom = 8.dp
+                ),
+                text = stringResource(
+                    id = R.string.category_detail_found_count,
+                    categoryDetails.size
+                ),
+                color = DarkBlue,
+                fontWeight = FontWeight.Normal,
+                fontSize = 12.sp
+            )
+        }
+        items(categoryDetails) { item ->
+            BrandRow(
+                backgroundColor = item.scoreBackgroundColor,
+                brandId = item.id,
+                brandName = item.brandName,
+                brandParentCompanyName = item.parentCompanyName,
+                score = item.score,
+                navigateToBrandDetail = navigateToBrandDetail
+            )
+            ListDivider()
+        }
+    }
+}
+
+@Composable
+private fun ModalBottomSortSelection(
+    state: ModalBottomSheetState,
+    scope: CoroutineScope,
+    sortOptions: List<SortOption>,
+    onSortSelected: (SortOption) -> Unit,
+    content: @Composable () -> Unit
+) {
+    ModalBottomSheetLayout(
+        sheetShape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp),
+        sheetState = state,
+        sheetContent = {
+            BottomSheetContent(
+                sortOptions = sortOptions,
+                state = state,
+                scope = scope,
+                onSortSelected = onSortSelected
+            )
+        },
+        content = content
+    )
+}
+
+@Composable
+fun BottomSheetContent(
+    state: ModalBottomSheetState,
+    scope: CoroutineScope,
+    sortOptions: List<SortOption>,
+    onSortSelected: (SortOption) -> Unit,
+) {
+    LazyColumn(
+        contentPadding = PaddingValues(8.dp),
+        verticalArrangement = Arrangement.spacedBy(0.dp)
+    ) {
+        itemsIndexed(sortOptions) { index, sort ->
+            Text(
+                text = stringResource(id = sort.nameRes),
+                modifier = Modifier
+                    .padding(vertical = 12.dp)
+                    .fillMaxWidth()
+                    .clickable {
+                        onSortSelected(sort)
+                        scope.launch { state.hide() }
+                    },
+                color = DarkTextColor,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            if (index < sortOptions.lastIndex) {
+                ListDivider()
             }
         }
     }
@@ -143,59 +242,30 @@ private fun CategoryDetailScreen(
 
 @Composable
 fun SortSelectionButton(
-    sortOptions: List<SortOption>,
-    onSortSelected: (SortOption) -> Unit,
-    currentSortOption: SortOption
+    sortLabelRes: Int,
+    onSortButtonClicked: () -> Unit
 ) {
-    val color = Color(0xFF0652DD)
-
-    Box {
-        var sortPopupOpen by remember { mutableStateOf(false) }
-
-        OutlinedButton(
-            onClick = { sortPopupOpen = true },
-            border = BorderStroke(1.dp, color = color),
-            colors = ButtonDefaults.outlinedButtonColors(
-                backgroundColor = color.copy(alpha = 0.1f)
-            )
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_sort),
-                contentDescription = null,
-                tint = color
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                text = stringResource(id = R.string.category_detail_sort),
-                color = color,
-                fontSize = 17.sp
-            )
-        }
-
-        DropdownMenu(
-            modifier = Modifier.background(color = DarkBlue),
-            offset = DpOffset((-20).dp, 0.dp),
-            expanded = sortPopupOpen,
-            onDismissRequest = { sortPopupOpen = false }
-        ) {
-            for (sort in sortOptions) {
-                DropdownMenuItem(
-                    onClick = {
-                        onSortSelected(sort)
-                        sortPopupOpen = false
-                    }
-                ) {
-                    Text(
-                        text = stringResource(id = sort.nameRes),
-                        fontWeight = if (sort == currentSortOption) {
-                            FontWeight.Bold
-                        } else {
-                            FontWeight.Normal
-                        }
-                    )
-                }
-            }
-        }
+    OutlinedButton(
+        onClick = { onSortButtonClicked() },
+        border = BorderStroke(1.dp, color = Blue),
+        colors = ButtonDefaults.outlinedButtonColors(
+            backgroundColor = Blue.copy(alpha = 0.1f)
+        )
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_sort),
+            contentDescription = null,
+            tint = Blue
+        )
+        Spacer(modifier = Modifier.size(8.dp))
+        Text(
+            text = stringResource(
+                id = R.string.category_detail_sort,
+                stringResource(id = sortLabelRes)
+            ),
+            color = Blue,
+            fontSize = 17.sp
+        )
     }
 }
 
@@ -207,7 +277,7 @@ fun CategoryDetailTopBar(
 ) {
     Row(
         modifier = Modifier
-            .background(Color.White)
+            .background(White0)
             .height(56.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -227,7 +297,7 @@ fun CategoryDetailTopBar(
                 .align(Alignment.CenterVertically)
                 .weight(1f),
             text = stringResource(id = titleRes),
-            color = TextDark,
+            color = DarkTextColor,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
             textAlign = TextAlign.Center,
@@ -248,15 +318,17 @@ fun CategoryDetailTopBar(
 
 @Composable
 fun BrandRow(
-    @ColorRes backgroundColorRes: Int,
+    backgroundColor: Color,
     brandId: Int,
     brandName: String,
     brandParentCompanyName: String,
-    score: Int
+    score: Int,
+    navigateToBrandDetail: (Int) -> Unit
 ) {
     Row(
         modifier = Modifier
-            .clickable(onClick = {})
+            .clickable(onClick = { navigateToBrandDetail(brandId) })
+            .background(color = RowColor)
             .padding(16.dp)
     ) {
         BrandDetail(
@@ -265,7 +337,7 @@ fun BrandRow(
             brandParentCompanyName = brandParentCompanyName
         )
         ScoreBox(
-            backgroundColorRes = backgroundColorRes,
+            backgroundColor = backgroundColor,
             score = score
         )
     }
@@ -280,7 +352,7 @@ fun BrandDetail(
     Column(modifier = modifier) {
         Text(
             text = brandName,
-            color = TextDark,
+            color = DarkTextColor,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             lineHeight = 55.sp
@@ -296,25 +368,33 @@ fun BrandDetail(
 
 @Composable
 fun ScoreBox(
-    @ColorRes backgroundColorRes: Int,
+    backgroundColor: Color,
     score: Int
 ) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .background(
-                color = colorResource(id = backgroundColorRes),
+                color = backgroundColor,
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
     ) {
         Text(
             text = stringResource(id = R.string.category_detail_score, score),
-            color = Color.White,
+            color = White0,
             fontWeight = FontWeight.Normal,
             fontSize = 17.sp
         )
     }
+}
+
+@Composable
+private fun ListDivider() {
+    Divider(
+        color = DividerColor,
+        thickness = 1.dp
+    )
 }
 
 @Preview
@@ -334,8 +414,9 @@ fun BrandRowPreview() {
         brandId = 5,
         brandName = "Hawaiian Tropic",
         brandParentCompanyName = "Rossmann",
-        backgroundColorRes = R.color.brand_score_dark_green,
-        score = 7
+        backgroundColor = ScoreDarkGreen,
+        score = 7,
+        navigateToBrandDetail = {}
     )
 }
 
@@ -352,7 +433,7 @@ fun CategoryDetailListPreview() {
                             brandName = "Hawaiian Tropic",
                             parentCompanyName = "Rossmann",
                             score = 7,
-                            scoreBackgroundColorRes = R.color.brand_score_light_green
+                            scoreBackgroundColor = ScoreLightGreen
                         )
                     )
                 }

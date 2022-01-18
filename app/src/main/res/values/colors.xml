@@ -7,6 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="deneysiz_blue">#0652DD</color>
+    <color name="deneysiz_divider_color">#ECF0F1</color>
+    <color name="deneysiz_row_color">#FCFCFC</color>
 
     <color name="brand_score_dark_green">#FF27AE60</color>
     <color name="brand_score_light_green">#FFA3CB38</color>

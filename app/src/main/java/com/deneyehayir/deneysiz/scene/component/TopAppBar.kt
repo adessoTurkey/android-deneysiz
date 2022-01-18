@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.deneyehayir.deneysiz.R
+import com.deneyehayir.deneysiz.ui.theme.White0
 
 @Composable
 fun MainTopAppBar(
@@ -29,7 +30,7 @@ fun MainTopAppBar(
     @StringRes titleRes: Int,
     titleColor: Color,
     actions: @Composable RowScope.() -> Unit,
-    backgroundColor: Color = Color.White,
+    backgroundColor: Color = White0,
     contentColor: Color = contentColorFor(backgroundColor),
     elevation: Dp = 0.dp
 ) = TopAppBar(

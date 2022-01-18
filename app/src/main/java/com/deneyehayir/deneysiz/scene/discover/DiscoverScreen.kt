@@ -18,11 +18,11 @@ import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,13 +32,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.data.remote.model.CategoryType
-import com.deneyehayir.deneysiz.domain.model.CategoryItemUiModel
+import com.deneyehayir.deneysiz.scene.discover.model.CategoryItemUiModel
+import com.deneyehayir.deneysiz.domain.model.CategoryType
+import com.deneyehayir.deneysiz.scene.discover.model.CategoryUiModel
+import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
 import com.deneyehayir.deneysiz.scene.component.MainTopAppBar
 import com.deneyehayir.deneysiz.scene.component.TopAppBarWhoWeAreAction
 import com.deneyehayir.deneysiz.ui.theme.Blue
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
-import com.deneyehayir.deneysiz.ui.theme.TextDark
+import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
+import com.deneyehayir.deneysiz.ui.theme.GradientDark
+import com.deneyehayir.deneysiz.ui.theme.Transparent
 
 @Composable
 fun DiscoverScreen(
@@ -48,13 +52,14 @@ fun DiscoverScreen(
     navigateToWhoWeAre: () -> Unit
 ) {
     val discoverViewModel = hiltViewModel<DiscoverViewModel>()
-    val categories = discoverViewModel.categoryData.observeAsState().value.orEmpty()
+    val discoveryViewState by rememberFlowWithLifecycle(discoverViewModel.discoverViewState)
+        .collectAsState(initial = DiscoverViewState.Initial)
     Scaffold(
         modifier = modifier,
         topBar = {
             MainTopAppBar(
                 titleRes = R.string.top_bar_title_discover,
-                titleColor = TextDark,
+                titleColor = DarkTextColor,
                 actions = {
                     TopAppBarWhoWeAreAction(
                         color = Blue,
@@ -64,8 +69,30 @@ fun DiscoverScreen(
             )
         }
     ) {
-        CategoryList(
-            categories = categories,
+        DiscoverScreen(
+            modifier = modifier,
+            navigateToSearch = navigateToSearch,
+            navigateToCategory = navigateToCategory,
+            navigateToWhoWeAre = navigateToWhoWeAre,
+            discoveryViewState = discoveryViewState
+        )
+    }
+}
+
+@Composable
+private fun DiscoverScreen(
+    modifier: Modifier = Modifier,
+    navigateToSearch: () -> Unit,
+    navigateToCategory: (CategoryItemUiModel) -> Unit,
+    navigateToWhoWeAre: () -> Unit,
+    discoveryViewState: DiscoverViewState
+) {
+    // TODO: improve condition
+    when {
+        discoveryViewState.isLoading -> {}
+        discoveryViewState.shouldShowError -> {}
+        else -> CategoryContent(
+            categoryData = discoveryViewState.categoryUiModel,
             navigateToCategory = navigateToCategory
         )
     }
@@ -75,6 +102,7 @@ fun DiscoverScreen(
 fun CategoryItem(
     modifier: Modifier = Modifier,
     category: CategoryItemUiModel,
+    textWidthFraction: Float = 0.9f,
     navigateToCategory: (CategoryItemUiModel) -> Unit
 ) {
     Card(
@@ -92,8 +120,8 @@ fun CategoryItem(
                     .drawWithCache {
                         val gradient = Brush.horizontalGradient(
                             colors = listOf(
-                                Color(0x80000000),
-                                Color.Transparent
+                                GradientDark,
+                                Transparent
                             )
                         )
                         onDrawWithContent {
@@ -107,7 +135,7 @@ fun CategoryItem(
                 text = stringResource(id = category.nameResource),
                 modifier = Modifier
                     .padding(12.dp)
-                    .fillMaxWidth(0.9f),
+                    .fillMaxWidth(textWidthFraction),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
@@ -116,44 +144,40 @@ fun CategoryItem(
 }
 
 @Composable
-fun CategoryList(
-    categories: List<CategoryItemUiModel>,
+fun CategoryContent(
+    categoryData: CategoryUiModel,
     navigateToCategory: (CategoryItemUiModel) -> Unit
 ) {
-    if (categories.isNotEmpty()) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(18.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(18.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
 
-            // TODO it should be managed in view model
-            val header = categories.first()
-            item {
-                Spacer(modifier = Modifier.height(8.dp))
-                CategoryItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    category = header,
-                    navigateToCategory = navigateToCategory
-                )
-            }
+        // TODO it should be managed in view model
+        item {
+            Spacer(modifier = Modifier.height(8.dp))
+            CategoryItem(
+                modifier = Modifier.fillMaxWidth(),
+                category = categoryData.headerItem,
+                textWidthFraction = 0.4f,
+                navigateToCategory = navigateToCategory
+            )
+        }
 
-            val categoryList = categories.takeLast(categories.size - 1)
-
-            items(categoryList.windowed(2, 2, true)) { categoryRow ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    categoryRow.forEach { category ->
-                        CategoryItem(
-                            modifier = Modifier
-                                .height(96.dp)
-                                .fillParentMaxWidth(0.5f),
-                            category = category,
-                            navigateToCategory = navigateToCategory
-                        )
-                    }
+        items(categoryData.windowedListItems) { categoryRow ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                categoryRow.forEach { category ->
+                    CategoryItem(
+                        modifier = Modifier
+                            .height(96.dp)
+                            .fillParentMaxWidth(0.5f),
+                        category = category,
+                        navigateToCategory = navigateToCategory
+                    )
                 }
             }
         }
@@ -164,18 +188,25 @@ fun CategoryList(
 @Composable
 fun CategoryListGridPreview() {
     DeneysizTheme {
-        CategoryList(
-            mutableListOf<CategoryItemUiModel>().apply {
-                repeat(9) {
-                    add(
-                        CategoryItemUiModel(
-                            type = CategoryType.ALL_BRANDS,
-                            nameResource = R.string.discover_category_all_brands,
-                            imageResource = R.drawable.ic_category_all_brands
+        CategoryContent(
+            categoryData = CategoryUiModel(
+                headerItem = CategoryItemUiModel(
+                    type = CategoryType.ALL_BRANDS,
+                    nameResource = R.string.discover_category_all_brands,
+                    imageResource = R.drawable.ic_category_all_brands
+                ),
+                listItems = mutableListOf<CategoryItemUiModel>().apply {
+                    repeat(9) {
+                        add(
+                            CategoryItemUiModel(
+                                type = CategoryType.ALL_BRANDS,
+                                nameResource = R.string.discover_category_all_brands,
+                                imageResource = R.drawable.ic_category_all_brands
+                            )
                         )
-                    )
+                    }
                 }
-            },
+            ),
             navigateToCategory = {}
         )
     }
@@ -187,7 +218,7 @@ fun DiscoverAppBarPreview() {
     DeneysizTheme {
         MainTopAppBar(
             titleRes = R.string.top_bar_title_discover,
-            titleColor = TextDark,
+            titleColor = DarkTextColor,
             actions = {}
         )
     }

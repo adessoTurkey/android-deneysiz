@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Deneysiz</string>
+    <string name="empty"/>
     <string name="bottom_nav_tab_search_brand">Marka Ara</string>
     <string name="bottom_nav_tab_discover">Keşfet</string>
     <string name="bottom_nav_tab_do_you_know">Biliyor Musun?</string>
@@ -9,7 +10,7 @@
     <string name="top_bar_title_who_we_are">Biz Kimiz?</string>
     <string name="top_bar_title_do_you_know">Biliyor Musun?</string>
     <string name="top_bar_action_who_we_are">Biz Kimiz</string>
-    <string name="discover_category_all_brands">Bütün\nMarkalar</string>
+    <string name="discover_category_all_brands">Bütün Markalar</string>
     <string name="discover_category_makeup">Makyaj</string>
     <string name="discover_category_hair_care">Saç Bakım</string>
     <string name="discover_category_skin_care">Cilt ve Yüz Bakım</string>
@@ -23,7 +24,13 @@
     <string name="category_detail_score">%d/10</string>
     <string name="alphabetical_ascending">A\'dan Z\'ye</string>
     <string name="alphabetical_descending">Z\'dan A\'ye</string>
-    <string name="score_ascending">En Düşük Puan</string>
-    <string name="score_descending">En Yüksek Puan</string>
-    <string name="category_detail_sort">Sırala</string>
+    <string name="score_ascending">Artan Puan</string>
+    <string name="score_descending">Azalan Puan</string>
+    <string name="sort_label_alphabetical_ascending">A-Z</string>
+    <string name="sort_label_alphabetical_descending">Z-A</string>
+    <string name="sort_label_score_ascending">Artan</string>
+    <string name="sort_label_score_descending">Azalan</string>
+    <string name="category_detail_sort">Sırala(%s)</string>
+    <string name="support_mail_address">iletisim@deneyehayir.org</string>
+    <string name="support_subject_suggest">Yeni Marka Öner</string>
 </resources>

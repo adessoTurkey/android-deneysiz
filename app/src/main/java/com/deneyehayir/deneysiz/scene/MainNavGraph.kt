@@ -10,7 +10,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,9 +21,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.domain.model.CategoryItemUiModel
+import com.deneyehayir.deneysiz.scene.discover.model.CategoryItemUiModel
 import com.deneyehayir.deneysiz.scene.categorydetail.CategoryDetailScreen
 import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
+import com.deneyehayir.deneysiz.ui.theme.BottomNavColor
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.Gray
 import com.deneyehayir.deneysiz.ui.theme.Orange
@@ -63,7 +63,7 @@ fun BottomNavBar(
     val selectedTab = tabs.firstOrNull { it.route == currentRoute }
 
     BottomNavigation(
-        backgroundColor = Color(0xFFECF0F1)
+        backgroundColor = BottomNavColor
     ) {
         tabs.forEach { tab ->
             BottomNavigationItem(
@@ -133,7 +133,6 @@ fun MainNavGraph(
                     modifier = modifier,
                     categoryItem,
                     onBack = { navController.navigateUp() },
-                    onSuggestBrand = {}
                 )
             }
         }
