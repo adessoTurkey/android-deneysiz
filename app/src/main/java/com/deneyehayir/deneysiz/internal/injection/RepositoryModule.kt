@@ -1,7 +1,7 @@
 package com.deneyehayir.deneysiz.internal.injection
 
-import com.deneyehayir.deneysiz.data.repository.CategoryRepositoryImpl
-import com.deneyehayir.deneysiz.domain.repository.CategoryRepository
+import com.deneyehayir.deneysiz.data.repository.RepositoryImpl
+import com.deneyehayir.deneysiz.domain.repository.Repository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,5 +12,5 @@ import dagger.hilt.components.SingletonComponent
 interface RepositoryModule {
 
     @Binds
-    fun bindCategoryRepository(repository: CategoryRepositoryImpl): CategoryRepository
+    fun bindRepository(repository: RepositoryImpl): Repository
 }

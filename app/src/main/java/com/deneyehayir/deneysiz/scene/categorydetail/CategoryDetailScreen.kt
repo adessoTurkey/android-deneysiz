@@ -47,17 +47,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
-import com.deneyehayir.deneysiz.scene.discover.model.CategoryItemUiModel
 import com.deneyehayir.deneysiz.internal.extension.navigateToEmailApp
 import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
+import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
 import com.deneyehayir.deneysiz.scene.categorydetail.model.SortOption
 import com.deneyehayir.deneysiz.ui.theme.Blue
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
-import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
-import com.deneyehayir.deneysiz.ui.theme.Gray
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
+import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.DividerColor
+import com.deneyehayir.deneysiz.ui.theme.Gray
 import com.deneyehayir.deneysiz.ui.theme.RowColor
 import com.deneyehayir.deneysiz.ui.theme.ScoreDarkGreen
 import com.deneyehayir.deneysiz.ui.theme.ScoreLightGreen
@@ -68,7 +67,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun CategoryDetailScreen(
     modifier: Modifier = Modifier,
-    categoryItem: CategoryItemUiModel,
+    onBrandDetail: (Int) -> Unit,
     onBack: () -> Unit
 ) {
     val categoryDetailViewModel = hiltViewModel<CategoryDetailViewModel>()
@@ -80,7 +79,7 @@ fun CategoryDetailScreen(
         modifier = modifier,
         topBar = {
             CategoryDetailTopBar(
-                titleRes = categoryItem.nameResource,
+                titleRes = categoryDetailViewModel.categoryStringRes,
                 onBack = onBack,
                 onSuggestBrand = {
                     context.navigateToEmailApp(
@@ -93,6 +92,7 @@ fun CategoryDetailScreen(
     ) {
         CategoryDetailScreen(
             categoryDetails = viewState.sortedBrandsList,
+            onBrandDetail = onBrandDetail,
             currentSortOption = viewState.sortOption,
             onSortSelected = { sortOption ->
                 categoryDetailViewModel.onSortSelected(sortOption)
@@ -104,6 +104,7 @@ fun CategoryDetailScreen(
 @Composable
 private fun CategoryDetailScreen(
     categoryDetails: List<CategoryDetailItemUiModel>,
+    onBrandDetail: (Int) -> Unit,
     onSortSelected: (SortOption) -> Unit,
     currentSortOption: SortOption
 ) {
@@ -122,7 +123,7 @@ private fun CategoryDetailScreen(
                     scope = scope,
                     categoryDetails = categoryDetails,
                     currentSortOption = currentSortOption,
-                    navigateToBrandDetail = { } // pass brandId
+                    navigateToBrandDetail = onBrandDetail
                 )
             }
         )
@@ -438,6 +439,7 @@ fun CategoryDetailListPreview() {
                     )
                 }
             },
+            onBrandDetail = {},
             onSortSelected = {},
             currentSortOption = SortOption.SCORE_DESC
         )

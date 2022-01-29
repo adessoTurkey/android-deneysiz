@@ -1,6 +1,5 @@
 package com.deneyehayir.deneysiz.scene.discover.model
 
-import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
@@ -8,7 +7,6 @@ import com.deneyehayir.deneysiz.R
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryItemDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryType
-import kotlinx.parcelize.Parcelize
 
 data class CategoryUiModel(
     val headerItem: CategoryItemUiModel,
@@ -25,12 +23,11 @@ data class CategoryUiModel(
     }
 }
 
-@Parcelize
 data class CategoryItemUiModel(
     val type: CategoryType,
     @StringRes val nameResource: Int,
     @DrawableRes val imageResource: Int
-) : Parcelable { // parcelable necessary?
+) {
 
     companion object {
         val Empty = CategoryItemUiModel(

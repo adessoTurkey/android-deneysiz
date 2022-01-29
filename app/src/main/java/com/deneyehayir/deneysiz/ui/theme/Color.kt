@@ -8,12 +8,14 @@ val White2 = Color(0xFFECF0F1)
 val Gray = Color(0xFF7F8C8D)
 val DarkBlue = Color(0xFF2C3E50)
 val Blue = Color(0xFF0652DD)
+val Blue2 = Color(0xFF007AFF)
 val Orange = Color(0xFFF34723)
 val Transparent = Color(0x00000000)
 val GradientDark = Color(0x80000000)
 
 val LightTextColor = White1
 val DarkTextColor = DarkBlue
+val BlueTextColor = Blue2
 
 val BottomNavColor = White2
 val RowColor = White1
