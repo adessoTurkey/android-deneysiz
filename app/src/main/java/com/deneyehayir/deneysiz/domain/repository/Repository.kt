@@ -4,6 +4,7 @@ import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
+import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
 
 interface Repository {
 
@@ -14,4 +15,6 @@ interface Repository {
     suspend fun fetchBrandDetail(brandId: Int): BrandDetailDomainModel
 
     suspend fun fetchCertificates(): CertificatesDomainModel
+
+    suspend fun fetchDoYouKnowData(): DoYouKnowDomainModel
 }
