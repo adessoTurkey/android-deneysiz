@@ -154,7 +154,6 @@ fun CategoryContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        // TODO it should be managed in view model
         item {
             Spacer(modifier = Modifier.height(8.dp))
             CategoryItem(

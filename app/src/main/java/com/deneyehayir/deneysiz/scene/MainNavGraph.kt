@@ -26,6 +26,8 @@ import com.deneyehayir.deneysiz.scene.branddetail.BrandDetailScreen
 import com.deneyehayir.deneysiz.scene.categorydetail.CategoryDetailScreen
 import com.deneyehayir.deneysiz.scene.certificatedetail.CertificateDetailScreen
 import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
+import com.deneyehayir.deneysiz.scene.doyouknow.DoYouKnowScreen
+import com.deneyehayir.deneysiz.scene.faq.FaqScreen
 import com.deneyehayir.deneysiz.ui.theme.BottomNavColor
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.Gray
@@ -35,6 +37,7 @@ const val navCategoryId = "categoryId"
 const val navCategoryStringRes = "categoryStringRes"
 const val navBrandDetailBrandId = "brandId"
 const val navCertificateName = "certificateName"
+const val navFaqId = "faqId"
 
 sealed class MainScreen(
     val route: String,
@@ -58,7 +61,8 @@ sealed class DetailScreen(
     val route: String
 ) {
     object Category : DetailScreen(
-        route = "detail/category?categoryId={categoryId}&categoryStringRes={categoryStringRes}"
+        route = "detail/category?categoryId={$navCategoryId}" +
+            "&categoryStringRes={$navCategoryStringRes}"
     ) {
         fun createRoute(
             categoryId: String,
@@ -68,7 +72,7 @@ sealed class DetailScreen(
     }
 
     object BrandDetail : DetailScreen(
-        route = "brandDetail/brandId={brandId}"
+        route = "brandDetail/brandId={$navBrandDetailBrandId}"
     ) {
         fun createRoute(
             brandId: Int
@@ -76,11 +80,19 @@ sealed class DetailScreen(
     }
 
     object CertificateDetail : DetailScreen(
-        route = "certificateDetail/certificateName={certificateName}"
+        route = "certificateDetail/certificateName={$navCertificateName}"
     ) {
         fun createRoute(
             certificateName: String
         ): String = "certificateDetail/certificateName=$certificateName"
+    }
+
+    object FaqScreen : DetailScreen(
+        route = "faq/id={$navFaqId}"
+    ) {
+        fun createRoute(
+            faqId: Int
+        ): String = "faq/id=$faqId"
     }
 }
 
@@ -149,10 +161,23 @@ fun MainNavGraph(
             )
         }
         composable(MainScreen.DoYouKnow.route) {
-            DiscoverScreen(
-                navigateToSearch = {},
-                navigateToCategory = {},
-                navigateToWhoWeAre = {}
+            DoYouKnowScreen(
+                modifier = modifier,
+                navigateToWhoWeAre = {},
+                onNavigateCertificateDetail = { certificateName ->
+                    navController.navigate(
+                        DetailScreen.CertificateDetail.createRoute(
+                            certificateName = certificateName
+                        )
+                    )
+                },
+                onNavigateFaqDetail = { id ->
+                    navController.navigate(
+                        DetailScreen.FaqScreen.createRoute(
+                            faqId = id
+                        )
+                    )
+                }
             )
         }
         composable(
@@ -216,6 +241,22 @@ fun MainNavGraph(
             val certificateName = backStackEntry.arguments?.getString(navCertificateName)
             if (certificateName != null) {
                 CertificateDetailScreen(
+                    modifier = modifier,
+                    onBack = { navController.navigateUp() }
+                )
+            }
+        }
+        composable(
+            route = DetailScreen.FaqScreen.route,
+            arguments = listOf(
+                navArgument(navFaqId) {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getInt(navFaqId)
+            if (id != null) {
+                FaqScreen(
                     modifier = modifier,
                     onBack = { navController.navigateUp() }
                 )

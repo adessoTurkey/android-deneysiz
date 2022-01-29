@@ -21,20 +21,6 @@ class BrandDetailViewModel @Inject constructor(
     private var viewState: BrandDetailViewState = BrandDetailViewState.Initial
     private val _brandDetailViewState = MutableStateFlow(viewState)
     val brandDetailViewState: StateFlow<BrandDetailViewState> = _brandDetailViewState
-
-    /*flow {
-    brandDetail(params = FetchBrandDetailUseCase.Params(brandId = brandId))
-        .onSuccess { brandDetail ->
-            viewState = viewState.setBrandDetailData(brandDetail.toUiModel())
-            emit(viewState)
-        }
-        .onFailure {  }
-}.stateIn(
-    scope = viewModelScope,
-    started = SharingStarted.WhileSubscribed(5000),
-    initialValue = viewState
-)*/
-
     val onScoreDetail: (() -> Unit) = {
         viewState = viewState.changeScoreDetailDialogVisibility()
         _brandDetailViewState.value = viewState

@@ -10,6 +10,7 @@ import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
+import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
 import com.deneyehayir.deneysiz.domain.repository.Repository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
@@ -40,4 +41,7 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun fetchCertificates(): CertificatesDomainModel =
         assetDataSource.getCertificates().toDomain()
+
+    override suspend fun fetchDoYouKnowData(): DoYouKnowDomainModel =
+        assetDataSource.getDoYouKnowData().toDomain()
 }

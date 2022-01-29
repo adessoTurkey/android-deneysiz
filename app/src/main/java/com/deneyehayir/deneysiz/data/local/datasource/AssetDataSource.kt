@@ -2,6 +2,7 @@ package com.deneyehayir.deneysiz.data.local.datasource
 
 import android.content.Context
 import com.deneyehayir.deneysiz.data.local.model.CertificateDataModel
+import com.deneyehayir.deneysiz.data.local.model.DoYouKnowDataModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -14,10 +15,14 @@ class AssetDataSource @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
 
-    suspend fun getCertificates(): CertificateDataModel {
+    suspend fun getCertificates(): CertificateDataModel = invoke(CERTIFICATES)
+
+    suspend fun getDoYouKnowData(): DoYouKnowDataModel = invoke(DO_YOU_KNOW)
+
+    private suspend inline fun <reified T> invoke(jsonPath: String): T {
         return suspendCancellableCoroutine { continuation ->
             continuation.resume(
-                value = readFromJson(CERTIFICATES).getResultAsDataModel(),
+                value = readFromJson(jsonPath).getResultAsDataModel(),
                 onCancellation = { continuation.cancel() }
             )
         }
@@ -37,5 +42,6 @@ class AssetDataSource @Inject constructor(
 
     companion object {
         const val CERTIFICATES = "local/response_certificates.json"
+        const val DO_YOU_KNOW = "local/response_do_you_know.json"
     }
 }

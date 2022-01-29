@@ -66,6 +66,7 @@ import com.deneyehayir.deneysiz.ui.theme.Gray
 import com.deneyehayir.deneysiz.ui.theme.LightTextColor
 import com.deneyehayir.deneysiz.ui.theme.Transparent
 import com.deneyehayir.deneysiz.ui.theme.White0
+import com.deneyehayir.deneysiz.ui.theme.White1
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -320,10 +321,9 @@ fun CertificateItem(
     certificate: CertificateUiModel,
     onNavigateCertificateDetail: (String) -> Unit
 ) {
-    // roundedCornerShape radius
     Card(
         modifier = modifier
-            .background(color = LightTextColor)
+            .background(color = White1)
             .clickable { onNavigateCertificateDetail(certificate.certificate.type) },
         shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
