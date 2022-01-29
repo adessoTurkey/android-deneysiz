@@ -17,7 +17,7 @@ subprojects {
     plugins.apply(BuildPlugins.ktlint)
 
     tasks.register("checkFormat") {
-        dependsOn("detekt", "ktlintCheck", "lintDebug", "spotlessCheck")
+        dependsOn("ktlintCheck", "lintDebug", "spotlessCheck")
     }
 
     tasks.register("reformat") {
