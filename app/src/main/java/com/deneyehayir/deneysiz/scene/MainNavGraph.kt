@@ -26,8 +26,11 @@ import com.deneyehayir.deneysiz.scene.branddetail.BrandDetailScreen
 import com.deneyehayir.deneysiz.scene.categorydetail.CategoryDetailScreen
 import com.deneyehayir.deneysiz.scene.certificatedetail.CertificateDetailScreen
 import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
+import com.deneyehayir.deneysiz.scene.donation.DonationScreen
 import com.deneyehayir.deneysiz.scene.doyouknow.DoYouKnowScreen
 import com.deneyehayir.deneysiz.scene.faq.FaqScreen
+import com.deneyehayir.deneysiz.scene.support.SupportScreen
+import com.deneyehayir.deneysiz.scene.whoweare.WhoWeAreScreen
 import com.deneyehayir.deneysiz.ui.theme.BottomNavColor
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.Gray
@@ -94,6 +97,18 @@ sealed class DetailScreen(
             faqId: Int
         ): String = "faq/id=$faqId"
     }
+
+    object WhoWeAreScreen : DetailScreen(
+        route = "whoWeAre"
+    )
+
+    object DonationScreen : DetailScreen(
+        route = "donation"
+    )
+
+    object SupportScreen : DetailScreen(
+        route = "support"
+    )
 }
 
 @Composable
@@ -157,13 +172,21 @@ fun MainNavGraph(
                         )
                     )
                 },
-                navigateToWhoWeAre = {}
+                navigateToWhoWeAre = {
+                    navController.navigate(
+                        DetailScreen.WhoWeAreScreen.route
+                    )
+                }
             )
         }
         composable(MainScreen.DoYouKnow.route) {
             DoYouKnowScreen(
                 modifier = modifier,
-                navigateToWhoWeAre = {},
+                navigateToWhoWeAre = {
+                    navController.navigate(
+                        DetailScreen.WhoWeAreScreen.route
+                    )
+                },
                 onNavigateCertificateDetail = { certificateName ->
                     navController.navigate(
                         DetailScreen.CertificateDetail.createRoute(
@@ -261,6 +284,34 @@ fun MainNavGraph(
                     onBack = { navController.navigateUp() }
                 )
             }
+        }
+        composable(route = DetailScreen.WhoWeAreScreen.route) {
+            WhoWeAreScreen(
+                modifier = modifier,
+                onBack = { navController.navigateUp() },
+                onSupportNavigation = {
+                    navController.navigate(
+                        DetailScreen.SupportScreen.route
+                    )
+                },
+                onDonationNavigation = {
+                    navController.navigate(
+                        DetailScreen.DonationScreen.route
+                    )
+                }
+            )
+        }
+        composable(route = DetailScreen.DonationScreen.route) {
+            DonationScreen(
+                modifier = modifier,
+                onBack = { navController.navigateUp() }
+            )
+        }
+        composable(route = DetailScreen.SupportScreen.route) {
+            SupportScreen(
+                modifier = modifier,
+                onBack = { navController.navigateUp() }
+            )
         }
     }
 }

@@ -1,0 +1,37 @@
+{
+  "description": "Eylül 2019’da tüzel kişilik kazanan Deneye Hayır Derneği, 2014-2019 yılları arasında Deneye Hayır Platformu olarak faaliyet göstermiştir. Platform, 2014 yılında gündeme gelen 5199 sayılı Hayvanları Koruma Kanunu’nun revizyonu sürecinde TBMM’de yapılan görüşmelere aktif katılım sağlamış; toplumun hayvan deneyleri konusunda bilgilendirilmesi ve bilinçlendirilmesi için çalışmalar yapmıştır.\n\nUluslararası İnsancıl Eğitim Ağı (InterNICHE) partner kuruluşu olan dernek, Sabancı Vakfı tarafından düzenlenen Fark Yaratanlar programına aday gösterilerek “Toplumsal Adalet” kategorisinde 2019 yılının “fark yaratanı” seçilmiş ve ayrıca hayvan deneylerine alternatif çalışmalar yürüten bilim insanları ve sivil toplum kuruluşlarını desteklemek amacıyla küresel çapta düzenlenen Lush Prize’da “Toplumsal Farkındalık” ve “Lobicilik” dallarında finale kalan Türkiye’den ilk katılımcı olmuştur.\n\nDerneğin nihai amacı, hayvanlar üzerinde yapılan deneysel amaçlı uygulamaların son bularak, hayvan içermeyen bilimsel yöntemlerin kullanılması için örgütlü bir mücadele yürütmek ve bu geçiş sürecinde de laboratuvarlardaki hayvanların haklarının korunmasıdır.\n\n",
+  "url": "https://www.deneyehayir.org",
+  "supportActions": [
+    {
+      "id": 0,
+      "text": "Bizimle İletişime Geç"
+    },
+    {
+      "id": 1,
+      "text": "Destek Ol"
+    },
+    {
+      "id": 2,
+      "text": "Bağış Yap"
+    }
+  ],
+  "footerDescription": "Biz Kimiz?",
+  "socialMediaPages": [
+    {
+      "id": 0,
+      "url": "https://twitter.com/deneyehayir"
+    },
+    {
+      "id": 1,
+      "url": "https://instagram.com/deneye_hayir"
+    },
+    {
+      "id": 2,
+      "url": "https://www.youtube.com/user/DeneyeHayir"
+    },
+    {
+      "id": 3,
+      "url": "https://facebook.com/deneyehayir"
+    }
+  ]
+}

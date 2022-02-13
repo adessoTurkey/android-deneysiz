@@ -1,0 +1,41 @@
+{
+  "description": "Deney laboratuvarlarındaki hayvanların haklarını korumak ve uzun vadede hayvan deneylerinin son bulmasını sağlayacak her türlü savunuculuk faaliyetini yürütmek üzere ülkemizde kurulmuş ilk ve tek derneğiz. Yaşam hakkına saygı duyan kişiler olarak, beş yüz yıl öncesinin deney pratiklerini reddediyor ve bizim iyiliğimiz için kimsenin zarar görmediği ürünlerin yer aldığı bir yaşam talep ediyoruz.\n\nBize destek olmanın birden çok yolu var…",
+  "supportActions": [
+    {
+      "id": 0,
+      "title": "Mesajları yaymamıza yardımcı olabilirsiniz",
+      "description": "Derneğimizin sosyal medya hesaplarını takip ederek ve gönderilerimizi kendi hesaplarınızdan paylaşarak, daha çok kişiye ulaşmamızı sağlayabilirsiniz.",
+      "socialMediaPages": [
+        {
+          "id": 0,
+          "url": "https://twitter.com/deneyehayir"
+        },
+        {
+          "id": 1,
+          "url": "https://instagram.com/deneye_hayir"
+        },
+        {
+          "id": 2,
+          "url": "https://www.youtube.com/user/DeneyeHayir"
+        },
+        {
+          "id": 3,
+          "url": "https://facebook.com/deneyehayir"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Bağışçımız olabilirsiniz",
+      "description": "Derneğimize tek seferlik bağış yapabilir ya da düzenli bağışçımız olabilirsiniz. Bunun için bağış yap sayfasına göz atmanızı istiyoruz.",
+      "socialMediaPages": []
+    },
+    {
+      "id": 2,
+      "title": "Belirli konularda bize gönüllü olarak destek verebilirsiniz",
+      "description": "Derneğimizin yönetimi, üyeleri ve gönüllüleri olarak hepimiz gönüllülük esasıyla katkı sağlamaya çalışıyoruz. Şu an için profesyonel anlamda bizlere yardımcı olan çalışma arkadaşlarımız yok, dolayısıyla iş yükümüz dönem dönem fazlalaşabiliyor. Siz de mesleğiniz ya da ilgilendiğiniz/hâkim olduğunuzu düşündüğünüz alana göre, bize gönüllü olarak destek verebilirsiniz. Tek kriterimiz: uzun süreli ve düzenli olması.",
+      "socialMediaPages": []
+    }
+  ],
+  "volunteerUrl": "https://fonzip.com/dhd/bagis"
+}
