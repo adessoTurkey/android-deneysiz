@@ -71,4 +71,15 @@
     <string name="do_you_know_faq_safe_brands">Deneysiz Markalar</string>
     <string name="do_you_know_faq_vegan_products">Vegan Ürünler</string>
     <string name="do_you_know_faq_offer_in_china">Çin\’de Satış</string>
+
+    <string name="who_we_are_support_mail_address">info@deneyehayir.org</string>
+    <string name="who_we_are_support_mail_subject">APP\'ten Mesaj:</string>
+
+    <string name="donation_top_bar_title">Nasıl Bağış Yaparım?</string>
+    <string name="donation_option_or">Ya da</string>
+    <string name="donation_make_donation">Bağış Yap</string>
+    <string name="donation_copy_message">Iban kopyalandı.</string>
+
+    <string name="support_top_bar_title">Nasıl Destek Olurum?</string>
+    <string name="support_apply_form">Form\'u Doldur</string>
 </resources>

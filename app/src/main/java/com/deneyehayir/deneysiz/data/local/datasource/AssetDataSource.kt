@@ -3,6 +3,9 @@ package com.deneyehayir.deneysiz.data.local.datasource
 import android.content.Context
 import com.deneyehayir.deneysiz.data.local.model.CertificateDataModel
 import com.deneyehayir.deneysiz.data.local.model.DoYouKnowDataModel
+import com.deneyehayir.deneysiz.data.local.model.DonationDataModel
+import com.deneyehayir.deneysiz.data.local.model.SupportDataModel
+import com.deneyehayir.deneysiz.data.local.model.WhoWeAreDataModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -18,6 +21,12 @@ class AssetDataSource @Inject constructor(
     suspend fun getCertificates(): CertificateDataModel = invoke(CERTIFICATES)
 
     suspend fun getDoYouKnowData(): DoYouKnowDataModel = invoke(DO_YOU_KNOW)
+
+    suspend fun getWhoWeAreData(): WhoWeAreDataModel = invoke(WHO_WE_ARE)
+
+    suspend fun getDonationData(): DonationDataModel = invoke(DONATION)
+
+    suspend fun getSupportData(): SupportDataModel = invoke(SUPPORT)
 
     private suspend inline fun <reified T> invoke(jsonPath: String): T {
         return suspendCancellableCoroutine { continuation ->
@@ -43,5 +52,8 @@ class AssetDataSource @Inject constructor(
     companion object {
         const val CERTIFICATES = "local/response_certificates.json"
         const val DO_YOU_KNOW = "local/response_do_you_know.json"
+        const val WHO_WE_ARE = "local/response_who_we_are.json"
+        const val DONATION = "local/response_donation.json"
+        const val SUPPORT = "local/response_support.json"
     }
 }

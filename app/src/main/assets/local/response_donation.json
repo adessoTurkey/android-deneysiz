@@ -1,0 +1,10 @@
+{
+  "description": "Tür ayrımı gözetmeksizin tüm hayvanların şiddet görmeden yaşama hakkını savunan hayvan hakları savunucularıyız ve gerçekleştirmek için yola çıktığımız amaç, sokak-barınak-bakımevlerindeki hayvanlar için çalışan gönüllü ve örgütlerinkinden pek farklı olmasa da yolumuz epey uzun ve zorlu. \nDeney laboratuvarları bulunan üniversiteler ve Bakanlıklara bağlı kurumlarla iletişime geçerek mevzuatımızın laboratuvarlardaki hayvanlara tanıdığı hakların çiğnenmemesini talep ediyor, projelerimizi resmî kurumlara duyurmak için çabalıyor, bizzat buralara giderek görüşmeler yapıyor, kitapçıklar bastırıp gönderiyoruz. Evet sokak veya bakımevlerinden zor durumdaki hayvanları kurtararak tedavi ettirmiyoruz, ormanlarda ve kırsal bölgelerde mama dağıtmıyoruz – kısacası alışılan biçimde sahada değiliz, ancak her dernek gibi bizim de çalışma biçimimize özgü giderlerimiz ve bunlar için de desteğe ihtiyacımız var…",
+  "bankAccount": {
+    "name": "Deneye Hayır Derneği",
+    "currency": "TL",
+    "address": "Ziraat Bankası Fethiye/Muğla Şubesi",
+    "iban": "TR71 0001 0002 0391 0906 4650 02"
+  },
+  "donationUrl": "https://fonzip.com/dhd/bagis"
+}

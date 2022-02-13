@@ -11,6 +11,9 @@ import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
 import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
+import com.deneyehayir.deneysiz.domain.model.DonationDomainModel
+import com.deneyehayir.deneysiz.domain.model.SupportDomainModel
+import com.deneyehayir.deneysiz.domain.model.WhoWeAreDomainModel
 import com.deneyehayir.deneysiz.domain.repository.Repository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
@@ -44,4 +47,13 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun fetchDoYouKnowData(): DoYouKnowDomainModel =
         assetDataSource.getDoYouKnowData().toDomain()
+
+    override suspend fun fetchWhoWeAreData(): WhoWeAreDomainModel =
+        assetDataSource.getWhoWeAreData().toDomain()
+
+    override suspend fun fetchDonationData(): DonationDomainModel =
+        assetDataSource.getDonationData().toDomain()
+
+    override suspend fun fetchSupportData(): SupportDomainModel =
+        assetDataSource.getSupportData().toDomain()
 }
