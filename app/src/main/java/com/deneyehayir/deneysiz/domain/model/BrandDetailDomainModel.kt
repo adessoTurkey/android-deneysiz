@@ -12,7 +12,8 @@ data class BrandDetailDomainModel(
     val isVeganProduct: Boolean,
     val score: Int,
     val description: String,
-    val updateDate: String
+    val updateDate: String,
+    val shouldShowError: Boolean
 )
 
 data class CertificateDomainModel(

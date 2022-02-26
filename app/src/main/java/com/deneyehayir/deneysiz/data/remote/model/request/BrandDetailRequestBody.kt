@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BrandDetailRequestBody(
-    val brandId: Int
+    val id: Int
 )

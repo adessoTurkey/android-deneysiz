@@ -2,6 +2,8 @@ package com.deneyehayir.deneysiz.data.remote.model.response
 
 import com.deneyehayir.deneysiz.domain.model.BEAUTY_WITHOUT_BUNNIES
 import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDetailItemDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificateDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificateType
 import com.deneyehayir.deneysiz.domain.model.LEAPING_BUNNY
@@ -11,14 +13,14 @@ import com.deneyehayir.deneysiz.domain.model.V_LABEL
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BrandDetailResponse(
+data class BrandByCategoryResponse(
     val status: Int?,
     val message: String?,
-    val data: List<BrandDetailDataResponse>
+    val data: List<BrandByCategoryItemResponse>?
 )
 
 @Serializable
-data class BrandDetailDataResponse(
+data class BrandByCategoryItemResponse(
     val id: Int?,
     val name: String?,
     val parentCompany: ParentCompanyResponse?,
@@ -30,7 +32,7 @@ data class BrandDetailDataResponse(
     val veganProduct: Boolean?,
     val score: Int?,
     val description: String?,
-    val createdAt: String?
+    val createdAt: String?,
 )
 
 @Serializable
@@ -45,19 +47,32 @@ data class CertificateResponse(
     val valid: Boolean?
 )
 
-fun BrandDetailResponse.toDomain() = BrandDetailDomainModel(
-    id = data.firstOrNull()?.id ?: -1,
-    name = data.firstOrNull()?.name.orEmpty(),
-    parentCompany = data.firstOrNull()?.parentCompany.toParentCompanyType(),
-    isOfferedInChina = data.firstOrNull()?.offerInChina ?: false,
-    categoryId = data.firstOrNull()?.categoryId.orEmpty(),
-    certificates = data.firstOrNull()?.certificates?.map { it.toDomain() } ?: emptyList(),
-    isSafe = data.firstOrNull()?.safe ?: false,
-    isVegan = data.firstOrNull()?.vegan ?: false,
-    isVeganProduct = data.firstOrNull()?.veganProduct ?: false,
-    score = data.firstOrNull()?.score ?: -1,
-    description = data.firstOrNull()?.description.orEmpty(),
-    updateDate = data.firstOrNull()?.createdAt.orEmpty(),
+fun BrandByCategoryResponse.toCategoryDetailDomain() = CategoryDetailDomainModel(
+    items = data?.map { response ->
+        CategoryDetailItemDomainModel(
+            id = response.id ?: -1,
+            brandName = response.name.orEmpty(),
+            parentCompanyName = response.parentCompany?.name.orEmpty(),
+            score = response.score ?: -1
+        )
+    }.orEmpty(),
+    shouldShowError = status != 200
+)
+
+fun BrandByCategoryResponse.toBrandDetailDomain() = BrandDetailDomainModel(
+    id = data?.firstOrNull()?.id ?: -1,
+    name = data?.firstOrNull()?.name.orEmpty(),
+    parentCompany = data?.firstOrNull()?.parentCompany.toParentCompanyType(),
+    isOfferedInChina = data?.firstOrNull()?.offerInChina ?: false,
+    categoryId = data?.firstOrNull()?.categoryId.orEmpty(),
+    certificates = data?.firstOrNull()?.certificates?.map { it.toDomain() } ?: emptyList(),
+    isSafe = data?.firstOrNull()?.safe ?: false,
+    isVegan = data?.firstOrNull()?.vegan ?: false,
+    isVeganProduct = data?.firstOrNull()?.veganProduct ?: false,
+    score = data?.firstOrNull()?.score ?: -1,
+    description = data?.firstOrNull()?.description.orEmpty(),
+    updateDate = data?.firstOrNull()?.createdAt.orEmpty(),
+    shouldShowError = status != 200
 )
 
 fun ParentCompanyResponse?.toParentCompanyType(): ParentCompanyType {

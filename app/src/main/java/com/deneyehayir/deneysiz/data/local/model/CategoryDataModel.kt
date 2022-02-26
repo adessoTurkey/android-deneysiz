@@ -1,4 +1,4 @@
-package com.deneyehayir.deneysiz.data.remote.model.response
+package com.deneyehayir.deneysiz.data.local.model
 
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryItemDomainModel
@@ -7,17 +7,17 @@ import kotlinx.serialization.Serializable
 
 @JvmInline
 @Serializable
-value class CategoryResponse(
-    val items: List<CategoryItemResponse>?
+value class CategoryDataModel(
+    val items: List<CategoryItemDataModel>?
 )
 
 @Serializable
-data class CategoryItemResponse(
+data class CategoryItemDataModel(
     val id: String?,
     val category: String?
 )
 
-fun CategoryResponse.toDomain() = CategoryDomainModel(
+fun CategoryDataModel.toDomain() = CategoryDomainModel(
     items = items?.map { response ->
         CategoryItemDomainModel(
             type = when (response.id) {

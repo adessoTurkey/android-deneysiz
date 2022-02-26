@@ -5,12 +5,14 @@
     {
       "id": 73,
       "name": "Hawaiian Tropic",
-      "parentCompany": "Rossmann",
-      "score" : 9,
+      "parentCompany": {
+        "name": "Rossmann",
+        "safe": true
+      },
+      "score": 9,
       "offerInChina": false,
       "categoryId": "0",
-      "parentCompanySafe": true,
-      "certificate": [
+      "certificates": [
         {
           "name": "LB",
           "valid": false
@@ -28,18 +30,20 @@
           "valid": false
         }
       ],
-      "isSafe": true,
+      "safe": true,
       "vegan": true,
-      "hasVeganProduct": true
+      "veganProduct": true
     },
     {
       "id": 74,
       "name": "Flink & Sauber",
-      "parentCompany": "Dirk Rossmann",
-      "score" : 7,
+      "parentCompany": {
+        "name": "Dirk Rossmann",
+        "safe": true
+      },
+      "score": 7,
       "offerInChina": false,
       "categoryId": "0",
-      "parentCompanySafe": true,
       "certificate": [
         {
           "name": "LB",
@@ -58,18 +62,20 @@
           "valid": false
         }
       ],
-      "isSafe": true,
+      "safe": true,
       "vegan": true,
-      "hasVeganProduct": true
+      "veganProduct": true
     },
     {
       "id": 75,
       "name": "Sunozon",
-      "parentCompany": "L’Oréal",
-      "score" : 6,
+      "parentCompany": {
+        "name": "L’Oréal",
+        "safe": true
+      },
+      "score": 6,
       "offerInChina": false,
       "categoryId": "0",
-      "parentCompanySafe": true,
       "certificate": [
         {
           "name": "LB",
@@ -88,18 +94,20 @@
           "valid": false
         }
       ],
-      "isSafe": true,
+      "safe": true,
       "vegan": true,
-      "hasVeganProduct": true
+      "veganProduct": true
     },
     {
       "id": 76,
       "name": "Diadermine",
-      "parentCompany": "Gliss",
-      "score" : 3,
+      "parentCompany": {
+        "name": "Gliss",
+        "safe": true
+      },
+      "score": 3,
       "offerInChina": false,
       "categoryId": "0",
-      "parentCompanySafe": true,
       "certificate": [
         {
           "name": "LB",
@@ -118,18 +126,20 @@
           "valid": false
         }
       ],
-      "isSafe": true,
+      "safe": true,
       "vegan": true,
-      "hasVeganProduct": true
+      "veganProduct": true
     },
     {
       "id": 77,
       "name": "Procsin",
-      "parentCompany": "Isana",
-      "score" : 2,
+      "parentCompany": {
+        "name": "Isana",
+        "safe": true
+      },
+      "score": 2,
       "offerInChina": false,
       "categoryId": "0",
-      "parentCompanySafe": true,
       "certificate": [
         {
           "name": "LB",
@@ -148,9 +158,9 @@
           "valid": false
         }
       ],
-      "isSafe": true,
+      "safe": true,
       "vegan": true,
-      "hasVeganProduct": true
+      "veganProduct": true
     }
   ]
 }

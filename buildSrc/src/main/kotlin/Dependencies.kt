@@ -2,6 +2,7 @@ object Dependencies {
     const val material = "com.google.android.material:material:1.3.0"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val chucker = "com.github.chuckerteam.chucker:library:3.4.0"
+    const val chuckerNoOp = "com.github.chuckerteam.chucker:library-no-op:3.4.0"
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.7"
 
     object Kotlin {
@@ -74,8 +75,7 @@ object Dependencies {
         private const val version = "2.38.1"
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltKapt = "com.google.dagger:hilt-android-compiler:$version"
-        const val hiltNavigationCompose =   "androidx.hilt:hilt-navigation-compose:1.0.0-alpha02"
-
+        const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha02"
     }
 
     object Test {

@@ -1,6 +1,7 @@
 package com.deneyehayir.deneysiz.data.local.datasource
 
 import android.content.Context
+import com.deneyehayir.deneysiz.data.local.model.CategoryDataModel
 import com.deneyehayir.deneysiz.data.local.model.CertificateDataModel
 import com.deneyehayir.deneysiz.data.local.model.DoYouKnowDataModel
 import com.deneyehayir.deneysiz.data.local.model.DonationDataModel
@@ -17,6 +18,8 @@ import javax.inject.Inject
 class AssetDataSource @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
+
+    suspend fun getCategories(): CategoryDataModel = invoke(CATEGORIES)
 
     suspend fun getCertificates(): CertificateDataModel = invoke(CERTIFICATES)
 
@@ -50,6 +53,7 @@ class AssetDataSource @Inject constructor(
     }
 
     companion object {
+        const val CATEGORIES = "local/response_categories.json"
         const val CERTIFICATES = "local/response_certificates.json"
         const val DO_YOU_KNOW = "local/response_do_you_know.json"
         const val WHO_WE_ARE = "local/response_who_we_are.json"

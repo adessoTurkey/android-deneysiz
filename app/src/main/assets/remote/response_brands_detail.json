@@ -1,5 +1,6 @@
 {
   "status": 200,
+  "message": "Success",
   "data": [
     {
       "id": 15,
@@ -35,6 +36,5 @@
       "description": "Dirk Rossmann’ın %40’ına sahip olan çatı firma A.S. Watson şiketlerinden Chi-Med hayvanlar üzerinde test yapıyor",
       "createdAt": "17/09/2021"
     }
-  ],
-  "message": "Success"
+  ]
 }
