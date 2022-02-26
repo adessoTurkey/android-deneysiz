@@ -1,14 +1,12 @@
 package com.deneyehayir.deneysiz.scene.categorydetail
 
-import androidx.annotation.StringRes
-import com.deneyehayir.deneysiz.R
 import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
 import com.deneyehayir.deneysiz.scene.categorydetail.model.SortOption
+import com.deneyehayir.deneysiz.scene.component.ErrorContentUiModel
 
 data class CategoryDetailViewState(
     val isLoading: Boolean,
-    val shouldShowError: Boolean,
-    @StringRes val errorMessage: Int,
+    val errorContent: ErrorContentUiModel?,
     private val brandsList: List<CategoryDetailItemUiModel>,
     val sortOption: SortOption
 ) {
@@ -20,19 +18,31 @@ data class CategoryDetailViewState(
         SortOption.SCORE_DESC -> brandsList.sortedByDescending { it.score }
     }
 
+    val sortingOptions = SortOption.values().toList()
+
     fun updateSortOption(sortOption: SortOption) = copy(
         sortOption = sortOption
     )
 
     fun updateBrandsList(brandsList: List<CategoryDetailItemUiModel>) = copy(
+        isLoading = false,
         brandsList = brandsList
+    )
+
+    fun showError(error: ErrorContentUiModel) = copy(
+        isLoading = false,
+        errorContent = error
+    )
+
+    fun hideError() = copy(
+        isLoading = false,
+        errorContent = null
     )
 
     companion object {
         val Initial = CategoryDetailViewState(
             isLoading = true,
-            shouldShowError = false,
-            errorMessage = R.string.empty,
+            errorContent = null,
             brandsList = emptyList(),
             sortOption = SortOption.SCORE_DESC
         )

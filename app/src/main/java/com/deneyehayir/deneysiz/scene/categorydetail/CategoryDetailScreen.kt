@@ -51,6 +51,8 @@ import com.deneyehayir.deneysiz.internal.extension.navigateToEmailApp
 import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
 import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
 import com.deneyehayir.deneysiz.scene.categorydetail.model.SortOption
+import com.deneyehayir.deneysiz.scene.component.ErrorDialog
+import com.deneyehayir.deneysiz.scene.component.LoadingScreen
 import com.deneyehayir.deneysiz.ui.theme.Blue
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
@@ -70,8 +72,8 @@ fun CategoryDetailScreen(
     onBrandDetail: (Int) -> Unit,
     onBack: () -> Unit
 ) {
-    val categoryDetailViewModel = hiltViewModel<CategoryDetailViewModel>()
-    val viewState by rememberFlowWithLifecycle(categoryDetailViewModel.viewState)
+    val viewModel = hiltViewModel<CategoryDetailViewModel>()
+    val viewState by rememberFlowWithLifecycle(viewModel.categoryDetailViewState)
         .collectAsState(initial = CategoryDetailViewState.Initial)
     val context = LocalContext.current
 
@@ -79,7 +81,7 @@ fun CategoryDetailScreen(
         modifier = modifier,
         topBar = {
             CategoryDetailTopBar(
-                titleRes = categoryDetailViewModel.categoryStringRes,
+                titleRes = viewModel.categoryStringRes,
                 onBack = onBack,
                 onSuggestBrand = {
                     context.navigateToEmailApp(
@@ -91,42 +93,51 @@ fun CategoryDetailScreen(
         }
     ) {
         CategoryDetailScreen(
-            categoryDetails = viewState.sortedBrandsList,
+            viewState = viewState,
             onBrandDetail = onBrandDetail,
-            currentSortOption = viewState.sortOption,
             onSortSelected = { sortOption ->
-                categoryDetailViewModel.onSortSelected(sortOption)
-            }
+                viewModel.onSortSelected(sortOption)
+            },
+            onErrorClose = viewModel.onErrorClose
         )
     }
 }
 
 @Composable
 private fun CategoryDetailScreen(
-    categoryDetails: List<CategoryDetailItemUiModel>,
+    viewState: CategoryDetailViewState,
     onBrandDetail: (Int) -> Unit,
     onSortSelected: (SortOption) -> Unit,
-    currentSortOption: SortOption
+    onErrorClose: () -> Unit,
 ) {
-    if (categoryDetails.isNotEmpty()) {
-        val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-        val scope = rememberCoroutineScope()
+    when {
+        viewState.isLoading -> { LoadingScreen() }
+        viewState.errorContent != null -> {
+            ErrorDialog(
+                content = viewState.errorContent,
+                onClose = onErrorClose
+            )
+        }
+        viewState.sortedBrandsList.isNotEmpty() -> {
+            val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+            val scope = rememberCoroutineScope()
 
-        ModalBottomSortSelection(
-            state = state,
-            scope = scope,
-            sortOptions = SortOption.values().toList(), // get from VM
-            onSortSelected = onSortSelected,
-            content = {
-                CategoryDetailList(
-                    state = state,
-                    scope = scope,
-                    categoryDetails = categoryDetails,
-                    currentSortOption = currentSortOption,
-                    navigateToBrandDetail = onBrandDetail
-                )
-            }
-        )
+            ModalBottomSortSelection(
+                state = state,
+                scope = scope,
+                sortOptions = viewState.sortingOptions,
+                onSortSelected = onSortSelected,
+                content = {
+                    CategoryDetailList(
+                        state = state,
+                        scope = scope,
+                        categoryDetails = viewState.sortedBrandsList,
+                        currentSortOption = viewState.sortOption,
+                        navigateToBrandDetail = onBrandDetail
+                    )
+                }
+            )
+        }
     }
 }
 
@@ -426,22 +437,27 @@ fun BrandRowPreview() {
 fun CategoryDetailListPreview() {
     DeneysizTheme {
         CategoryDetailScreen(
-            categoryDetails = mutableListOf<CategoryDetailItemUiModel>().apply {
-                repeat(5) {
-                    add(
-                        CategoryDetailItemUiModel(
-                            id = 1,
-                            brandName = "Hawaiian Tropic",
-                            parentCompanyName = "Rossmann",
-                            score = 7,
-                            scoreBackgroundColor = ScoreLightGreen
+            viewState = CategoryDetailViewState(
+                isLoading = false,
+                errorContent = null,
+                brandsList = mutableListOf<CategoryDetailItemUiModel>().apply {
+                    repeat(5) {
+                        add(
+                            CategoryDetailItemUiModel(
+                                id = 1,
+                                brandName = "Hawaiian Tropic",
+                                parentCompanyName = "Rossmann",
+                                score = 7,
+                                scoreBackgroundColor = ScoreLightGreen
+                            )
                         )
-                    )
-                }
-            },
+                    }
+                },
+                sortOption = SortOption.SCORE_DESC
+            ),
             onBrandDetail = {},
             onSortSelected = {},
-            currentSortOption = SortOption.SCORE_DESC
+            onErrorClose = {}
         )
     }
 }

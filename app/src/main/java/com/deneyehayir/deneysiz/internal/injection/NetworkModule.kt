@@ -61,12 +61,14 @@ object NetworkModule {
             .build()
     }
 
+    @ExperimentalSerializationApi
     @Provides
     @Singleton
     internal fun provideJson() = Json {
         ignoreUnknownKeys = true
         isLenient = true
         coerceInputValues = true
+        explicitNulls = false
     }
 
     @ExperimentalSerializationApi

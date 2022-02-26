@@ -133,7 +133,7 @@ private fun BrandDetailDomainModel.populateBrandInfoList(): List<BrandInfoUiMode
     )
     val offerInChina = BrandInfoUiModel(
         titleStringRes = R.string.brand_detail_info_china_offer,
-        iconRes = isOfferedInChina.getSafetyIcon()
+        iconRes = isOfferedInChina.not().getSafetyIcon()
     )
     val safeParentCompany = BrandInfoUiModel(
         titleStringRes = R.string.brand_detail_info_parent_company_safe,

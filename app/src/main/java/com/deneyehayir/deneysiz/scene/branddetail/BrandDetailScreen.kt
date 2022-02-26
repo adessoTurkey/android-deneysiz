@@ -58,6 +58,8 @@ import com.deneyehayir.deneysiz.scene.branddetail.model.BrandInfoUiModel
 import com.deneyehayir.deneysiz.scene.branddetail.model.BrandScoreType
 import com.deneyehayir.deneysiz.scene.branddetail.model.CertificateUiModel
 import com.deneyehayir.deneysiz.scene.branddetail.model.ScoreUiModel
+import com.deneyehayir.deneysiz.scene.component.ErrorDialog
+import com.deneyehayir.deneysiz.scene.component.LoadingScreen
 import com.deneyehayir.deneysiz.ui.theme.BlueTextColor
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
@@ -105,7 +107,8 @@ fun BrandDetailScreen(
                 )
             },
             onScoreDetail = viewModel.onScoreDetail,
-            onNavigateCertificateDetail = onNavigateCertificateDetail
+            onNavigateCertificateDetail = onNavigateCertificateDetail,
+            onErrorClose = viewModel.onErrorClose
         )
         Spacer(modifier = Modifier.size(24.dp))
     }
@@ -118,11 +121,17 @@ private fun BrandDetailScreen(
     viewState: BrandDetailViewState,
     onNavigateToEmailApp: () -> Unit,
     onScoreDetail: () -> Unit,
-    onNavigateCertificateDetail: (String) -> Unit
+    onNavigateCertificateDetail: (String) -> Unit,
+    onErrorClose: () -> Unit,
 ) {
     when {
-        viewState.isLoading -> {}
-        viewState.shouldShowError -> {}
+        viewState.isLoading -> { LoadingScreen() }
+        viewState.errorContent != null -> {
+            ErrorDialog(
+                content = viewState.errorContent,
+                onClose = onErrorClose
+            )
+        }
         viewState.brandDetailData != null -> {
             ModalBottomSheetSupportLayout(
                 state = bottomSheetState,

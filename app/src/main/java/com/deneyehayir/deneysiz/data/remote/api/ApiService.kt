@@ -1,38 +1,32 @@
 package com.deneyehayir.deneysiz.data.remote.api
 
+import com.deneyehayir.deneysiz.BuildConfig
 import com.deneyehayir.deneysiz.data.remote.model.request.BrandDetailRequestBody
 import com.deneyehayir.deneysiz.data.remote.model.request.CategoryDetailRequestBody
-import com.deneyehayir.deneysiz.data.remote.model.response.BrandDetailResponse
-import com.deneyehayir.deneysiz.data.remote.model.response.CategoryDetailResponse
-import com.deneyehayir.deneysiz.data.remote.model.response.CategoryResponse
+import com.deneyehayir.deneysiz.data.remote.model.response.BrandByCategoryResponse
 import com.deneyehayir.deneysiz.internal.util.api.LocalRequestType
+import com.deneyehayir.deneysiz.internal.util.api.LocalRequestType.LOCAL_BRANDS_DETAIL
+import com.deneyehayir.deneysiz.internal.util.api.LocalRequestType.LOCAL_CATEGORY_DETAIL
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Tag
 
 interface ApiService {
 
-    @GET(CATEGORIES)
-    suspend fun fetchCategories(
-        @Tag localRequestType: LocalRequestType = LocalRequestType.CATEGORIES
-    ): CategoryResponse
-
     @POST(CATEGORY_DETAIL)
     suspend fun fetchCategoryDetail(
-        @Tag localRequestType: LocalRequestType = LocalRequestType.CATEGORY_DETAIL,
+        @Tag type: LocalRequestType? = if (BuildConfig.DEBUG) LOCAL_CATEGORY_DETAIL else null,
         @Body requestBody: CategoryDetailRequestBody
-    ): CategoryDetailResponse
+    ): BrandByCategoryResponse
 
     @POST(BRANDS_DETAIL)
     suspend fun fetchBrandDetail(
-        @Tag localRequestType: LocalRequestType = LocalRequestType.BRANDS_DETAIL,
+        @Tag type: LocalRequestType? = if (BuildConfig.DEBUG) LOCAL_BRANDS_DETAIL else null,
         @Body requestBody: BrandDetailRequestBody
-    ): BrandDetailResponse
+    ): BrandByCategoryResponse
 
     companion object {
-        const val CATEGORIES = "remote/response_data_categories.json"
-        const val CATEGORY_DETAIL = "remote/response_category_detail.json"
-        const val BRANDS_DETAIL = "remote/response_brands_detail.json"
+        const val CATEGORY_DETAIL = "brands/byCategory"
+        const val BRANDS_DETAIL = "brands/detail"
     }
 }

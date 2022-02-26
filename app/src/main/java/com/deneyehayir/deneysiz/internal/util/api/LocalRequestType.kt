@@ -1,16 +1,13 @@
 package com.deneyehayir.deneysiz.internal.util.api
 
-import com.deneyehayir.deneysiz.data.remote.api.ApiService
 import okhttp3.Request
 
-enum class LocalRequestType(val endpoint: String) {
-    CATEGORIES(ApiService.CATEGORIES),
-    CATEGORY_DETAIL(ApiService.CATEGORY_DETAIL),
-    BRANDS_DETAIL(ApiService.BRANDS_DETAIL),
-    NONE("none");
+private const val categoryDetail = "remote/response_category_detail.json"
+private const val brandsDetail = "remote/response_brands_detail.json"
 
-    companion object {
-        fun fromRequest(request: Request): LocalRequestType =
-            request.tag(LocalRequestType::class.java) ?: NONE
-    }
+enum class LocalRequestType(val endpoint: String) {
+    LOCAL_CATEGORY_DETAIL(categoryDetail),
+    LOCAL_BRANDS_DETAIL(brandsDetail)
 }
+
+fun Request.isLocalRequestTagAvailable(): LocalRequestType? = tag(LocalRequestType::class.java)

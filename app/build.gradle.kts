@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -21,27 +23,43 @@ android {
         vectorDrawables { useSupportLibrary = true }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = rootProject.file("app-release.jks")
+            storePassword = gradleLocalProperties(rootDir).getProperty("storePassword")
+            keyAlias = gradleLocalProperties(rootDir).getProperty("keyAlias")
+            keyPassword = gradleLocalProperties(rootDir).getProperty("keyPassword")
+        }
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+            resValue("string", "app_name", "Deneysiz-Dev")
             val baseUrlDev: String by project
             buildConfigField("String", "BASE_URL", baseUrlDev)
         }
 
         release {
             isMinifyEnabled = false
+            resValue("string", "app_name", "Deneysiz")
             val baseUrlPrd: String by project
             buildConfigField("String", "BASE_URL", baseUrlPrd)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
         freeCompilerArgs = listOf(
@@ -49,7 +67,9 @@ android {
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi"
         )
     }
+
     buildFeatures { compose = true }
+
     composeOptions { kotlinCompilerExtensionVersion = Dependencies.AndroidX.Compose.version }
 
     lint {
@@ -101,6 +121,7 @@ dependencies {
     implementation(Dependencies.OkHttp.loggingInterceptor)
 
     debugImplementation(Dependencies.chucker)
+    releaseImplementation(Dependencies.chuckerNoOp)
     debugImplementation(Dependencies.leakCanary)
 
     testImplementation(Dependencies.Test.junit)

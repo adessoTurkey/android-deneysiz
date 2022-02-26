@@ -5,7 +5,8 @@ import com.deneyehayir.deneysiz.data.local.model.toDomain
 import com.deneyehayir.deneysiz.data.remote.datasource.RemoteDataSource
 import com.deneyehayir.deneysiz.data.remote.model.request.BrandDetailRequestBody
 import com.deneyehayir.deneysiz.data.remote.model.request.CategoryDetailRequestBody
-import com.deneyehayir.deneysiz.data.remote.model.response.toDomain
+import com.deneyehayir.deneysiz.data.remote.model.response.toBrandDetailDomain
+import com.deneyehayir.deneysiz.data.remote.model.response.toCategoryDetailDomain
 import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
@@ -24,23 +25,23 @@ class RepositoryImpl @Inject constructor(
     private val assetDataSource: AssetDataSource
 ) : Repository {
 
-    override suspend fun fetchCategories(): CategoryDomainModel =
-        remoteDataSource.fetchCategories().toDomain()
-
     override suspend fun fetchCategoryDetail(
         categoryId: String
     ): CategoryDetailDomainModel = remoteDataSource.fetchCategoryDetail(
         requestBody = CategoryDetailRequestBody(
             categoryId = categoryId
         )
-    ).toDomain()
+    ).toCategoryDetailDomain()
 
     override suspend fun fetchBrandDetail(brandId: Int): BrandDetailDomainModel =
         remoteDataSource.fetchBrandDetail(
             requestBody = BrandDetailRequestBody(
-                brandId = brandId
+                id = brandId
             )
-        ).toDomain()
+        ).toBrandDetailDomain()
+
+    override suspend fun fetchCategories(): CategoryDomainModel =
+        assetDataSource.getCategories().toDomain()
 
     override suspend fun fetchCertificates(): CertificatesDomainModel =
         assetDataSource.getCertificates().toDomain()

@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.deneyehayir.deneysiz.R
 import com.deneyehayir.deneysiz.domain.model.CategoryType
 import com.deneyehayir.deneysiz.domain.usecase.FetchCategoryDetailUseCase
+import com.deneyehayir.deneysiz.internal.extension.toErrorContentUiModel
 import com.deneyehayir.deneysiz.scene.categorydetail.model.SortOption
 import com.deneyehayir.deneysiz.scene.categorydetail.model.toUiModel
+import com.deneyehayir.deneysiz.scene.component.ErrorContentUiModel
 import com.deneyehayir.deneysiz.scene.navCategoryId
 import com.deneyehayir.deneysiz.scene.navCategoryStringRes
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,9 +25,9 @@ class CategoryDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val categoryDetail: FetchCategoryDetailUseCase
 ) : ViewModel() {
-    private var currentViewState = CategoryDetailViewState.Initial
-    private val _viewState = MutableStateFlow(currentViewState)
-    val viewState: StateFlow<CategoryDetailViewState> = _viewState
+    private var viewState = CategoryDetailViewState.Initial
+    private val _categoryDetailViewState = MutableStateFlow(viewState)
+    val categoryDetailViewState: StateFlow<CategoryDetailViewState> = _categoryDetailViewState
 
     private val categoryId =
         savedStateHandle.get<String>(navCategoryId) ?: CategoryType.INVALID.type
@@ -36,9 +37,14 @@ class CategoryDetailViewModel @Inject constructor(
     val onSortSelected: ((SortOption) -> Unit) = { sortOption ->
         sortingJob?.cancel()
         sortingJob = viewModelScope.launch(Dispatchers.Default) {
-            currentViewState = currentViewState.updateSortOption(sortOption)
-            _viewState.value = currentViewState
+            viewState = viewState.updateSortOption(sortOption)
+            _categoryDetailViewState.value = viewState
         }
+    }
+
+    val onErrorClose: (() -> Unit) = {
+        viewState = viewState.hideError()
+        _categoryDetailViewState.value = viewState
     }
 
     init {
@@ -48,10 +54,16 @@ class CategoryDetailViewModel @Inject constructor(
     private fun fetchCategoryDetailData() = viewModelScope.launch {
         categoryDetail(FetchCategoryDetailUseCase.Params(categoryId))
             .onSuccess { categoryDetail ->
-                currentViewState =
-                    currentViewState.updateBrandsList(categoryDetail.toUiModel().items)
-                _viewState.value = currentViewState
+                viewState = if (categoryDetail.shouldShowError) {
+                    viewState.showError(ErrorContentUiModel.Default)
+                } else {
+                    viewState.updateBrandsList(categoryDetail.toUiModel().items)
+                }
+                _categoryDetailViewState.value = viewState
             }
-            .onFailure { Timber.d("fetchCategoryDetailData onFailure: $it") }
+            .onFailure { throwable ->
+                viewState = viewState.showError(throwable.toErrorContentUiModel())
+                _categoryDetailViewState.value = viewState
+            }
     }
 }

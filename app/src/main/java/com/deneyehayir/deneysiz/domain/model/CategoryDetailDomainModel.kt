@@ -1,8 +1,8 @@
 package com.deneyehayir.deneysiz.domain.model
 
-@JvmInline
-value class CategoryDetailDomainModel(
-    val items: List<CategoryDetailItemDomainModel>
+data class CategoryDetailDomainModel(
+    val items: List<CategoryDetailItemDomainModel>,
+    val shouldShowError: Boolean
 )
 
 data class CategoryDetailItemDomainModel(
