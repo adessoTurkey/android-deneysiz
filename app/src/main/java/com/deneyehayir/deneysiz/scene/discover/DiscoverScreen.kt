@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,15 +31,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.scene.discover.model.CategoryItemUiModel
 import com.deneyehayir.deneysiz.domain.model.CategoryType
-import com.deneyehayir.deneysiz.scene.discover.model.CategoryUiModel
 import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
 import com.deneyehayir.deneysiz.scene.component.MainTopAppBar
 import com.deneyehayir.deneysiz.scene.component.TopAppBarWhoWeAreAction
+import com.deneyehayir.deneysiz.scene.discover.model.CategoryItemUiModel
+import com.deneyehayir.deneysiz.scene.discover.model.CategoryUiModel
 import com.deneyehayir.deneysiz.ui.theme.Blue
-import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
+import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
 import com.deneyehayir.deneysiz.ui.theme.GradientDark
 import com.deneyehayir.deneysiz.ui.theme.Transparent
 
@@ -129,7 +128,7 @@ fun CategoryItem(
                             drawRect(gradient)
                         }
                     }
-                    .then(modifier)
+                    .fillMaxSize()
             )
             Text(
                 text = stringResource(id = category.nameResource),
@@ -150,12 +149,11 @@ fun CategoryContent(
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(18.dp),
+        contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
         item {
-            Spacer(modifier = Modifier.height(8.dp))
             CategoryItem(
                 modifier = Modifier.fillMaxWidth(),
                 category = categoryData.headerItem,
@@ -166,14 +164,17 @@ fun CategoryContent(
 
         items(categoryData.windowedListItems) { categoryRow ->
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                modifier = Modifier.fillMaxWidth()
             ) {
-                categoryRow.forEach { category ->
+                categoryRow.forEachIndexed { index, category ->
                     CategoryItem(
                         modifier = Modifier
                             .height(96.dp)
-                            .fillParentMaxWidth(0.5f),
+                            .fillParentMaxWidth(0.5f)
+                            .padding(
+                                start = if (index == 1) 8.dp else 0.dp,
+                                end = if (index == 0) 8.dp else 0.dp
+                            ),
                         category = category,
                         navigateToCategory = navigateToCategory
                     )
