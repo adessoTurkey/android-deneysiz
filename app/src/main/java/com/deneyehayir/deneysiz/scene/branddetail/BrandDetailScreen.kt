@@ -108,6 +108,7 @@ fun BrandDetailScreen(
             },
             onScoreDetail = viewModel.onScoreDetail,
             onNavigateCertificateDetail = onNavigateCertificateDetail,
+            onRetry = viewModel.onRetry,
             onErrorClose = viewModel.onErrorClose
         )
         Spacer(modifier = Modifier.size(24.dp))
@@ -122,13 +123,17 @@ private fun BrandDetailScreen(
     onNavigateToEmailApp: () -> Unit,
     onScoreDetail: () -> Unit,
     onNavigateCertificateDetail: (String) -> Unit,
+    onRetry: () -> Unit,
     onErrorClose: () -> Unit,
 ) {
     when {
-        viewState.isLoading -> { LoadingScreen() }
+        viewState.isLoading -> {
+            LoadingScreen()
+        }
         viewState.errorContent != null -> {
             ErrorDialog(
                 content = viewState.errorContent,
+                onRetry = onRetry,
                 onClose = onErrorClose
             )
         }

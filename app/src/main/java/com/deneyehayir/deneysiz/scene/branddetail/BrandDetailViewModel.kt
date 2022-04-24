@@ -33,6 +33,12 @@ class BrandDetailViewModel @Inject constructor(
         _brandDetailViewState.value = viewState
     }
 
+    val onRetry: (() -> Unit) = {
+        viewState = BrandDetailViewState.Initial
+        _brandDetailViewState.value = viewState
+        fetchBrandDetail()
+    }
+
     init {
         fetchBrandDetail()
     }

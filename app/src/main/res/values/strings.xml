@@ -83,8 +83,8 @@
     <string name="support_apply_form">Form\'u Doldur</string>
 
     <string name="error_dialog_title_no_internet">İnternet Yok</string>
-    <string name="error_dialog_title_error">İşlem Hatası</string>
-    <string name="error_dialog_description_no_internet">Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, argumentum, te melius erroribus. argumentum,</string>
-    <string name="error_dialog_description_error">Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, argumentum, te melius erroribus.</string>
-    <string name="error_dialog_button_text">Tamam</string>
+    <string name="error_dialog_title_error">Üzgünüz</string>
+    <string name="error_dialog_description_no_internet">Lütfen internet bağlantınızı kontrol ederek tekrar deneyiniz.</string>
+    <string name="error_dialog_description_error">Şu anda işleminiz gerçekleştirilemiyor.Lütfen daha sonra tekrar deneyiniz.</string>
+    <string name="error_dialog_button_text">Tekrar Deneyin</string>
 </resources>
