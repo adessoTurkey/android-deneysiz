@@ -1,5 +1,7 @@
 package com.deneyehayir.deneysiz.scene.support
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -229,6 +231,7 @@ fun SupportActionContent(
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SupportActionItemCard(
     modifier: Modifier = Modifier,
@@ -237,7 +240,7 @@ fun SupportActionItemCard(
     onSocialMediaNavigation: (String) -> Unit
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier.clickable { onExpandableToggleClick(supportAction) },
         backgroundColor = White1,
         shape = RoundedCornerShape(8.dp)
     ) {
@@ -249,19 +252,9 @@ fun SupportActionItemCard(
                 supportAction = supportAction,
                 onExpandableToggleClick = onExpandableToggleClick
             )
-            if (supportAction.isExpanded) {
-                SupportActionExtendedContent(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            bottom = 16.dp
-                        ),
-                    text = supportAction.description
-                )
-                if (supportAction.socialMediaPages.isNotEmpty()) {
-                    SocialMediaPagesContent(
+            AnimatedVisibility(visible = supportAction.isExpanded) {
+                Column {
+                    SupportActionExtendedContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(
@@ -269,9 +262,21 @@ fun SupportActionItemCard(
                                 end = 16.dp,
                                 bottom = 16.dp
                             ),
-                        socialMediaPages = supportAction.socialMediaPages,
-                        onSocialMediaNavigation = onSocialMediaNavigation
+                        text = supportAction.description
                     )
+                    if (supportAction.socialMediaPages.isNotEmpty()) {
+                        SocialMediaPagesContent(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    start = 16.dp,
+                                    end = 16.dp,
+                                    bottom = 16.dp
+                                ),
+                            socialMediaPages = supportAction.socialMediaPages,
+                            onSocialMediaNavigation = onSocialMediaNavigation
+                        )
+                    }
                 }
             }
         }
