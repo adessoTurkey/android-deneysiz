@@ -52,7 +52,13 @@ data class OfferInChina(
     override val titleRes: Int = R.string.brand_detail_pop_up_title_china_offer,
     override val score: Int,
     override val maxScore: Int = 1
-) : BrandScoreType()
+) : BrandScoreType() {
+    override val subtitleRes = if (score != maxScore) {
+        R.string.brand_detail_pop_up_subtitle_yes
+    } else {
+        R.string.brand_detail_pop_up_subtitle_no
+    }
+}
 
 data class VeganProduct(
     override val titleRes: Int = R.string.brand_detail_pop_up_title_vegan_product,

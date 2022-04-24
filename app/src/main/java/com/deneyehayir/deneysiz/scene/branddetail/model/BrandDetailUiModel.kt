@@ -110,7 +110,7 @@ private fun BrandDetailDomainModel.populatePopupItems(): List<BrandScoreType> {
         parentCompanyType = parentCompany,
         score = when (parentCompany) {
             is ParentCompanyType.Unavailable -> 3
-            is ParentCompanyType.Available -> if (isSafe) 3 else 0
+            is ParentCompanyType.Available -> if (parentCompany.safe) 3 else 0
         }
     )
     val veganBrand = VeganBrand(score = if (isVegan) 1 else 0)
