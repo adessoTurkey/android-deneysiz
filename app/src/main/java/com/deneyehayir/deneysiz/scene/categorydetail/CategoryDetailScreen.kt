@@ -98,6 +98,7 @@ fun CategoryDetailScreen(
             onSortSelected = { sortOption ->
                 viewModel.onSortSelected(sortOption)
             },
+            onRetry = viewModel.onRetry,
             onErrorClose = viewModel.onErrorClose
         )
     }
@@ -108,13 +109,17 @@ private fun CategoryDetailScreen(
     viewState: CategoryDetailViewState,
     onBrandDetail: (Int) -> Unit,
     onSortSelected: (SortOption) -> Unit,
+    onRetry: () -> Unit,
     onErrorClose: () -> Unit,
 ) {
     when {
-        viewState.isLoading -> { LoadingScreen() }
+        viewState.isLoading -> {
+            LoadingScreen()
+        }
         viewState.errorContent != null -> {
             ErrorDialog(
                 content = viewState.errorContent,
+                onRetry = onRetry,
                 onClose = onErrorClose
             )
         }
@@ -457,6 +462,7 @@ fun CategoryDetailListPreview() {
             ),
             onBrandDetail = {},
             onSortSelected = {},
+            onRetry = {},
             onErrorClose = {}
         )
     }

@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.deneyehayir.deneysiz.R
+import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
 import com.deneyehayir.deneysiz.ui.theme.LightTextColor
 import com.deneyehayir.deneysiz.ui.theme.Orange
@@ -37,6 +40,7 @@ import com.deneyehayir.deneysiz.ui.theme.White1
 @Composable
 fun ErrorDialog(
     content: ErrorContentUiModel,
+    onRetry: () -> Unit,
     onClose: () -> Unit
 ) {
     val headerSize = 96
@@ -53,7 +57,8 @@ fun ErrorDialog(
                 titleResId = content.titleRes,
                 descriptionResId = content.descriptionRes,
                 buttonTextResId = content.buttonTextRes,
-                onButtonClick = onClose
+                onButtonClick = onRetry,
+                onClose = onClose
             )
             ErrorDialogHeader(
                 modifier = Modifier.size(headerSize.dp),
@@ -94,16 +99,26 @@ fun ErrorDialogContent(
     titleResId: Int,
     descriptionResId: Int,
     buttonTextResId: Int,
-    onButtonClick: () -> Unit
+    onButtonClick: () -> Unit,
+    onClose: () -> Unit
 ) {
     Column(
         modifier = modifier
             .background(color = LightTextColor, shape = RoundedCornerShape(8.dp))
             .padding(horizontal = 24.dp)
     ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_close),
+            contentDescription = null,
+            tint = DarkBlue,
+            modifier = Modifier
+                .padding(top = 22.dp)
+                .align(Alignment.End)
+                .clickable { onClose() }
+        )
         Text(
             modifier = Modifier
-                .padding(top = 56.dp)
+                .padding(top = 8.dp)
                 .align(Alignment.CenterHorizontally),
             text = stringResource(id = titleResId),
             color = DarkTextColor,
@@ -113,13 +128,14 @@ fun ErrorDialogContent(
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             modifier = Modifier
-                .align(Alignment.CenterHorizontally),
+                .align(Alignment.CenterHorizontally)
+                .padding(horizontal = 8.dp),
             text = stringResource(id = descriptionResId),
             color = DarkTextColor,
             fontWeight = FontWeight.Normal,
             fontSize = 14.sp
         )
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         ErrorDialogButton(
             modifier = Modifier
                 .fillMaxWidth()
@@ -176,6 +192,7 @@ data class ErrorContentUiModel(
 fun ErrorDialogPreview() {
     ErrorDialog(
         content = ErrorContentUiModel.Default,
+        onRetry = {},
         onClose = {}
     )
 }

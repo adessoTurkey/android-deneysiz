@@ -47,6 +47,12 @@ class CategoryDetailViewModel @Inject constructor(
         _categoryDetailViewState.value = viewState
     }
 
+    val onRetry: (() -> Unit) = {
+        viewState = CategoryDetailViewState.Initial
+        _categoryDetailViewState.value = viewState
+        fetchCategoryDetailData()
+    }
+
     init {
         fetchCategoryDetailData()
     }
