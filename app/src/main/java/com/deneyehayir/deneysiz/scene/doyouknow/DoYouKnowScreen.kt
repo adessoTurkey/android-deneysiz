@@ -164,6 +164,7 @@ private fun DoYouKnowScreenContent(
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
+        item { Spacer(modifier = Modifier.height(128.dp)) }
     }
 }
 
@@ -243,9 +244,10 @@ fun DoYouKnowScreenContentPreview() {
             faqTitle = "Merak Edilenler",
             faqDescription = "description",
             faqList = listOf(
-                FaqItemUiModel(id = 0, "Deneysiz Markalar", ""),
-                FaqItemUiModel(id = 1, "Vegan Ürünler", ""),
-                FaqItemUiModel(id = 2, "Çin’de Satış", ""),
+                FaqItemUiModel(id = 0, "Çin'de Satış ve Üretim", "", emptyList()),
+                FaqItemUiModel(id = 1, "Hayvan Deneyleri - Genel Bilgiler", "", emptyList()),
+                FaqItemUiModel(id = 2, "Vegan Ürünler", "", emptyList()),
+                FaqItemUiModel(id = 3, "Puanlama Sistemi", "", emptyList()),
             )
         ),
         onNavigateCertificateDetail = {},
