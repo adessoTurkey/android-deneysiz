@@ -2,6 +2,7 @@ package com.deneyehayir.deneysiz.data.local.model
 
 import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
 import com.deneyehayir.deneysiz.domain.model.FaqItemDomainModel
+import com.deneyehayir.deneysiz.domain.model.FaqItemLinkDomainModel
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -17,7 +18,14 @@ data class DoYouKnowDataModel(
 data class FaqItemDataModel(
     val id: Int,
     val title: String,
-    val description: String
+    val description: String,
+    val links: List<FaqItemLinkDataModel>?
+)
+
+@Serializable
+data class FaqItemLinkDataModel(
+    val name: String,
+    val url: String
 )
 
 fun DoYouKnowDataModel.toDomain() = DoYouKnowDomainModel(
@@ -31,5 +39,11 @@ fun DoYouKnowDataModel.toDomain() = DoYouKnowDomainModel(
 fun FaqItemDataModel.toDomain() = FaqItemDomainModel(
     id = id,
     title = title,
-    description = description
+    description = description,
+    links = links?.map { linkItem -> linkItem.toDomain() }.orEmpty()
+)
+
+fun FaqItemLinkDataModel.toDomain() = FaqItemLinkDomainModel(
+    name = name,
+    url = url
 )
