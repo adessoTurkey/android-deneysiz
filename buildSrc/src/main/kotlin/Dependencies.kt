@@ -4,6 +4,7 @@ object Dependencies {
     const val chucker = "com.github.chuckerteam.chucker:library:3.4.0"
     const val chuckerNoOp = "com.github.chuckerteam.chucker:library-no-op:3.4.0"
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.7"
+    const val lottie = "com.airbnb.android:lottie-compose:5.0.1"
 
     object Kotlin {
         private const val version = "1.5.10"
@@ -15,6 +16,7 @@ object Dependencies {
         const val coreKtx = "androidx.core:core-ktx:1.6.0"
         const val appStartup = "androidx.startup:startup-runtime:1.0.0"
         const val activityCompose = "androidx.activity:activity-compose:1.3.0"
+        const val splash = "androidx.core:core-splashscreen:1.0.0-beta02"
 
         object Compose {
             const val version = "1.0.0"
@@ -30,8 +32,9 @@ object Dependencies {
         }
 
         object Navigation {
-            private const val version = "2.4.0-alpha05"
+            private const val version = "2.4.0"
             const val compose = "androidx.navigation:navigation-compose:$version"
+            const val common = "androidx.navigation:navigation-common-ktx:$version"
         }
 
         object Test {

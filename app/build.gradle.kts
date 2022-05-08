@@ -93,7 +93,9 @@ dependencies {
     implementation(Dependencies.AndroidX.Lifecycle.viewModel)
     implementation(Dependencies.AndroidX.Lifecycle.viewModelCompose)
     implementation(Dependencies.AndroidX.Navigation.compose)
+    implementation(Dependencies.AndroidX.Navigation.common)
     implementation(Dependencies.AndroidX.appStartup)
+    implementation(Dependencies.AndroidX.splash)
     implementation(Dependencies.material)
 
     implementation(Dependencies.AndroidX.Compose.layout)
@@ -119,6 +121,8 @@ dependencies {
     implementation(platform(Dependencies.OkHttp.bom))
     implementation(Dependencies.OkHttp.okHttp)
     implementation(Dependencies.OkHttp.loggingInterceptor)
+
+    implementation(Dependencies.lottie)
 
     debugImplementation(Dependencies.chucker)
     releaseImplementation(Dependencies.chuckerNoOp)
