@@ -14,13 +14,12 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Deneysiz"
+        android:theme="@style/Theme.Starting"
         tools:ignore="UnusedAttribute">
 
         <activity
             android:name=".scene.main.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Deneysiz">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

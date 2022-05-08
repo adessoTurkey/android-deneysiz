@@ -19,8 +19,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.deneyehayir.deneysiz.R
 import com.deneyehayir.deneysiz.scene.branddetail.BrandDetailScreen
 import com.deneyehayir.deneysiz.scene.categorydetail.CategoryDetailScreen
@@ -29,6 +29,7 @@ import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
 import com.deneyehayir.deneysiz.scene.donation.DonationScreen
 import com.deneyehayir.deneysiz.scene.doyouknow.DoYouKnowScreen
 import com.deneyehayir.deneysiz.scene.faq.FaqScreen
+import com.deneyehayir.deneysiz.scene.splash.SplashScreen
 import com.deneyehayir.deneysiz.scene.support.SupportScreen
 import com.deneyehayir.deneysiz.scene.whoweare.WhoWeAreScreen
 import com.deneyehayir.deneysiz.ui.theme.BottomNavColor
@@ -41,6 +42,7 @@ const val navCategoryStringRes = "categoryStringRes"
 const val navBrandDetailBrandId = "brandId"
 const val navCertificateName = "certificateName"
 const val navFaqId = "faqId"
+const val splashScreenRoute = "splash"
 
 sealed class MainScreen(
     val route: String,
@@ -157,9 +159,22 @@ fun BottomNavBar(
 fun MainNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = MainScreen.Discover.route,
+    startDestination: String = splashScreenRoute,
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
+        composable(splashScreenRoute) {
+            SplashScreen(
+                onSplashComplete = {
+                    navController.navigate(
+                        MainScreen.Discover.route
+                    ) {
+                        popUpTo(splashScreenRoute) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
         composable(MainScreen.Discover.route) {
             DiscoverScreen(
                 modifier = modifier,

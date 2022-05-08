@@ -10,7 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
-import com.deneyehayir.deneysiz.ui.theme.Transparent
+import com.deneyehayir.deneysiz.ui.theme.Orange
+import com.deneyehayir.deneysiz.ui.theme.White0
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -29,10 +30,12 @@ fun MainContent() {
 
         val systemUiController = rememberSystemUiController()
         SideEffect {
-            systemUiController.setSystemBarsColor(
-                color = Transparent,
-                darkIcons = true
-            )
+            systemUiController.apply {
+                setStatusBarColor(
+                    color = if (currentRoute == splashScreenRoute) Orange else White0
+                )
+                isNavigationBarVisible = currentRoute != splashScreenRoute
+            }
         }
 
         Scaffold(
