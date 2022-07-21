@@ -2,8 +2,7 @@ package com.deneyehayir.deneysiz.domain.model
 
 data class SupportDomainModel(
     val description: String,
-    val supportActions: List<SupportActionDomainModel>,
-    val volunteerUrl: String
+    val supportActions: List<SupportActionDomainModel>
 )
 
 data class SupportActionDomainModel(

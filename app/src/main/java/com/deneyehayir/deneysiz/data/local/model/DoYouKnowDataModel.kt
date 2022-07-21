@@ -17,9 +17,7 @@ data class DoYouKnowDataModel(
 @Serializable
 data class FaqItemDataModel(
     val id: Int,
-    val title: String,
-    val description: String,
-    val links: List<FaqItemLinkDataModel>?
+    val title: String
 )
 
 @Serializable
@@ -38,9 +36,7 @@ fun DoYouKnowDataModel.toDomain() = DoYouKnowDomainModel(
 
 fun FaqItemDataModel.toDomain() = FaqItemDomainModel(
     id = id,
-    title = title,
-    description = description,
-    links = links?.map { linkItem -> linkItem.toDomain() }.orEmpty()
+    title = title
 )
 
 fun FaqItemLinkDataModel.toDomain() = FaqItemLinkDomainModel(

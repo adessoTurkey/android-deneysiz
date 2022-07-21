@@ -7,8 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SupportDataModel(
     val description: String,
-    val supportActions: List<SupportActionDataModel>,
-    val volunteerUrl: String
+    val supportActions: List<SupportActionDataModel>
 )
 
 @Serializable
@@ -21,8 +20,7 @@ data class SupportActionDataModel(
 
 fun SupportDataModel.toDomain() = SupportDomainModel(
     description = description,
-    supportActions = supportActions.map { supportAction -> supportAction.toDomain() },
-    volunteerUrl = volunteerUrl
+    supportActions = supportActions.map { supportAction -> supportAction.toDomain() }
 )
 
 fun SupportActionDataModel.toDomain() = SupportActionDomainModel(

@@ -1,5 +1,5 @@
 {
-  "description": "Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus",
+  "description": "Ambalajlarında aşağıda gördüğün logolardan biri ya da birkaçının bulunduğu ürünler, elindeki ürünün hayvanlar üzerinde test edilmediğini garantiler.",
   "certificates": [
     {
       "name": "Leaping Bunny",
@@ -19,40 +19,23 @@
     }
   ],
   "faqTitle": "Merak Edilenler",
-  "faqDescription": "Deutsches Ipsum Dolor quo lucilius Freude schöner Götterfunken at, adhuc laboramus sadipscing per adhuc laboramus",
+  "faqDescription": "Bize sıkça sorulan soruların cevaplarını aşağıda listeledik. Detaylı bilgiler için burayı okumanızı öneririz.",
   "faqList": [
     {
-      "id": 0,
-      "title": "Çin'de Satış ve Üretim",
-      "description": "2014 yılında kadar, Çin (anakarada) satıla sunulacak yerli ve ithal kozmetik ürünlerinin hayvanlar üzerinde test edilmesi yasal bir zorunluluktu. Firmalar bu testleri kendileri yapmasalar bile hükumete ait laboratuvarlarda bu testler yapılmadan ürünler raflara konulamıyordu.  2014 yılında bir değişiklik yapılarak, ülke içinde (onaylanmış güvenli içerik listesi ile) üretilen ürünler için hayvan testi zorunluluğu kalktı ancak yurt dışından ithal edilen ürünler için bu zorunluluk devam etti.\n\nHayvan testi zorunluluğu sadece anakarada fiziksel olarak satılacak (online satışlar muaf) ve Hong Kong dışındaki yerlerden ülkeye ithal edilen ürünler için geçerliydi. Ayrıca havaalanlarında satışa sunulan ürünler de hayvan testi zorunluluğundan muaftı.\n\nÇin Gıda ve İlaç Dairesi 2017’de bazı düzenlemeler yaptı ve ertesi yıl, Leaping Bunny’nin girişimiyle, ithal ürünlerin satış öncesi ve sonrasında hayvan testlerinden muaf tutulması için yerel olarak üretileceği bir pilot çalışma başlatıldı.\n\n2019’da Çin Medikal Ürün Dairesi, kozmetik ürün içeriklerinin hayvansız alternatif bilimsel yöntemlerle test edilebilmesi için dokuz yeni yöntemi onayladı ve ayrıca teknik güvenlik standardı olarak üç yeni yöntem de 2020’de yürürlüğe girdi. Her bir ürünün kontrolü için ortalama 70 hayvanın öldürüldüğü kozmetik ürünlerin hem satış öncesi hem de satış sonrası testlerinde, hayvanların kullanılmadığı bu alternatif yöntemlerin geçerliliğinin tanınması büyük bir adım oldu.",
-      "links": []
+      "id": 100,
+      "title": "Çin'de Satış ve Üretim"
     },
     {
-      "id": 1,
-      "title": "Hayvan Deneyleri - Genel Bilgiler",
-      "description": "Hayvan deneyleri, insan harici hayvanlar üzerinde deneysel ve bilimsel amaçlarla yapılan uygulamalardır. Her yıl dünyada 100 milyonun üzerinde hayvan deneylerde kullanılır.\n\nDünyadaki bilinen milyonlarca hayvan türünden, deneylerde en sık kullanılan 9 hayvan türü; fare, sıçan, tavşan, balık, kedi, köpek, maymun, kobay (ginepig) ve hamster’dır.\n\nHayvanlar sadece ilaç ya da aşı geliştirmek için değil, aklımıza gelen her alanda ve her şekilde laboratuvarlarda birer denek olmakta ve öldürülmektedirler. Tükettiğimiz gıdalardan cep telefonumuza, bindiğimiz araçların güvenlik testlerinden uçakların jet yakıtlarına kadar insanın kullanımındaki hemen her şey, insan sağlığına olumsuz etkilerini ölçmek amacıyla öncelikle hayvanlar üzerinde test edilirler.\n\nÜlkemizde de hayvanlar üzerinde deneyler yapılmaktadır ve bu amaç için kurulmuş 120’nin üzerinde deney merkezi vardır. Türkiye’de her yıl ortalama 260 bin hayvan deneylerde kullanılır.\n\nHayvan deneylerinin insan sağlığı için güvenilir bir test metodu olmadığını savunan bilim insanlarının sayısı her geçen gün hızla artmakta, hatta bu bilim insanları hayvanların kullanılmadığı alternatif bilimsel yöntemlerin her alanda genişletilmesi ve kullanımının artması için örgütler kurmakta, eğitici kurs, seminerler vermekte ve bilimsel yayınlar yapmaktadırlar.\n\nHayvan deneylerinin etik boyutu ise son birkaç yüzyıldır önemli bir tartışma alanı olmuş, tüm canlıların doğuştan ve eşit şekilde sahip olduğu yaşam hakkını ihlâl eden bu uygulamaların bir an önce son bulması gerektiğinden hareketle birçok ülke, bir takım yasal değişiklikler yaparak kısıtlamalara gitmiştir.\n\nHayvan deneyleriyle ilgili daha detaylı bilgi için web sitemizi* inceleyebilir ya da “Hayvan Deneyleri: Hayvanlar bizim için mi var?”** adlı kitabı okuyabilirsiniz.",
-      "links": [
-        {
-          "name": "deneyehayir.org",
-          "url": "https://www.deneyehayir.org/"
-        },
-        {
-          "name": "Hayvan Deneyleri: Hayvanlar bizim için mi var?",
-          "url": "https://yeniinsanyayinevi.com/kitaplarimiz/hayvan-deneyleri/"
-        }
-      ]
+      "id": 101,
+      "title": "Hayvan Deneyleri - Genel Bilgiler"
     },
     {
-      "id": 2,
-      "title": "Vegan Ürünler",
-      "description": "Vegan ürün nedir?\n\nVegan ürün, içeriğinde direkt ya da dolaylı yoldan hayvanlardan elde edilen herhangi bir içerik (bal, balmumu, karmin, lanolin vb.) barındırmayan üründür. \n\nVegan Ürünler Aynı Zamanda Deneysiz midir?\n\nBir üründe hayvan kaynaklı içeriklerin olmaması onun hayvanlar üzerinde test edilmediği anlamına gelmez. Bunun yanında, ürün ambalajlarında vegan ibaresinin kötüye kullanımına da rastlayabiliyoruz. Bu yüzden hem deneysizliği hem de hayvan kaynaklı içerik barındırmadığını garantileyen bir sertifikalandırma programına dahil olmuş ürünlerin tercih edilmesi daha doğru olacaktır.\n\nVegan Ürünler Zulümsüz müdür?\n\nBir ürüne “zulümsüz\" diyebilmemiz için hem vegan hem de herhangi bir aşamada hayvanlar üzerinde test edilmemiş olması gerekir. Ana konusu hayvan deneyi olmayan sertifikalandırmalardan sadece The Vegan Society, Vegetarian Society ve V-Label, logo kullanımına izin verdiği ürünlerin aynı zamanda hayvanlar üzerinde test edilmediğini garanti eder.",
-      "links": []
+      "id": 102,
+      "title": "Vegan Ürünler"
     },
     {
-      "id": 3,
-      "title": "Puanlama Sistemi",
-      "description": "2014 yılında kadar, Çin (anakarada) satıla sunulacak yerli ve ithal kozmetik ürünlerinin hayvanlar üzerinde test edilmesi yasal bir zorunluluktu. Firmalar bu testleri kendileri yapmasalar bile hükumete ait laboratuvarlarda bu testler yapılmadan ürünler raflara konulamıyordu.  2014 yılında bir değişiklik yapılarak, ülke içinde (onaylanmış güvenli içerik listesi ile) üretilen ürünler için hayvan testi zorunluluğu kalktı ancak yurt dışından ithal edilen ürünler için bu zorunluluk devam etti.\n\nHayvan testi zorunluluğu sadece anakarada fiziksel olarak satılacak (online satışlar muaf) ve Hong Kong dışındaki yerlerden ülkeye ithal edilen ürünler için geçerliydi. Ayrıca havaalanlarında satışa sunulan ürünler de hayvan testi zorunluluğundan muaftı.\n\nÇin Gıda ve İlaç Dairesi 2017’de bazı düzenlemeler yaptı ve ertesi yıl, Leaping Bunny’nin girişimiyle, ithal ürünlerin satış öncesi ve sonrasında hayvan testlerinden muaf tutulması için yerel olarak üretileceği bir pilot çalışma başlatıldı.\n\n2019’da Çin Medikal Ürün Dairesi, kozmetik ürün içeriklerinin hayvansız alternatif bilimsel yöntemlerle test edilebilmesi için dokuz yeni yöntemi onayladı ve ayrıca teknik güvenlik standardı olarak üç yeni yöntem de 2020’de yürürlüğe girdi. Her bir ürünün kontrolü için ortalama 70 hayvanın öldürüldüğü kozmetik ürünlerin hem satış öncesi hem de satış sonrası testlerinde, hayvanların kullanılmadığı bu alternatif yöntemlerin geçerliliğinin tanınması büyük bir adım oldu.",
-      "links": []
+      "id": 103,
+      "title": "Puanlama Sistemi"
     }
   ]
 }

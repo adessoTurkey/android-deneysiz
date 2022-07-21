@@ -76,7 +76,7 @@ import kotlinx.coroutines.launch
 fun BrandDetailScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
-    onNavigateCertificateDetail: (String) -> Unit
+    onNavigateCertificateDetail: (Int) -> Unit
 ) {
     val viewModel = hiltViewModel<BrandDetailViewModel>()
     val viewState by rememberFlowWithLifecycle(viewModel.brandDetailViewState)
@@ -122,7 +122,7 @@ private fun BrandDetailScreen(
     viewState: BrandDetailViewState,
     onNavigateToEmailApp: () -> Unit,
     onScoreDetail: () -> Unit,
-    onNavigateCertificateDetail: (String) -> Unit,
+    onNavigateCertificateDetail: (Int) -> Unit,
     onRetry: () -> Unit,
     onErrorClose: () -> Unit,
 ) {
@@ -160,7 +160,7 @@ private fun BrandDetailScreenContent(
     brandDetailData: BrandDetailUiModel,
     shouldScoreDetailDialogShown: Boolean,
     onScoreDetail: () -> Unit,
-    onNavigateCertificateDetail: (String) -> Unit
+    onNavigateCertificateDetail: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -311,7 +311,7 @@ fun ScoreArea(
 @Composable
 fun CertificatesContent(
     certificateList: List<CertificateUiModel>,
-    onNavigateCertificateDetail: (String) -> Unit
+    onNavigateCertificateDetail: (Int) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -333,12 +333,12 @@ fun CertificatesContent(
 fun CertificateItem(
     modifier: Modifier = Modifier,
     certificate: CertificateUiModel,
-    onNavigateCertificateDetail: (String) -> Unit
+    onNavigateCertificateDetail: (Int) -> Unit
 ) {
     Card(
         modifier = modifier
             .background(color = White1)
-            .clickable { onNavigateCertificateDetail(certificate.certificate.type) },
+            .clickable { onNavigateCertificateDetail(certificate.certificate.id) },
         shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
     ) {

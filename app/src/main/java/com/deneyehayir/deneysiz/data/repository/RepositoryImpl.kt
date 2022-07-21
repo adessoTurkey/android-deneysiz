@@ -11,6 +11,7 @@ import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
+import com.deneyehayir.deneysiz.domain.model.DoYouKnowContentDomainModel
 import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
 import com.deneyehayir.deneysiz.domain.model.DonationDomainModel
 import com.deneyehayir.deneysiz.domain.model.SupportDomainModel
@@ -57,4 +58,7 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun fetchSupportData(): SupportDomainModel =
         assetDataSource.getSupportData().toDomain()
+
+    override suspend fun fetchDoYouKnowContentData(): DoYouKnowContentDomainModel =
+        assetDataSource.getDoYouKnowContentData().toDomain()
 }

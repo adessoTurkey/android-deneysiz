@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.deneyehayir.deneysiz.ui.theme.Blue
 
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable
@@ -14,5 +15,5 @@ fun LoadingScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
-    ) { CircularProgressIndicator() }
+    ) { CircularProgressIndicator(color = Blue) }
 }

@@ -37,7 +37,7 @@ import com.deneyehayir.deneysiz.scene.branddetail.model.CertificateUiModel
 import com.deneyehayir.deneysiz.scene.component.MainTopAppBar
 import com.deneyehayir.deneysiz.scene.component.TopAppBarWhoWeAreAction
 import com.deneyehayir.deneysiz.scene.doyouknow.model.DoYouKnowUiModel
-import com.deneyehayir.deneysiz.scene.faq.model.FaqItemUiModel
+import com.deneyehayir.deneysiz.scene.doyouknow.model.FaqItemUiModel
 import com.deneyehayir.deneysiz.ui.theme.Blue
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
@@ -48,7 +48,7 @@ import com.deneyehayir.deneysiz.ui.theme.White1
 fun DoYouKnowScreen(
     modifier: Modifier = Modifier,
     navigateToWhoWeAre: () -> Unit,
-    onNavigateCertificateDetail: (String) -> Unit,
+    onNavigateCertificateDetail: (Int) -> Unit,
     onNavigateFaqDetail: (Int) -> Unit
 ) {
     val viewModel = hiltViewModel<DoYouKnowViewModel>()
@@ -81,7 +81,7 @@ fun DoYouKnowScreen(
 @Composable
 private fun DoYouKnowScreen(
     viewState: DoYouKnowViewState,
-    onNavigateCertificateDetail: (String) -> Unit,
+    onNavigateCertificateDetail: (Int) -> Unit,
     onNavigateFaqDetail: (Int) -> Unit
 ) {
     when {
@@ -100,7 +100,7 @@ private fun DoYouKnowScreen(
 @Composable
 private fun DoYouKnowScreenContent(
     uiModel: DoYouKnowUiModel,
-    onNavigateCertificateDetail: (String) -> Unit,
+    onNavigateCertificateDetail: (Int) -> Unit,
     onNavigateFaqDetail: (Int) -> Unit
 ) {
     LazyColumn(
@@ -207,12 +207,12 @@ fun FaqItem(
 private fun CertificateItem(
     modifier: Modifier = Modifier,
     certificate: CertificateUiModel,
-    onNavigateCertificateDetail: (String) -> Unit
+    onNavigateCertificateDetail: (Int) -> Unit
 ) {
     Card(
         modifier = modifier
             .background(color = White1)
-            .clickable { onNavigateCertificateDetail(certificate.certificate.type) },
+            .clickable { onNavigateCertificateDetail(certificate.certificate.id) },
         shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
     ) {
@@ -244,10 +244,10 @@ fun DoYouKnowScreenContentPreview() {
             faqTitle = "Merak Edilenler",
             faqDescription = "description",
             faqList = listOf(
-                FaqItemUiModel(id = 0, "Çin'de Satış ve Üretim", "", emptyList()),
-                FaqItemUiModel(id = 1, "Hayvan Deneyleri - Genel Bilgiler", "", emptyList()),
-                FaqItemUiModel(id = 2, "Vegan Ürünler", "", emptyList()),
-                FaqItemUiModel(id = 3, "Puanlama Sistemi", "", emptyList()),
+                FaqItemUiModel(id = 0, "Çin'de Satış ve Üretim"),
+                FaqItemUiModel(id = 1, "Hayvan Deneyleri - Genel Bilgiler"),
+                FaqItemUiModel(id = 2, "Vegan Ürünler"),
+                FaqItemUiModel(id = 3, "Puanlama Sistemi"),
             )
         ),
         onNavigateCertificateDetail = {},

@@ -5,10 +5,13 @@ const val BEAUTY_WITHOUT_BUNNIES = "Beauty Without Bunnies"
 const val VEGAN_SOCIETY = "Vegan Society"
 const val V_LABEL = "V-Label"
 
-enum class CertificateType(val type: String) {
-    LeapingBunny(LEAPING_BUNNY),
-    BeautyWithoutBunnies(BEAUTY_WITHOUT_BUNNIES),
-    VeganSociety(VEGAN_SOCIETY),
-    VLabel(V_LABEL),
-    None("")
+enum class CertificateType(
+    val type: String,
+    val id: Int // should be read from json?
+) {
+    LeapingBunny(LEAPING_BUNNY, 0),
+    VeganSociety(VEGAN_SOCIETY, 1),
+    BeautyWithoutBunnies(BEAUTY_WITHOUT_BUNNIES, 2),
+    VLabel(V_LABEL, 3),
+    None("", -1)
 }
