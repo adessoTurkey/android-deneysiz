@@ -44,7 +44,7 @@ fun WhoWeAreSupportActionDomainModel.toUiModel() = WhoWeAreSupportActionUiModel(
         0 -> R.drawable.ic_email
         1 -> R.drawable.ic_support
         2 -> R.drawable.ic_heart
-        else -> R.drawable.ic_do_you_know
+        else -> R.drawable.ic_discover
     }
 )
 
@@ -56,6 +56,6 @@ fun SocialMediaPageDomainModel.toUiModel() = SocialMediaPageUiModel(
         1 -> R.drawable.ic_instagram
         2 -> R.drawable.ic_youtube
         3 -> R.drawable.ic_facebook
-        else -> R.drawable.ic_do_you_know
+        else -> R.drawable.ic_discover
     }
 )

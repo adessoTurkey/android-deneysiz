@@ -1,20 +1,20 @@
-package com.deneyehayir.deneysiz.scene.certificatedetail
+package com.deneyehayir.deneysiz.scene.doyouknowcontent
 
 import androidx.annotation.StringRes
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.scene.certificatedetail.model.CertificateDetailUiModel
+import com.deneyehayir.deneysiz.scene.doyouknowcontent.model.DoYouKnowContentUiModel
 
-data class CertificateDetailViewState(
+data class DoYouKnowContentViewState(
     val isLoading: Boolean,
     val shouldShowError: Boolean,
     @StringRes val errorMessage: Int,
-    val certificateDetail: CertificateDetailUiModel?
+    val contentUiModel: DoYouKnowContentUiModel?
 ) {
 
-    fun updateCertificateDetail(certificateDetail: CertificateDetailUiModel) = copy(
+    fun updateContentUiModel(contentUiModel: DoYouKnowContentUiModel) = copy(
         isLoading = false,
         shouldShowError = false,
-        certificateDetail = certificateDetail
+        contentUiModel = contentUiModel
     )
 
     fun setError() = copy(
@@ -22,11 +22,11 @@ data class CertificateDetailViewState(
     )
 
     companion object {
-        val Initial = CertificateDetailViewState(
+        val Initial = DoYouKnowContentViewState(
             isLoading = true,
             shouldShowError = false,
             errorMessage = R.string.empty,
-            certificateDetail = null
+            contentUiModel = null
         )
     }
 }

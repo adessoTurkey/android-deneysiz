@@ -25,7 +25,7 @@ data class BrandByCategoryItemResponse(
     val name: String?,
     val parentCompany: ParentCompanyResponse?,
     val offerInChina: Boolean?,
-    val categoryId: String?,
+    val categoryId: List<Int>?,
     val certificates: List<CertificateResponse>?,
     val safe: Boolean?,
     val vegan: Boolean?,

@@ -20,8 +20,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
@@ -53,7 +51,6 @@ import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
 import com.deneyehayir.deneysiz.ui.theme.Gray
 import com.deneyehayir.deneysiz.ui.theme.Gray2
-import com.deneyehayir.deneysiz.ui.theme.Orange
 import com.deneyehayir.deneysiz.ui.theme.White0
 import com.deneyehayir.deneysiz.ui.theme.White1
 
@@ -142,15 +139,6 @@ private fun SupportScreenContent(
             supportActions = uiModel.supportActions,
             onExpandableToggleClick = onExpandableToggleClick,
             onSocialMediaNavigation = onSocialMediaNavigation
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        ApplicantButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(42.dp),
-            text = stringResource(id = R.string.support_apply_form),
-            formUrl = uiModel.volunteerUrl,
-            onVolunteerApplyClick = onVolunteerApplyClick
         )
     }
 }
@@ -384,30 +372,6 @@ fun SocialMediaPageItem(
     }
 }
 
-@Composable
-fun ApplicantButton(
-    modifier: Modifier = Modifier,
-    text: String,
-    formUrl: String,
-    onVolunteerApplyClick: (String) -> Unit
-) {
-    Button(
-        modifier = modifier,
-        onClick = { onVolunteerApplyClick(formUrl) },
-        shape = RoundedCornerShape(8.dp),
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Orange
-        )
-    ) {
-        Text(
-            text = text,
-            color = White1,
-            fontWeight = FontWeight.Medium,
-            fontSize = 14.sp
-        )
-    }
-}
-
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable
 fun SupportTopBarPreview() {
@@ -442,8 +406,7 @@ fun SupportScreenContentPreview() {
                     socialMediaPages = listOf(),
                     false
                 )
-            ),
-            volunteerUrl = ""
+            )
         ),
         onExpandableToggleClick = {},
         onSocialMediaNavigation = {},

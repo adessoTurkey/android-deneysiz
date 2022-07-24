@@ -1,9 +1,8 @@
 package com.deneyehayir.deneysiz.scene.doyouknow.model
 
 import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
+import com.deneyehayir.deneysiz.domain.model.FaqItemDomainModel
 import com.deneyehayir.deneysiz.scene.branddetail.model.CertificateUiModel
-import com.deneyehayir.deneysiz.scene.faq.model.FaqItemUiModel
-import com.deneyehayir.deneysiz.scene.faq.model.toUiModel
 
 data class DoYouKnowUiModel(
     val description: String,
@@ -14,6 +13,16 @@ data class DoYouKnowUiModel(
 ) {
     val windowedCertificates = certificates.windowed(2, 2, true)
 }
+
+data class FaqItemUiModel(
+    val id: Int,
+    val title: String
+)
+
+fun FaqItemDomainModel.toUiModel() = FaqItemUiModel(
+    id = id,
+    title = title
+)
 
 // common uiModels should be organized
 fun DoYouKnowDomainModel.toUiModel() = DoYouKnowUiModel(

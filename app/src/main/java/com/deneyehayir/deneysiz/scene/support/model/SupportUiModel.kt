@@ -7,8 +7,7 @@ import com.deneyehayir.deneysiz.scene.whoweare.model.toUiModel
 
 data class SupportUiModel(
     val description: String,
-    val supportActions: List<SupportActionUiModel>,
-    val volunteerUrl: String
+    val supportActions: List<SupportActionUiModel>
 )
 
 data class SupportActionUiModel(
@@ -25,8 +24,7 @@ data class SupportActionUiModel(
 
 fun SupportDomainModel.toUiModel() = SupportUiModel(
     description = description,
-    supportActions = supportActions.map { supportAction -> supportAction.toUiModel() },
-    volunteerUrl = volunteerUrl
+    supportActions = supportActions.map { supportAction -> supportAction.toUiModel() }
 )
 
 fun SupportActionDomainModel.toUiModel() = SupportActionUiModel(

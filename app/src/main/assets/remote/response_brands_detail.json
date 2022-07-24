@@ -10,7 +10,9 @@
         "safe": false
       },
       "offerInChina": true,
-      "categoryId": "3",
+      "categoryId": [
+        0
+      ],
       "certificates": [
         {
           "name": "Leaping Bunny",

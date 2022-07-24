@@ -24,11 +24,10 @@ import androidx.navigation.navArgument
 import com.deneyehayir.deneysiz.R
 import com.deneyehayir.deneysiz.scene.branddetail.BrandDetailScreen
 import com.deneyehayir.deneysiz.scene.categorydetail.CategoryDetailScreen
-import com.deneyehayir.deneysiz.scene.certificatedetail.CertificateDetailScreen
 import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
 import com.deneyehayir.deneysiz.scene.donation.DonationScreen
 import com.deneyehayir.deneysiz.scene.doyouknow.DoYouKnowScreen
-import com.deneyehayir.deneysiz.scene.faq.FaqScreen
+import com.deneyehayir.deneysiz.scene.doyouknowcontent.DoYouKnowContentScreen
 import com.deneyehayir.deneysiz.scene.splash.SplashScreen
 import com.deneyehayir.deneysiz.scene.support.SupportScreen
 import com.deneyehayir.deneysiz.scene.whoweare.WhoWeAreScreen
@@ -40,8 +39,7 @@ import com.deneyehayir.deneysiz.ui.theme.Orange
 const val navCategoryId = "categoryId"
 const val navCategoryStringRes = "categoryStringRes"
 const val navBrandDetailBrandId = "brandId"
-const val navCertificateName = "certificateName"
-const val navFaqId = "faqId"
+const val navDoYouKnowContentId = "doYouKnowContentId"
 const val splashScreenRoute = "splash"
 
 sealed class MainScreen(
@@ -84,20 +82,12 @@ sealed class DetailScreen(
         ): String = "brandDetail/brandId=$brandId"
     }
 
-    object CertificateDetail : DetailScreen(
-        route = "certificateDetail/certificateName={$navCertificateName}"
+    object DoYouKnowContentDetail : DetailScreen(
+        route = "doYouKnowContentDetail/id={$navDoYouKnowContentId}"
     ) {
         fun createRoute(
-            certificateName: String
-        ): String = "certificateDetail/certificateName=$certificateName"
-    }
-
-    object FaqScreen : DetailScreen(
-        route = "faq/id={$navFaqId}"
-    ) {
-        fun createRoute(
-            faqId: Int
-        ): String = "faq/id=$faqId"
+            contentId: Int
+        ): String = "doYouKnowContentDetail/id=$contentId"
     }
 
     object WhoWeAreScreen : DetailScreen(
@@ -202,17 +192,17 @@ fun MainNavGraph(
                         DetailScreen.WhoWeAreScreen.route
                     )
                 },
-                onNavigateCertificateDetail = { certificateName ->
+                onNavigateCertificateDetail = { contentId ->
                     navController.navigate(
-                        DetailScreen.CertificateDetail.createRoute(
-                            certificateName = certificateName
+                        DetailScreen.DoYouKnowContentDetail.createRoute(
+                            contentId = contentId
                         )
                     )
                 },
-                onNavigateFaqDetail = { id ->
+                onNavigateFaqDetail = { contentId ->
                     navController.navigate(
-                        DetailScreen.FaqScreen.createRoute(
-                            faqId = id
+                        DetailScreen.DoYouKnowContentDetail.createRoute(
+                            contentId = contentId
                         )
                     )
                 }
@@ -258,10 +248,10 @@ fun MainNavGraph(
                 BrandDetailScreen(
                     modifier = modifier,
                     onBack = { navController.navigateUp() },
-                    onNavigateCertificateDetail = { certificateName ->
+                    onNavigateCertificateDetail = { contentId ->
                         navController.navigate(
-                            DetailScreen.CertificateDetail.createRoute(
-                                certificateName = certificateName
+                            DetailScreen.DoYouKnowContentDetail.createRoute(
+                                contentId = contentId
                             )
                         )
                     }
@@ -269,32 +259,16 @@ fun MainNavGraph(
             }
         }
         composable(
-            route = DetailScreen.CertificateDetail.route,
+            route = DetailScreen.DoYouKnowContentDetail.route,
             arguments = listOf(
-                navArgument(navCertificateName) {
-                    type = NavType.StringType
-                }
-            )
-        ) { backStackEntry ->
-            val certificateName = backStackEntry.arguments?.getString(navCertificateName)
-            if (certificateName != null) {
-                CertificateDetailScreen(
-                    modifier = modifier,
-                    onBack = { navController.navigateUp() }
-                )
-            }
-        }
-        composable(
-            route = DetailScreen.FaqScreen.route,
-            arguments = listOf(
-                navArgument(navFaqId) {
+                navArgument(navDoYouKnowContentId) {
                     type = NavType.IntType
                 }
             )
         ) { backStackEntry ->
-            val id = backStackEntry.arguments?.getInt(navFaqId)
-            if (id != null) {
-                FaqScreen(
+            val contentId = backStackEntry.arguments?.getInt(navDoYouKnowContentId)
+            if (contentId != null) {
+                DoYouKnowContentScreen(
                     modifier = modifier,
                     onBack = { navController.navigateUp() }
                 )

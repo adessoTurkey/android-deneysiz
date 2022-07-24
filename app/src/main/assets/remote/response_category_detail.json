@@ -11,7 +11,9 @@
       },
       "score": 9,
       "offerInChina": false,
-      "categoryId": "0",
+      "categoryId": [
+        0
+      ],
       "certificates": [
         {
           "name": "LB",
@@ -43,7 +45,9 @@
       },
       "score": 7,
       "offerInChina": false,
-      "categoryId": "0",
+      "categoryId": [
+        0
+      ],
       "certificate": [
         {
           "name": "LB",
@@ -75,7 +79,9 @@
       },
       "score": 6,
       "offerInChina": false,
-      "categoryId": "0",
+      "categoryId": [
+        0
+      ],
       "certificate": [
         {
           "name": "LB",
@@ -107,7 +113,9 @@
       },
       "score": 3,
       "offerInChina": false,
-      "categoryId": "0",
+      "categoryId": [
+        0
+      ],
       "certificate": [
         {
           "name": "LB",
@@ -139,7 +147,9 @@
       },
       "score": 2,
       "offerInChina": false,
-      "categoryId": "0",
+      "categoryId": [
+        0
+      ],
       "certificate": [
         {
           "name": "LB",

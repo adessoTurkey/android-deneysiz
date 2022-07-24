@@ -277,6 +277,7 @@ fun BankAccountInfoIban(
 ) {
     Box(
         modifier = modifier
+            .clickable { onCopyToClipboard(text) }
             .background(
                 color = Blue.copy(alpha = 0.05f),
                 shape = RoundedCornerShape(4.dp)
@@ -292,8 +293,7 @@ fun BankAccountInfoIban(
         )
         Icon(
             modifier = Modifier
-                .align(alignment = Alignment.CenterEnd)
-                .clickable { onCopyToClipboard(text) },
+                .align(alignment = Alignment.CenterEnd),
             painter = painterResource(id = R.drawable.ic_clipboard),
             contentDescription = null,
             tint = Blue,

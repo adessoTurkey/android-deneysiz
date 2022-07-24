@@ -48,7 +48,7 @@ data class CertificateUiModel(
         CertificateType.BeautyWithoutBunnies -> R.drawable.ic_certificate_beauty_without_bunnies
         CertificateType.VeganSociety -> R.drawable.ic_certificate_vegan_society
         CertificateType.VLabel -> R.drawable.ic_certificate_v_label
-        CertificateType.None -> R.drawable.ic_do_you_know
+        CertificateType.None -> R.drawable.ic_discover
     }
 }
 

@@ -5,7 +5,7 @@ data class BrandDetailDomainModel(
     val name: String,
     val parentCompany: ParentCompanyType,
     val isOfferedInChina: Boolean,
-    val categoryId: String,
+    val categoryId: List<Int>,
     val certificates: List<CertificateDomainModel>,
     val isSafe: Boolean,
     val isVegan: Boolean,

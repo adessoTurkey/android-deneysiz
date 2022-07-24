@@ -11,15 +11,11 @@ data class DoYouKnowDomainModel(
 data class FaqItemDomainModel(
     val id: Int,
     val title: String,
-    val description: String,
-    val links: List<FaqItemLinkDomainModel>
 ) {
     companion object {
         val Empty = FaqItemDomainModel(
             id = -1,
-            title = "",
-            description = "",
-            links = emptyList()
+            title = ""
         )
     }
 }
