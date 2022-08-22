@@ -16,6 +16,8 @@ object PluginVersions {
     const val ktlint = "10.1.0"
     const val hilt = "2.36"
     const val serialization = "1.5.10"
+    const val googleServices = "4.3.13"
+    const val crashlytics = "2.9.1"
 }
 
 dependencies {
@@ -26,4 +28,6 @@ dependencies {
     implementation("org.jlleitschuh.gradle:ktlint-gradle:${PluginVersions.ktlint}")
     implementation("com.google.dagger:hilt-android-gradle-plugin:${PluginVersions.hilt}")
     implementation("org.jetbrains.kotlin:kotlin-serialization:${PluginVersions.serialization}")
+    implementation("com.google.gms:google-services:${PluginVersions.googleServices}")
+    implementation("com.google.firebase:firebase-crashlytics-gradle:${PluginVersions.crashlytics}")
 }
