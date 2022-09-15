@@ -1,0 +1,330 @@
+[
+  {
+    "id": 0,
+    "paragraphs": [
+      {
+        "type": "Title",
+        "content": "LEAPING BUNNY (CCIC)",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "1996 yılında 7 örgütün oluşturduğu CCIC (Kozmetik Ürünlerinde Müşteri Bilgilendirme Koalisyonu), Avusturya, Belçika, Finlandiya, Kanada, Fransa, İtalya, Hollanda, İspanya, İsveç, İsviçre, Birleşik Krallık ve ABD’nin de tanıdığı bir standart getirerek, kozmetik ürünlerini hayvanlarda test etmeyen firmalar için ürün ambalajlarında “sıçrayan tavşan” ikonu ile bilgilendirmeyi başlattı. Bu ikona sahip firma/ürünler, hayvanlar üzerinde test yapmadığı gibi, hayvanlar üzerinde test edilmiş içerikleri de satın almadıklarını beyan etmiş oluyorlar ve her yıl düzenlenen raporla yenilenen bir kontrat ile ikon kullanımlarını devam ettirebiliyorlar.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Sıkı denetimleri ve uluslararası geçerliliği ile en güvenilir kabul edilen CCIC “Leaping Bunny” ikonu diğer ikonlardan farklı olarak, yasanın kapsamadığı kozmetik dışındaki ürünler de dahil olmak üzere, markanın satış yaptığı (Çin anakara da dahil) hiçbir ülkede ürün ve içeriklerini hayvanlar üzerinde test etmediğini ifade ediyor. Ayrıca markanın çalıştığı laboratuvar ve tedarikçilerden de belirli belgeleri imzalamaları isteniyor.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "leapingbunny.org",
+        "markups": [
+          {
+            "type": "Link",
+            "start": 0,
+            "end": 16,
+            "href": "https://www.leapingbunny.org/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "paragraphs": [
+      {
+        "type": "Title",
+        "content": "SUNFLOWER (Vegan Society)",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Vegan Trademark, dünya çapında en çok tanınan sembol, 79 ülkede 54 binden fazla üründe bulunuyor ve güncelliğini koruması için her yıl yenileniyor.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Ürün bazında verilen bu logoya sahip olmak için ürünlerde hiçbir hayvansal içerik veya türevinin olmaması ve ürünün geliştirme ya da üretim aşamalarının herhangi birinde hayvanlar üzerinde test yapılmamış olması gerekiyor. ",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Üretim hattında vegan olmayan kaynaklardan çapraz bulaşma riskinin ortadan kaldırılması için tüm makul ve pratik adımların atılması bekleniyor. Ürünlerde GDO’ya izin verildiği gibi, hayvan genleri içermesine izin verilmiyor.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "vegansociety.com",
+        "markups": [
+          {
+            "type": "Link",
+            "start": 0,
+            "end": 16,
+            "href": "https://www.vegansociety.com/the-vegan-trademark/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "paragraphs": [
+      {
+        "type": "Title",
+        "content": "BEAUTY WITHOUT BUNNIES (PeTA)",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "PeTA onaylı logoları kullanabilmek için hem bileşen hem de nihai ürünlerin geliştirme aşamasında, hiçbir koşulda hayvanlar üzerinde testler yapmamayı, yaptırmamayı taahhüt etmek gerekir. Firmalar tarafından kullanılan birçok bileşen geçmişte hayvanlar üzerinde test edilmişse de “onaylı” olduktan itibaren katı bir deneysizlik taahhüdünü şart koşuluyor.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Sertifikalandırmada iki ayrı seçenek var:",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "animal test–free: kendilerinin ve tedarikçilerinin dünyanın herhangi bir yerinde içerikleri, formülasyonları veya bitmiş ürünleri için hayvanlar üzerinde herhangi bir test yapmadıklarını veya bunlara izin vermediklerini ve asla yapmayacaklarını doğrulayan şirket ve markalar",
+        "markups": [
+          {
+            "type": "Bold",
+            "start": 0,
+            "end": 17
+          }
+        ]
+      },
+      {
+        "type": "Text",
+        "content": "animal test–free and vegan: yukarıdakiyle aynı gereksinimleri karşılamaya ek olarak, TÜM ÜRÜN YELPAZESİNDE hayvanlardan elde edilmiş bir içerik (bal, balmumu, karmin vb.) de yer almayan şirket ve markalar",
+        "markups": [
+          {
+            "type": "Bold",
+            "start": 0,
+            "end": 27
+          }
+        ]
+      },
+      {
+        "type": "Text",
+        "content": "crueltyfree.peta.org",
+        "markups": [
+          {
+            "type": "Link",
+            "start": 0,
+            "end": 20,
+            "href": "https://crueltyfree.peta.org/"
+          }
+        ]
+      },
+      {
+        "type": "Header",
+        "content": "Diğer Peta Logoları",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "AB'deki etiketleme yasaları dünyanın diğer bölgelerindekilerden farklı olduğundan, ürünlerini AB'nin parçası olan ülkelerde satan şirketler için bu logolar kullanılmaktadır:",
+        "markups": []
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "paragraphs": [
+      {
+        "type": "Title",
+        "content": "V-LABEL",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Bir İsviçre kuruluşu olan V-Label GmbH tarafından 1996 yılında kurulmuş olan V-Label, uluslararası geçerliliği olan bir sertifikalandırma markasıdır ve Avrupa Vejetaryen Birliği’nin teşviki ile ortaya çıkmıştır. Türkiye’deki yürütücülüğünü Vegan Derneği yapmaktadır.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "V-Label’in vegan ve vejetaryen olmak üzere iki ayrı tescil etiketi bulunur, vejetaryen olarak kabul edilen ürünler hayvan veya parçalarını içermemelidir. Vegan ürünlerde ise hayvansal kaynaklı madde ve bileşikler de bulunmamalıdır. Ek kriter olarak ise GDO içerdiği beyan edilen ürünlere ve kafes sistemiyle barındırılan tavuklardan elde edilen yumurtaları içeren ürünlere lisans verilmez. Ambalajlarında hayvansal kaynaklı maddeler içeren ürünlere lisans verilebilir ancak bu maddelerin kullanılmaması tavsiye edilir. V-Label etiketi taşıyan ürünlerin hayvanlar üzerinde test edilmesi ya da ettirilmesine izin verilmez. Kriterlere uygunluk her yıl kontrol edilerek sertifika yenilenir.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "v-label.eu/tr",
+        "markups": [
+          {
+            "type": "Link",
+            "start": 0,
+            "end": 13,
+            "href": "https://www.v-label.eu/tr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "paragraphs": [
+      {
+        "type": "Title",
+        "content": "Çin'de Satış ve Üretim",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "2014 yılında kadar, Çin (anakarada) satıla sunulacak yerli ve ithal kozmetik ürünlerinin hayvanlar üzerinde test edilmesi yasal bir zorunluluktu. Firmalar bu testleri kendileri yapmasalar bile hükumete ait laboratuvarlarda bu testler yapılmadan ürünler raflara konulamıyordu.  2014 yılında bir değişiklik yapılarak, ülke içinde (onaylanmış güvenli içerik listesi ile) üretilen ürünler için hayvan testi zorunluluğu kalktı ancak yurt dışından ithal edilen ürünler için bu zorunluluk devam etti.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Hayvan testi zorunluluğu sadece anakarada fiziksel olarak satılacak (online satışlar muaf) ve Hong Kong dışındaki yerlerden ülkeye ithal edilen ürünler için geçerliydi. Ayrıca havaalanlarında satışa sunulan ürünler de hayvan testi zorunluluğundan muaftı.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Çin Gıda ve İlaç Dairesi 2017’de bazı düzenlemeler yaptı ve ertesi yıl, Leaping Bunny’nin girişimiyle, ithal ürünlerin satış öncesi ve sonrasında hayvan testlerinden muaf tutulması için yerel olarak üretileceği bir pilot çalışma başlatıldı.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "2019’da Çin Medikal Ürün Dairesi, kozmetik ürün içeriklerinin hayvansız alternatif bilimsel yöntemlerle test edilebilmesi için dokuz yeni yöntemi onayladı ve ayrıca teknik güvenlik standardı olarak üç yeni yöntem de 2020’de yürürlüğe girdi. Her bir ürünün kontrolü için ortalama 70 hayvanın öldürüldüğü kozmetik ürünlerin hem satış öncesi hem de satış sonrası testlerinde, hayvanların kullanılmadığı bu alternatif yöntemlerin geçerliliğinin tanınması büyük bir adım oldu.",
+        "markups": []
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "paragraphs": [
+      {
+        "type": "Title",
+        "content": "Hayvan Deneyleri - Genel Bilgiler",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Hayvan deneyleri, insan harici hayvanlar üzerinde deneysel ve bilimsel amaçlarla yapılan uygulamalardır. Her yıl dünyada 100 milyonun üzerinde hayvan deneylerde kullanılır.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Dünyadaki bilinen milyonlarca hayvan türünden, deneylerde en sık kullanılan 9 hayvan türü; fare, sıçan, tavşan, balık, kedi, köpek, maymun, kobay (ginepig) ve hamster’dır.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Hayvanlar sadece ilaç ya da aşı geliştirmek için değil, aklımıza gelen her alanda ve her şekilde laboratuvarlarda birer denek olmakta ve öldürülmektedirler. Tükettiğimiz gıdalardan cep telefonumuza, bindiğimiz araçların güvenlik testlerinden uçakların jet yakıtlarına kadar insanın kullanımındaki hemen her şey, insan sağlığına olumsuz etkilerini ölçmek amacıyla öncelikle hayvanlar üzerinde test edilirler.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Ülkemizde de hayvanlar üzerinde deneyler yapılmaktadır ve bu amaç için kurulmuş 120’nin üzerinde deney merkezi vardır. Türkiye’de her yıl ortalama 260 bin hayvan deneylerde kullanılır.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Hayvan deneylerinin insan sağlığı için güvenilir bir test metodu olmadığını savunan bilim insanlarının sayısı her geçen gün hızla artmakta, hatta bu bilim insanları hayvanların kullanılmadığı alternatif bilimsel yöntemlerin her alanda genişletilmesi ve kullanımının artması için örgütler kurmakta, eğitici kurs, seminerler vermekte ve bilimsel yayınlar yapmaktadırlar.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Hayvan deneylerinin etik boyutu ise son birkaç yüzyıldır önemli bir tartışma alanı olmuş, tüm canlıların doğuştan ve eşit şekilde sahip olduğu yaşam hakkını ihlâl eden bu uygulamaların bir an önce son bulması gerektiğinden hareketle birçok ülke, bir takım yasal değişiklikler yaparak kısıtlamalara gitmiştir.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Hayvan deneyleriyle ilgili daha detaylı bilgi için web sitemizi inceleyebilir ya da “Hayvan Deneyleri: Hayvanlar bizim için mi var?” adlı kitabı okuyabilirsiniz.",
+        "markups": [
+          {
+            "type": "Link",
+            "start": 51,
+            "end": 77,
+            "href": "https://www.deneyehayir.org/"
+          },
+          {
+            "type": "Link",
+            "start": 84,
+            "end": 132,
+            "href": "https://yeniinsanyayinevi.com/kitaplarimiz/hayvan-deneyleri/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "paragraphs": [
+      {
+        "type": "Title",
+        "content": "Vegan Ürünler",
+        "markups": []
+      },
+      {
+        "type": "Header",
+        "content": "Vegan ürün nedir?",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Vegan ürün, içeriğinde direkt ya da dolaylı yoldan hayvanlardan elde edilen herhangi bir içerik (bal, balmumu, karmin, lanolin vb.) barındırmayan üründür.",
+        "markups": []
+      },
+      {
+        "type": "Header",
+        "content": "Vegan Ürünler Aynı Zamanda Deneysiz midir?",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Bir üründe hayvan kaynaklı içeriklerin olmaması onun hayvanlar üzerinde test edilmediği anlamına gelmez. Bunun yanında, ürün ambalajlarında vegan ibaresinin kötüye kullanımına da rastlayabiliyoruz. Bu yüzden hem deneysizliği hem de hayvan kaynaklı içerik barındırmadığını garantileyen bir sertifikalandırma programına dahil olmuş ürünlerin tercih edilmesi daha doğru olacaktır.",
+        "markups": []
+      },
+      {
+        "type": "Header",
+        "content": "Vegan Ürünler Zulümsüz müdür?",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Bir ürüne “zulümsüz\" diyebilmemiz için hem vegan hem de herhangi bir aşamada hayvanlar üzerinde test edilmemiş olması gerekir. Ana konusu hayvan deneyi olmayan sertifikalandırmalardan sadece The Vegan Society, Vegetarian Society ve V-Label, logo kullanımına izin verdiği ürünlerin aynı zamanda hayvanlar üzerinde test edilmediğini garanti eder.",
+        "markups": []
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "paragraphs": [
+      {
+        "type": "Title",
+        "content": "Puanlama Sistemi",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Deneysiz App’in puanlama sistemi; markaların çatı firmalarını, Çin’de satış yapıp yapmadıklarını ve yapıyorlar ise deney yapıp yapmadıklarını, ürünlerinin içeriklerinin tamamının ya da bir kısmının %100 bitkisel olup olmadığını baz alarak hesaplanan, objektif bir puanlama sistemidir. Araştırmanın yapıldığı tarihteki güncel verilere, markaların beyanına ve çeşitli kurumların sertifikalarına dayalı olarak yapılan puanlamada yalnızca deneysiz markalar puanlanmıştır.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "10 puan üzerinden yapılan puanlamada:",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Marka Deneysiz olduğu için (4)dört puan alır.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Eğer Çatı Markası varsa ve o marka da deney yapmıyor ise (3) puan daha alır.",
+        "markups": []
+      },
+      {
+        "type": "Text",
+        "content": "Çin’de satış yapmak için deney yapmıyor ise (1) bir puan, bitkisel içerikli ürün gamı varsa (1)bir puan ve ürünlerinin tamamı vegan ise (1) puan daha alır.",
+        "markups": []
+      }
+    ]
+  }
+]

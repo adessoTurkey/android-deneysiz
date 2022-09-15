@@ -1,0 +1,41 @@
+{
+  "description": "Ambalajlarında aşağıda gördüğün logolardan biri ya da birkaçının bulunduğu ürünler, elindeki ürünün hayvanlar üzerinde test edilmediğini garantiler.",
+  "certificates": [
+    {
+      "name": "Leaping Bunny",
+      "url": "https://www.leapingbunny.org"
+    },
+    {
+      "name": "Vegan Society",
+      "url": "https://www.vegansociety.com"
+    },
+    {
+      "name": "Beauty Without Bunnies",
+      "url": "https://crueltyfree.peta.org"
+    },
+    {
+      "name": "V-Label",
+      "url": "https://www.v-label.eu"
+    }
+  ],
+  "faqTitle": "Merak Edilenler",
+  "faqDescription": "Bize sıkça sorulan soruların cevaplarını aşağıda listeledik. Detaylı bilgiler için burayı okumanızı öneririz.",
+  "faqList": [
+    {
+      "id": 100,
+      "title": "Çin'de Satış ve Üretim"
+    },
+    {
+      "id": 101,
+      "title": "Hayvan Deneyleri - Genel Bilgiler"
+    },
+    {
+      "id": 102,
+      "title": "Vegan Ürünler"
+    },
+    {
+      "id": 103,
+      "title": "Puanlama Sistemi"
+    }
+  ]
+}

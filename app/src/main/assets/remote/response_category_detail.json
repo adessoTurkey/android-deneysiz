@@ -1,0 +1,176 @@
+{
+  "status": 200,
+  "message": "Success",
+  "data": [
+    {
+      "id": 73,
+      "name": "Hawaiian Tropic",
+      "parentCompany": {
+        "name": "Rossmann",
+        "safe": true
+      },
+      "score": 9,
+      "offerInChina": false,
+      "categoryId": [
+        0
+      ],
+      "certificates": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "safe": true,
+      "vegan": true,
+      "veganProduct": true
+    },
+    {
+      "id": 74,
+      "name": "Flink & Sauber",
+      "parentCompany": {
+        "name": "Dirk Rossmann",
+        "safe": true
+      },
+      "score": 7,
+      "offerInChina": false,
+      "categoryId": [
+        0
+      ],
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "safe": true,
+      "vegan": true,
+      "veganProduct": true
+    },
+    {
+      "id": 75,
+      "name": "Sunozon",
+      "parentCompany": {
+        "name": "L’Oréal",
+        "safe": true
+      },
+      "score": 6,
+      "offerInChina": false,
+      "categoryId": [
+        0
+      ],
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "safe": true,
+      "vegan": true,
+      "veganProduct": true
+    },
+    {
+      "id": 76,
+      "name": "Diadermine",
+      "parentCompany": {
+        "name": "Gliss",
+        "safe": true
+      },
+      "score": 3,
+      "offerInChina": false,
+      "categoryId": [
+        0
+      ],
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "safe": true,
+      "vegan": true,
+      "veganProduct": true
+    },
+    {
+      "id": 77,
+      "name": "Procsin",
+      "parentCompany": {
+        "name": "Isana",
+        "safe": true
+      },
+      "score": 2,
+      "offerInChina": false,
+      "categoryId": [
+        0
+      ],
+      "certificate": [
+        {
+          "name": "LB",
+          "valid": false
+        },
+        {
+          "name": "Peta",
+          "valid": false
+        },
+        {
+          "name": "Unilever",
+          "valid": false
+        },
+        {
+          "name": "XXXX",
+          "valid": false
+        }
+      ],
+      "safe": true,
+      "vegan": true,
+      "veganProduct": true
+    }
+  ]
+}

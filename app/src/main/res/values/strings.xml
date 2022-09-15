@@ -1,0 +1,78 @@
+<resources>
+    <string name="empty"/>
+    
+    <string name="bottom_nav_tab_search_brand">Marka Ara</string>
+    <string name="bottom_nav_tab_discover">Keşfet</string>
+    <string name="bottom_nav_tab_do_you_know">Biliyor Musun?</string>
+    <string name="bottom_nav_tab_following">Takiptekiler</string>
+    
+    <string name="top_bar_title_search_brand">Arama</string>
+    <string name="top_bar_title_discover">Keşfet</string>
+    <string name="top_bar_title_who_we_are">Biz Kimiz?</string>
+    <string name="top_bar_title_do_you_know">Biliyor Musun?</string>
+    <string name="top_bar_action_who_we_are">Biz Kimiz</string>
+    
+    <string name="discover_category_all_brands">Bütün Markalar</string>
+    <string name="discover_category_makeup">Makyaj</string>
+    <string name="discover_category_hair_care">Saç Bakım</string>
+    <string name="discover_category_skin_care">Cilt ve Yüz Bakım</string>
+    <string name="discover_category_fragrance">Deodorant ve Parfüm</string>
+    <string name="discover_category_personal_care">Kişisel Hijyen ve Bakım</string>
+    <string name="discover_category_dental_care">Ağız ve Diş Bakım</string>
+    <string name="discover_category_mom_baby_care">Anne ve Bebek Bakım</string>
+    <string name="discover_category_home_care">Ev Bakım</string>
+    
+    <string name="search_brand">Marka ara</string>
+    
+    <string name="category_detail_found_count">%d marka bulundu</string>
+    <string name="category_detail_score">%d/10</string>
+    
+    <string name="alphabetical_ascending">A\'dan Z\'ye</string>
+    <string name="alphabetical_descending">Z\'dan A\'ye</string>
+    <string name="score_ascending">Artan Puan</string>
+    <string name="score_descending">Azalan Puan</string>
+    <string name="sort_label_alphabetical_ascending">A-Z</string>
+    <string name="sort_label_alphabetical_descending">Z-A</string>
+    <string name="sort_label_score_ascending">Artan</string>
+    <string name="sort_label_score_descending">Azalan</string>
+    <string name="category_detail_sort">Sırala(%s)</string>
+    <string name="support_mail_address">info@deneyehayir.org</string>
+    <string name="support_subject_suggest">Yeni Marka Önermek İstiyorum</string>
+    <string name="support_confirmation_approve">Yeni Marka Öner</string>
+    <string name="support_confirmation_deny">İptal</string>
+
+    <string name="brand_detail_info_vegan_product">Vegan Ürünler</string>
+    <string name="brand_detail_info_china_offer">Çin\’de Satış Yapmıyor</string>
+    <string name="brand_detail_info_parent_company_safe">Çatı Firma Deneysiz</string>
+    <string name="brand_detail_pop_up_description">Puanlama sistemi aşağıdaki metrikler baz alınarak oluşturulmuştur.</string>
+    <string name="brand_detail_pop_up_title_safe_brand">Marka Deneysiz</string>
+    <string name="brand_detail_pop_up_title_parent_company_safe">Çatı Marka Deneysiz</string>
+    <string name="brand_detail_pop_up_title_brand_vegan">Marka Vegan</string>
+    <string name="brand_detail_pop_up_title_china_offer">Çin\’de Satış</string>
+    <string name="brand_detail_pop_up_title_vegan_product">Vegan Ürün Var Mı?</string>
+    <string name="brand_detail_pop_up_subtitle_yes">Evet</string>
+    <string name="brand_detail_pop_up_subtitle_no">Hayır</string>
+    <string name="brand_detail_pop_up_subtitle_none">Yok</string>
+    <string name="brand_detail_update_date">Güncellenme Tarihi: %s</string>
+    <string name="brand_detail_support_mail_address">info@deneyehayir.org</string>
+    <string name="brand_detail_support_mail_subject">Yanlış/eksik veri bildir</string>
+    <string name="brand_detail_support_approve">yanlış/eksik veri bildir</string>
+    <string name="brand_detail_support_deny">İptal</string>
+
+    <string name="who_we_are_support_mail_address">info@deneyehayir.org</string>
+    <string name="who_we_are_support_mail_subject">Deneysiz App hk</string>
+
+    <string name="donation_top_bar_title">Nasıl Bağış Yaparım?</string>
+    <string name="donation_option_or">Ya da</string>
+    <string name="donation_make_donation">Bağış Yap</string>
+    <string name="donation_copy_message">Iban kopyalandı.</string>
+
+    <string name="support_top_bar_title">Nasıl Destek Olurum?</string>
+    <string name="support_apply_form">Form\'u Doldur</string>
+
+    <string name="error_dialog_title_no_internet">İnternet Yok</string>
+    <string name="error_dialog_title_error">Üzgünüz</string>
+    <string name="error_dialog_description_no_internet">Lütfen internet bağlantınızı kontrol ederek tekrar deneyiniz.</string>
+    <string name="error_dialog_description_error">Şu anda işleminiz gerçekleştirilemiyor.Lütfen daha sonra tekrar deneyiniz.</string>
+    <string name="error_dialog_button_text">Tekrar Deneyin</string>
+</resources>

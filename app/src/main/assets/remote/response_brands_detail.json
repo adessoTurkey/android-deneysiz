@@ -1,0 +1,42 @@
+{
+  "status": 200,
+  "message": "Success",
+  "data": [
+    {
+      "id": 15,
+      "name": "Alterra",
+      "parentCompany": {
+        "name": "Dirk Rossmann",
+        "safe": false
+      },
+      "offerInChina": true,
+      "categoryId": [
+        0
+      ],
+      "certificates": [
+        {
+          "name": "Leaping Bunny",
+          "valid": true
+        },
+        {
+          "name": "Beauty Without Bunnies",
+          "valid": false
+        },
+        {
+          "name": "Vegan Society",
+          "valid": true
+        },
+        {
+          "name": "V-Label",
+          "valid": false
+        }
+      ],
+      "safe": true,
+      "vegan": true,
+      "veganProduct": true,
+      "score": 6,
+      "description": "Dirk Rossmann’ın %40’ına sahip olan çatı firma A.S. Watson şiketlerinden Chi-Med hayvanlar üzerinde test yapıyor",
+      "createdAt": "17/09/2021"
+    }
+  ]
+}
