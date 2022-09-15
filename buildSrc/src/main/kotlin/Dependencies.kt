@@ -106,4 +106,10 @@ object Dependencies {
         const val okHttp = "com.squareup.okhttp3:okhttp"
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor"
     }
+
+    object Firebase {
+        const val firebaseBom = "com.google.firebase:firebase-bom:30.3.2"
+        const val analytics = "com.google.firebase:firebase-analytics-ktx"
+        const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+    }
 }

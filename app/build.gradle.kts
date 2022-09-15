@@ -25,7 +25,7 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = rootProject.file("app-release.jks")
+            storeFile = rootProject.file("upload-keystore.jks")
             storePassword = gradleLocalProperties(rootDir).getProperty("storePassword")
             keyAlias = gradleLocalProperties(rootDir).getProperty("keyAlias")
             keyPassword = gradleLocalProperties(rootDir).getProperty("keyPassword")
@@ -43,7 +43,8 @@ android {
         }
 
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             resValue("string", "app_name", "Deneysiz")
             val baseUrlPrd: String by project
             buildConfigField("String", "BASE_URL", baseUrlPrd)
@@ -51,6 +52,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            val proguardRules = fileTree("proguard") {
+                include("*.pro")
+            }
+            proguardFiles(*proguardRules.toList().toTypedArray())
             signingConfig = signingConfigs.getByName("release")
         }
     }
@@ -128,6 +133,10 @@ dependencies {
     releaseImplementation(Dependencies.chuckerNoOp)
     debugImplementation(Dependencies.leakCanary)
 
+    implementation(platform(Dependencies.Firebase.firebaseBom))
+    implementation(Dependencies.Firebase.analytics)
+    implementation(Dependencies.Firebase.crashlytics)
+
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.KotlinX.Coroutines.test)
     androidTestImplementation(Dependencies.Test.junitAndroidX)
@@ -136,4 +145,9 @@ dependencies {
     androidTestImplementation(Dependencies.AndroidX.Test.rules)
     androidTestImplementation(Dependencies.AndroidX.Test.Ext.junit)
     androidTestImplementation(Dependencies.AndroidX.Compose.uiTest)
+}
+
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+    apply(plugin = "com.google.firebase.crashlytics")
 }
