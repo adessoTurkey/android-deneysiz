@@ -3,50 +3,29 @@ package com.deneyehayir.deneysiz.scene
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import com.deneyehayir.deneysiz.scene.component.MainTopAppBar
+import com.deneyehayir.deneysiz.scene.component.TopAppBarWhoWeAreAction
+import com.deneyehayir.deneysiz.ui.theme.Blue
+import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
-import com.deneyehayir.deneysiz.ui.theme.Orange
-import com.deneyehayir.deneysiz.ui.theme.White0
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.deneyehayir.deneysiz.ui.theme.White1
 
 @Composable
-fun MainContent() {
+fun MainContent(
+    appState: MainAppState = rememberMainAppState()
+) {
     DeneysizTheme {
-        val tabs = remember {
-            listOf(
-                MainScreen.Discover,
-                MainScreen.DoYouKnow
+        Scaffold(bottomBar = {
+            BottomNavBar(
+                bottomNavVisibilityState = appState.shouldShowBottomNavBar,
+                navController = appState.navController,
+                tabs = appState.bottomNavTabs,
+                currentDestination = appState.currentDestination
             )
-        }
-        val navController = rememberNavController()
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        val bottomTabRoutes = remember { tabs.map { it.route } }
-
-        val systemUiController = rememberSystemUiController()
-        SideEffect {
-            systemUiController.apply {
-                setStatusBarColor(
-                    color = if (currentRoute == splashScreenRoute) Orange else White0
-                )
-                isNavigationBarVisible = currentRoute != splashScreenRoute
-            }
-        }
-
-        Scaffold(
-            bottomBar = {
-                if (currentRoute in bottomTabRoutes) {
-                    BottomNavBar(navController = navController, tabs = tabs)
-                }
-            }
-        ) { innerPaddingModifier ->
+        }) { innerPaddingModifier ->
             MainNavGraph(
-                navController = navController,
+                navController = appState.navController,
                 modifier = Modifier.padding(innerPaddingModifier)
             )
         }

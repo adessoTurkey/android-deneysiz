@@ -45,6 +45,7 @@ import com.deneyehayir.deneysiz.internal.extension.openWebPage
 import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
 import com.deneyehayir.deneysiz.scene.donation.model.BankAccountUiModel
 import com.deneyehayir.deneysiz.scene.donation.model.DonationUiModel
+import com.deneyehayir.deneysiz.ui.component.button.DeneysizButton
 import com.deneyehayir.deneysiz.ui.theme.Blue
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
@@ -143,10 +144,7 @@ private fun DonationScreenContent(
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(24.dp))
-        DonationButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(42.dp),
+        DeneysizButton(
             text = stringResource(id = R.string.donation_make_donation),
             onDonationClick = { onDonationClick(uiModel.donationUrl) }
         )
@@ -301,28 +299,6 @@ fun BankAccountInfoIban(
     }
 }
 
-@Composable
-fun DonationButton(
-    modifier: Modifier = Modifier,
-    text: String,
-    onDonationClick: () -> Unit
-) {
-    Button(
-        modifier = modifier,
-        onClick = { onDonationClick() },
-        shape = RoundedCornerShape(8.dp),
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Orange
-        )
-    ) {
-        Text(
-            text = text,
-            color = White1,
-            fontWeight = FontWeight.Medium,
-            fontSize = 14.sp
-        )
-    }
-}
 
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable
@@ -337,17 +313,5 @@ fun BankAccountInfoCardPreview() {
             iconResId = R.drawable.ic_currency_try
         ),
         onCopyToClipboard = {}
-    )
-}
-
-@Preview(backgroundColor = 0xFFFFFF, showBackground = true)
-@Composable
-fun DonationButtonPreview() {
-    DonationButton(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        text = "Bağış Yap",
-        onDonationClick = {}
     )
 }

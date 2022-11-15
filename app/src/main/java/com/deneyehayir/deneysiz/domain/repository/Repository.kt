@@ -1,14 +1,6 @@
 package com.deneyehayir.deneysiz.domain.repository
 
-import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
-import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
-import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
-import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
-import com.deneyehayir.deneysiz.domain.model.DoYouKnowContentDomainModel
-import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
-import com.deneyehayir.deneysiz.domain.model.DonationDomainModel
-import com.deneyehayir.deneysiz.domain.model.SupportDomainModel
-import com.deneyehayir.deneysiz.domain.model.WhoWeAreDomainModel
+import com.deneyehayir.deneysiz.domain.model.*
 
 interface Repository {
 
@@ -29,4 +21,6 @@ interface Repository {
     suspend fun fetchSupportData(): SupportDomainModel
 
     suspend fun fetchDoYouKnowContentData(): DoYouKnowContentDomainModel
+
+    suspend fun fetchSearchResult(query: String): SearchResultDomainModel
 }
