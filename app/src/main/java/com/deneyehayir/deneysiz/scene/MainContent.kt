@@ -20,7 +20,8 @@ fun MainContent() {
         val tabs = remember {
             listOf(
                 MainScreen.Discover,
-                MainScreen.DoYouKnow
+                MainScreen.DoYouKnow,
+                MainScreen.Following
             )
         }
         val navController = rememberNavController()

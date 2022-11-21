@@ -137,6 +137,10 @@ dependencies {
     implementation(Dependencies.Firebase.analytics)
     implementation(Dependencies.Firebase.crashlytics)
 
+
+    implementation(Dependencies.Room.room)
+    kapt(Dependencies.Room.roomCompiler)
+
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.KotlinX.Coroutines.test)
     androidTestImplementation(Dependencies.Test.junitAndroidX)

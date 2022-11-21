@@ -1,5 +1,6 @@
 package com.deneyehayir.deneysiz.data.repository
 
+import com.deneyehayir.deneysiz.data.local.database.dao.BrandsDao
 import com.deneyehayir.deneysiz.data.local.datasource.AssetDataSource
 import com.deneyehayir.deneysiz.data.local.model.toDomain
 import com.deneyehayir.deneysiz.data.remote.datasource.RemoteDataSource
@@ -9,6 +10,7 @@ import com.deneyehayir.deneysiz.data.remote.model.response.toBrandDetailDomain
 import com.deneyehayir.deneysiz.data.remote.model.response.toCategoryDetailDomain
 import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDetailItemDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
 import com.deneyehayir.deneysiz.domain.model.DoYouKnowContentDomainModel
@@ -18,21 +20,32 @@ import com.deneyehayir.deneysiz.domain.model.SupportDomainModel
 import com.deneyehayir.deneysiz.domain.model.WhoWeAreDomainModel
 import com.deneyehayir.deneysiz.domain.repository.Repository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class RepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val assetDataSource: AssetDataSource
+    private val assetDataSource: AssetDataSource,
+    private val brandsDao: BrandsDao
 ) : Repository {
 
     override suspend fun fetchCategoryDetail(
         categoryId: String
-    ): CategoryDetailDomainModel = remoteDataSource.fetchCategoryDetail(
-        requestBody = CategoryDetailRequestBody(
-            categoryId = categoryId
-        )
-    ).toCategoryDetailDomain()
+    ): CategoryDetailDomainModel {
+        val favoriteList = coroutineScope {
+            async {
+                brandsDao.fetchFavoriteBrands()
+            }
+        }
+
+        return remoteDataSource.fetchCategoryDetail(
+            requestBody = CategoryDetailRequestBody(
+                categoryId = categoryId
+            )
+        ).toCategoryDetailDomain(favoriteList.await())
+    }
 
     override suspend fun fetchBrandDetail(brandId: Int): BrandDetailDomainModel =
         remoteDataSource.fetchBrandDetail(
@@ -61,4 +74,15 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun fetchDoYouKnowContentData(): DoYouKnowContentDomainModel =
         assetDataSource.getDoYouKnowContentData().toDomain()
+
+    override suspend fun addBrandToFollowing(categoryDetailItemDomainModel: CategoryDetailItemDomainModel): Long =
+        brandsDao.addBrandToFavorite(categoryDetailItemDomainModel.toEntity())
+
+    override suspend fun removeBrandFromFollowing(brandId: Int) {
+        brandsDao.deleteBrandFromFavorite(brandId)
+    }
+
+    override suspend fun fetchFollowingBrands(): List<CategoryDetailItemDomainModel> =
+        brandsDao.fetchFavoriteBrands().map { it.toDomainModel() }
+
 }

@@ -10,6 +10,7 @@
     <string name="top_bar_title_discover">Keşfet</string>
     <string name="top_bar_title_who_we_are">Biz Kimiz?</string>
     <string name="top_bar_title_do_you_know">Biliyor Musun?</string>
+    <string name="top_bar_title_following">Takiptekiler</string>
     <string name="top_bar_action_who_we_are">Biz Kimiz</string>
     
     <string name="discover_category_all_brands">Bütün Markalar</string>
@@ -75,4 +76,6 @@
     <string name="error_dialog_description_no_internet">Lütfen internet bağlantınızı kontrol ederek tekrar deneyiniz.</string>
     <string name="error_dialog_description_error">Şu anda işleminiz gerçekleştirilemiyor.Lütfen daha sonra tekrar deneyiniz.</string>
     <string name="error_dialog_button_text">Tekrar Deneyin</string>
+    <string name="following_empty_title">Hop, hop, hop...</string>
+    <string name="following_empty_desc">Görünüşe göre takip ettiğin bir marka yok, hemen keşfete zıpla ve takibe başla!</string>
 </resources>

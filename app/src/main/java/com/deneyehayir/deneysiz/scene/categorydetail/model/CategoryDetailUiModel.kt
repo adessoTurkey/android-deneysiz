@@ -21,19 +21,28 @@ data class CategoryDetailItemUiModel(
     val parentCompanyName: String,
     val score: Int,
     @StringRes val scoreStringRes: Int = R.string.category_detail_score,
-    val scoreBackgroundColor: Color
-)
+    val scoreBackgroundColor: Color,
+    val isFavorite: Boolean
+) {
+    fun toDomainModel() = CategoryDetailItemDomainModel(
+        id = id,
+        brandName = brandName,
+        parentCompanyName = parentCompanyName,
+        score = score,
+        isFavorite = isFavorite
+    )
+}
 
-fun CategoryDetailDomainModel.toUiModel() = CategoryDetailUiModel(
-    items = items.map { domain -> domain.toUiModel() }
-)
+fun CategoryDetailDomainModel.toUiModel() =
+    CategoryDetailUiModel(items = items.map { domain -> domain.toUiModel() })
 
 fun CategoryDetailItemDomainModel.toUiModel() = CategoryDetailItemUiModel(
     id = id,
     brandName = brandName,
     parentCompanyName = parentCompanyName,
     score = score,
-    scoreBackgroundColor = score.getScoreBackgroundColor()
+    scoreBackgroundColor = score.getScoreBackgroundColor(),
+    isFavorite = isFavorite
 )
 
 private fun Int.getScoreBackgroundColor(): Color {

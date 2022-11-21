@@ -7,7 +7,7 @@ object Dependencies {
     const val lottie = "com.airbnb.android:lottie-compose:5.0.1"
 
     object Kotlin {
-        private const val version = "1.5.10"
+        private const val version = "1.6.10"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
     }
 
@@ -19,7 +19,7 @@ object Dependencies {
         const val splash = "androidx.core:core-splashscreen:1.0.0-beta02"
 
         object Compose {
-            const val version = "1.0.0"
+            const val version = "1.3.1"
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
             const val material = "androidx.compose.material:material:$version"
@@ -111,5 +111,11 @@ object Dependencies {
         const val firebaseBom = "com.google.firebase:firebase-bom:30.3.2"
         const val analytics = "com.google.firebase:firebase-analytics-ktx"
         const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+    }
+
+    object Room {
+        private const val room_version = "2.4.3"
+        const val room="androidx.room:room-ktx:$room_version"
+        const val roomCompiler="androidx.room:room-compiler:$room_version"
     }
 }

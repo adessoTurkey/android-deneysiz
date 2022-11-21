@@ -2,6 +2,7 @@ package com.deneyehayir.deneysiz.domain.repository
 
 import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDetailItemDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
 import com.deneyehayir.deneysiz.domain.model.DoYouKnowContentDomainModel
@@ -29,4 +30,10 @@ interface Repository {
     suspend fun fetchSupportData(): SupportDomainModel
 
     suspend fun fetchDoYouKnowContentData(): DoYouKnowContentDomainModel
+
+    suspend fun addBrandToFollowing(categoryDetailItemDomainModel: CategoryDetailItemDomainModel): Long
+
+    suspend fun removeBrandFromFollowing(brandId: Int)
+
+    suspend fun fetchFollowingBrands() : List<CategoryDetailItemDomainModel>
 }

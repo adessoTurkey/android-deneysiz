@@ -50,6 +50,28 @@ fun MainTopAppBar(
 )
 
 @Composable
+fun MainTopAppBar(
+    modifier: Modifier = Modifier,
+    @StringRes titleRes: Int,
+    titleColor: Color,
+    backgroundColor: Color = White0,
+    contentColor: Color = contentColorFor(backgroundColor),
+    elevation: Dp = 0.dp
+) = TopAppBar(
+    modifier = modifier,
+    title = {
+        Text(
+            text = stringResource(id = titleRes),
+            color = titleColor,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp
+        )
+    },
+    backgroundColor = backgroundColor,
+    contentColor = contentColor,
+    elevation = elevation
+)
+@Composable
 fun TopAppBarWhoWeAreAction(
     color: Color,
     navigateToWhoWeAre: () -> Unit
