@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,14 +14,17 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
+import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.Icon
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
@@ -29,6 +33,8 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.rememberSwipeableState
+import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,12 +43,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -65,6 +73,7 @@ import com.deneyehayir.deneysiz.ui.theme.ScoreLightGreen
 import com.deneyehayir.deneysiz.ui.theme.White0
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 @Composable
 fun CategoryDetailScreen(
@@ -73,25 +82,23 @@ fun CategoryDetailScreen(
     onBack: () -> Unit
 ) {
     val viewModel = hiltViewModel<CategoryDetailViewModel>()
-    val viewState by rememberFlowWithLifecycle(viewModel.categoryDetailViewState)
-        .collectAsState(initial = CategoryDetailViewState.Initial)
+    val viewState by rememberFlowWithLifecycle(viewModel.categoryDetailViewState).collectAsState(
+        initial = CategoryDetailViewState.Initial
+    )
     val context = LocalContext.current
 
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            CategoryDetailTopBar(
-                titleRes = viewModel.categoryStringRes,
-                onBack = onBack,
-                onSuggestBrand = {
-                    context.navigateToEmailApp(
-                        mailAddressRes = R.string.support_mail_address,
-                        subjectRes = R.string.support_subject_suggest
-                    )
-                }
-            )
-        }
-    ) {
+    Scaffold(modifier = modifier, topBar = {
+        CategoryDetailTopBar(
+            titleRes = viewModel.categoryStringRes,
+            onBack = onBack,
+            onSuggestBrand = {
+                context.navigateToEmailApp(
+                    mailAddressRes = R.string.support_mail_address,
+                    subjectRes = R.string.support_subject_suggest
+                )
+            }
+        )
+    }) {
         CategoryDetailScreen(
             viewState = viewState,
             onBrandDetail = onBrandDetail,
@@ -110,7 +117,7 @@ private fun CategoryDetailScreen(
     onBrandDetail: (Int) -> Unit,
     onSortSelected: (SortOption) -> Unit,
     onRetry: () -> Unit,
-    onErrorClose: () -> Unit,
+    onErrorClose: () -> Unit
 ) {
     when {
         viewState.isLoading -> {
@@ -192,7 +199,13 @@ private fun CategoryDetailList(
                 brandName = item.brandName,
                 brandParentCompanyName = item.parentCompanyName,
                 score = item.score,
-                navigateToBrandDetail = navigateToBrandDetail
+                navigateToBrandDetail = navigateToBrandDetail,
+                onFollowClick = { brandId ->
+                    // todo will implement later
+                },
+                onSendClick = { brandId ->
+                    // todo will implement later
+                }
             )
             ListDivider()
         }
@@ -227,7 +240,7 @@ fun BottomSheetContent(
     state: ModalBottomSheetState,
     scope: CoroutineScope,
     sortOptions: List<SortOption>,
-    onSortSelected: (SortOption) -> Unit,
+    onSortSelected: (SortOption) -> Unit
 ) {
     LazyColumn(
         contentPadding = PaddingValues(8.dp),
@@ -340,23 +353,105 @@ fun BrandRow(
     brandName: String,
     brandParentCompanyName: String,
     score: Int,
-    navigateToBrandDetail: (Int) -> Unit
+    navigateToBrandDetail: (Int) -> Unit,
+    onFollowClick: (Int) -> Unit,
+    onSendClick: (Int) -> Unit
+) {
+    val swipeableState = rememberSwipeableState(initialValue = 0f)
+
+    val sizePx = with(LocalDensity.current) { (110.dp).toPx() }
+    val anchors = mapOf(0f to 0f, -sizePx to 1f) // Maps anchor points (in px) to states
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .swipeable(
+                state = swipeableState,
+                anchors = anchors,
+                thresholds = { from, to ->
+                    FractionalThreshold(0.3f)
+                },
+                orientation = Orientation.Horizontal
+            )
+    ) {
+        Row(
+            modifier = Modifier
+                .clickable(onClick = { navigateToBrandDetail(brandId) })
+                .background(color = RowColor)
+                .padding(16.dp)
+                .align(Alignment.Center)
+                .offset {
+                    IntOffset(swipeableState.offset.value.roundToInt(), 0)
+                }
+        ) {
+            BrandDetail(
+                modifier = Modifier.weight(1f),
+                brandName = brandName,
+                brandParentCompanyName = brandParentCompanyName
+            )
+            ScoreBox(
+                backgroundColor = backgroundColor,
+                score = score
+            )
+        }
+        BrandSwipeActionRow(
+            modifier = Modifier
+                .width(110.dp)
+                .align(Alignment.CenterEnd)
+                .offset(x = (110).dp)
+                .offset {
+                    IntOffset(swipeableState.offset.value.roundToInt(), 0)
+                },
+            brandId = brandId,
+            onFollowClick = onFollowClick,
+            onSendClick = onSendClick
+        )
+    }
+}
+
+@Composable
+fun BrandSwipeActionRow(
+    modifier: Modifier = Modifier,
+    brandId: Int,
+    onFollowClick: (Int) -> Unit,
+    onSendClick: (Int) -> Unit
 ) {
     Row(
-        modifier = Modifier
-            .clickable(onClick = { navigateToBrandDetail(brandId) })
-            .background(color = RowColor)
-            .padding(16.dp)
+        modifier = modifier
+            .height(70.dp)
     ) {
-        BrandDetail(
-            modifier = Modifier.weight(1f),
-            brandName = brandName,
-            brandParentCompanyName = brandParentCompanyName
-        )
-        ScoreBox(
-            backgroundColor = backgroundColor,
-            score = score
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(0.5f)
+                .background(Blue)
+                .clickable {
+                    onFollowClick.invoke(brandId)
+                }
+        ) {
+            Icon(
+                modifier = Modifier.align(Alignment.Center),
+                painter = painterResource(id = R.drawable.ic_bookmark),
+                contentDescription = null,
+                tint = White0
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(0.5f)
+                .background(Gray)
+                .clickable {
+                    onSendClick.invoke(brandId)
+                }
+        ) {
+            Icon(
+                modifier = Modifier.align(Alignment.Center),
+                painter = painterResource(id = R.drawable.ic_send),
+                contentDescription = null,
+                tint = White0
+            )
+        }
     }
 }
 
@@ -433,7 +528,9 @@ fun BrandRowPreview() {
         brandParentCompanyName = "Rossmann",
         backgroundColor = ScoreDarkGreen,
         score = 7,
-        navigateToBrandDetail = {}
+        navigateToBrandDetail = {},
+        onFollowClick = {},
+        onSendClick = {}
     )
 }
 
