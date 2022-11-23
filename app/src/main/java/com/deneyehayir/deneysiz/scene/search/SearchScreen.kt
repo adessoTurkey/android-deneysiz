@@ -1,6 +1,11 @@
 package com.deneyehayir.deneysiz.scene.search
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
@@ -33,13 +38,15 @@ fun SearchRoute(
     viewModel: SearchViewModel = hiltViewModel(),
     navigateToBrandDetail: (Int) -> Unit
 ) {
-
-    val viewState by rememberFlowWithLifecycle(viewModel.uiState).collectAsState(initial = SearchUiState.Initial)
+    val viewState by rememberFlowWithLifecycle(viewModel.uiState).collectAsState(
+        initial = SearchUiState.Initial
+    )
     val queryStringState by rememberFlowWithLifecycle(viewModel.queryFlowText).collectAsState(
         initial = ""
     )
     val context = LocalContext.current
-    SearchScreen(modifier = modifier,
+    SearchScreen(
+        modifier = modifier,
         viewState = viewState,
         queryString = queryStringState,
         onSearchDetailUiEvent = viewModel::handleUiEvents,
@@ -49,7 +56,8 @@ fun SearchRoute(
                 mailAddressRes = R.string.search_suggest_brand_mail_address,
                 subjectRes = R.string.search_suggest_brand_mail_subject
             )
-        })
+        }
+    )
 }
 
 @Composable
@@ -57,7 +65,7 @@ fun SearchScreen(
     modifier: Modifier = Modifier,
     viewState: SearchUiState,
     queryString: String,
-    onSearchDetailUiEvent: (SearchDetailUiEvents) -> Unit,
+    onSearchDetailUiEvent: (SearchUiEvents) -> Unit,
     navigateToBrandDetail: (Int) -> Unit,
     onSuggestBrandClick: () -> Unit
 ) {
@@ -71,18 +79,21 @@ fun SearchScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-
-            SearchTextInputItem(modifier = Modifier.weight(0.8f),
+            SearchTextInputItem(
+                modifier = Modifier.weight(0.8f),
                 textValue = queryString,
                 onValueChange = {
-                    onSearchDetailUiEvent.invoke(SearchDetailUiEvents.QueryTextChange(it))
-                })
+                    onSearchDetailUiEvent.invoke(SearchUiEvents.QueryTextChange(it))
+                }
+            )
 
             TextButton(modifier = Modifier.weight(0.2f), onClick = {
-                onSearchDetailUiEvent.invoke(SearchDetailUiEvents.CancelButtonClick)
+                onSearchDetailUiEvent.invoke(SearchUiEvents.CancelButtonClick)
             }) {
                 Text(
-                    text = stringResource(id = com.deneyehayir.deneysiz.R.string.search_cancel_button_text),
+                    text = stringResource(
+                        id = com.deneyehayir.deneysiz.R.string.search_cancel_button_text
+                    ),
                     color = SearchDetailTextButtonColor
                 )
             }
@@ -94,10 +105,10 @@ fun SearchScreen(
             }
             viewState.errorContent != null -> {
                 ErrorDialog(content = viewState.errorContent, onRetry = {
-                    onSearchDetailUiEvent.invoke(SearchDetailUiEvents.ErrorRetryClick)
+                    onSearchDetailUiEvent.invoke(SearchUiEvents.ErrorRetryClick)
                 }, onClose = {
-                    onSearchDetailUiEvent.invoke(SearchDetailUiEvents.ErrorCloseClick)
-                })
+                        onSearchDetailUiEvent.invoke(SearchUiEvents.ErrorCloseClick)
+                    })
             }
             viewState.isBrandNotFoundError -> {
                 Column(
@@ -125,7 +136,8 @@ fun SearchScreen(
                                 .padding(horizontal = 16.dp)
                                 .padding(top = 16.dp),
                             text = stringResource(
-                                id = R.string.search_result_info_text, viewState.data.size
+                                id = R.string.search_result_info_text,
+                                viewState.data.size
                             ),
                             color = DarkTextColor
                         )
@@ -147,13 +159,14 @@ fun SearchScreen(
     }
 }
 
-
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable
 fun SearchDetailScreenPreview() {
-    SearchScreen(viewState = SearchUiState.Initial,
+    SearchScreen(
+        viewState = SearchUiState.Initial,
         queryString = "",
         onSearchDetailUiEvent = {},
         navigateToBrandDetail = {},
-        onSuggestBrandClick = {})
+        onSuggestBrandClick = {}
+    )
 }

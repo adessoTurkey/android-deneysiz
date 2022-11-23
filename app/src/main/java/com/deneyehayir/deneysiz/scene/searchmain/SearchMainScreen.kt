@@ -1,8 +1,19 @@
 package com.deneyehayir.deneysiz.scene.searchmain
 
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -22,7 +33,6 @@ import com.deneyehayir.deneysiz.ui.theme.SearchTextInputContentColor
 import com.deneyehayir.deneysiz.ui.theme.TextInputFieldBgColor
 import com.deneyehayir.deneysiz.ui.theme.White1
 
-
 @Composable
 fun SearchMainRoute(
     modifier: Modifier = Modifier,
@@ -30,7 +40,6 @@ fun SearchMainRoute(
     onInputFieldClick: () -> Unit,
     navigateToWhoWeAre: () -> Unit
 ) {
-
     SearchMainScreen(
         modifier = modifier,
         scrollState = scrollState,
@@ -75,9 +84,9 @@ fun SearchMainScreen(
                 )
 
                 TopAppBarWhoWeAreAction(
-                    color = White1, navigateToWhoWeAre = navigateToWhoWeAre
+                    color = White1,
+                    navigateToWhoWeAre = navigateToWhoWeAre
                 )
-
             }
         }
 
@@ -112,7 +121,6 @@ fun SearchMainScreen(
                     color = SearchTextInputContentColor
                 )
             }
-
         }
     }
 }

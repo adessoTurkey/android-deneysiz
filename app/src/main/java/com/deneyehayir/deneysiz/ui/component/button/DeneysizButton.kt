@@ -42,7 +42,6 @@ fun DeneysizButton(
     }
 }
 
-
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable
 fun DeneysizButtonPreview() {

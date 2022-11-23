@@ -6,9 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.deneyehayir.deneysiz.scene.search.SearchRoute
 
-
 const val searchRoute = "searchRoute"
-
 
 fun NavController.navigateToSearch(navOptions: NavOptions? = null) {
     this.navigate(searchRoute, navOptions)

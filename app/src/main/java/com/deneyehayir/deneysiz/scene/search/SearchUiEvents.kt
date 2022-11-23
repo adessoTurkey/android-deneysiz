@@ -1,9 +1,8 @@
 package com.deneyehayir.deneysiz.scene.search
 
-
-sealed class SearchDetailUiEvents {
-    data class QueryTextChange(var query: String) : SearchDetailUiEvents()
-    object ErrorRetryClick : SearchDetailUiEvents()
-    object ErrorCloseClick : SearchDetailUiEvents()
-    object CancelButtonClick : SearchDetailUiEvents()
+sealed class SearchUiEvents {
+    data class QueryTextChange(var query: String) : SearchUiEvents()
+    object ErrorRetryClick : SearchUiEvents()
+    object ErrorCloseClick : SearchUiEvents()
+    object CancelButtonClick : SearchUiEvents()
 }

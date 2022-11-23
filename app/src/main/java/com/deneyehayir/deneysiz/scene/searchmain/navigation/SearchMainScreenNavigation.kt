@@ -7,10 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.deneyehayir.deneysiz.scene.searchmain.SearchMainRoute
 
-
 const val searchMainGraph = "searchMainGraph"
 const val searchMainRoute = "searchMainRoute"
-
 
 fun NavController.navigateToSearchMain(navOptions: NavOptions? = null) {
     this.navigate(searchMainGraph, navOptions)
@@ -22,12 +20,16 @@ fun NavGraphBuilder.searchMainScreen(
     nestedGraph: NavGraphBuilder.() -> Unit
 ) {
     navigation(
-        route = searchMainGraph, startDestination = searchMainRoute
+        route = searchMainGraph,
+        startDestination = searchMainRoute
     ) {
         composable(
             route = searchMainRoute
         ) {
-            SearchMainRoute(onInputFieldClick = onInputFieldClick, navigateToWhoWeAre = navigateToWhoWeAre)
+            SearchMainRoute(
+                onInputFieldClick = onInputFieldClick,
+                navigateToWhoWeAre = navigateToWhoWeAre
+            )
         }
         nestedGraph()
     }

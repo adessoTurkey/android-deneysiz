@@ -21,7 +21,6 @@ import com.deneyehayir.deneysiz.ui.theme.GradientDark
 import com.deneyehayir.deneysiz.ui.theme.SearchTextInputContentColor
 import com.deneyehayir.deneysiz.ui.theme.TextInputFieldBgColor
 
-
 @Composable
 fun SearchTextInputItem(
     modifier: Modifier = Modifier,
@@ -39,7 +38,8 @@ fun SearchTextInputItem(
         onValueChange = onValueChange,
         leadingIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.ic_search), contentDescription = null
+                painter = painterResource(id = R.drawable.ic_search),
+                contentDescription = null
             )
         },
         shape = RoundedCornerShape(10.dp),

@@ -55,7 +55,7 @@ object NetworkModule {
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(chuckerInterceptor)
+//            .addInterceptor(chuckerInterceptor)
             .addInterceptor(errorHandlingInterceptor)
             .addInterceptor(localResponseInterceptor)
             .build()
@@ -79,7 +79,7 @@ object NetworkModule {
         json: Json
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl("http://deneysiz-backend-prod.eu-central-1.elasticbeanstalk.com/")
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .client(client)
             .build()

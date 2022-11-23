@@ -15,11 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.*
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import androidx.navigation.navOptions
 import com.deneyehayir.deneysiz.R
 import com.deneyehayir.deneysiz.scene.branddetail.BrandDetailScreen
 import com.deneyehayir.deneysiz.scene.categorydetail.CategoryDetailScreen
@@ -47,7 +52,9 @@ const val navDoYouKnowContentId = "doYouKnowContentId"
 const val splashScreenRoute = "splash"
 
 sealed class MainScreen(
-    val route: String, @StringRes val titleResource: Int, @DrawableRes val iconResource: Int
+    val route: String,
+    @StringRes val titleResource: Int,
+    @DrawableRes val iconResource: Int
 ) {
     object SearchMain : MainScreen(
         route = searchMainRoute,
@@ -75,7 +82,8 @@ sealed class DetailScreen(
         route = "detail/category?categoryId={$navCategoryId}" + "&categoryStringRes={$navCategoryStringRes}"
     ) {
         fun createRoute(
-            categoryId: String, @StringRes categoryStringRes: Int
+            categoryId: String,
+            @StringRes categoryStringRes: Int
         ): String = "detail/category?categoryId=$categoryId&categoryStringRes=$categoryStringRes"
     }
 
@@ -116,8 +124,8 @@ fun BottomNavBar(
     tabs: List<MainScreen>,
     currentDestination: NavDestination?
 ) {
-
-    AnimatedVisibility(visible = bottomNavVisibilityState,
+    AnimatedVisibility(
+        visible = bottomNavVisibilityState,
         enter = slideInVertically(initialOffsetY = { it }),
         exit = slideOutVertically(targetOffsetY = { it })
     ) {
@@ -126,12 +134,13 @@ fun BottomNavBar(
         ) {
             tabs.forEach { tab ->
                 val selected = currentDestination.isTopLevelDestinationInHierarchy(tab)
-                BottomNavigationItem(icon = {
-                    Icon(
-                        painter = painterResource(id = tab.iconResource),
-                        contentDescription = null
-                    )
-                },
+                BottomNavigationItem(
+                    icon = {
+                        Icon(
+                            painter = painterResource(id = tab.iconResource),
+                            contentDescription = null
+                        )
+                    },
                     label = {
                         Text(text = stringResource(id = tab.titleResource))
                     },
@@ -148,7 +157,8 @@ fun BottomNavBar(
                                 restoreState = true
                             }
                         }
-                    })
+                    }
+                )
             }
         }
     }
@@ -163,37 +173,39 @@ private fun NavDestination?.isTopLevelDestinationInHierarchy(destination: MainSc
 fun MainNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    startDestination: String = splashScreenRoute,
+    startDestination: String = splashScreenRoute
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
-
         searchMainScreen(onInputFieldClick = {
             navController.navigateToSearch()
         }, nestedGraph = {
-            searchScreen(navigateToBrandDetail = { brandId ->
-                navController.navigate(
-                    DetailScreen.BrandDetail.createRoute(
-                        brandId = brandId
+                searchScreen(navigateToBrandDetail = { brandId ->
+                    navController.navigate(
+                        DetailScreen.BrandDetail.createRoute(
+                            brandId = brandId
+                        )
                     )
+                })
+            }, navigateToWhoWeAre = {
+                navController.navigate(
+                    DetailScreen.WhoWeAreScreen.route
                 )
             })
-        }, navigateToWhoWeAre = {
-            navController.navigate(
-                DetailScreen.WhoWeAreScreen.route
-            )
-        })
 
         composable(splashScreenRoute) {
             SplashScreen(onSplashComplete = {
-                navController.navigateToSearchMain(navOptions = navOptions {
-                    popUpTo(splashScreenRoute) {
-                        inclusive = true
+                navController.navigateToSearchMain(
+                    navOptions = navOptions {
+                        popUpTo(splashScreenRoute) {
+                            inclusive = true
+                        }
                     }
-                })
+                )
             })
         }
         composable(MainScreen.Discover.route) {
-            DiscoverScreen(modifier = modifier,
+            DiscoverScreen(
+                modifier = modifier,
                 navigateToSearch = {},
                 navigateToCategory = { categoryItem ->
                     navController.navigate(
@@ -207,7 +219,8 @@ fun MainNavGraph(
                     navController.navigate(
                         DetailScreen.WhoWeAreScreen.route
                     )
-                })
+                }
+            )
         }
         composable(MainScreen.DoYouKnow.route) {
             DoYouKnowScreen(modifier = modifier, navigateToWhoWeAre = {
@@ -215,25 +228,29 @@ fun MainNavGraph(
                     DetailScreen.WhoWeAreScreen.route
                 )
             }, onNavigateCertificateDetail = { contentId ->
-                navController.navigate(
-                    DetailScreen.DoYouKnowContentDetail.createRoute(
-                        contentId = contentId
+                    navController.navigate(
+                        DetailScreen.DoYouKnowContentDetail.createRoute(
+                            contentId = contentId
+                        )
                     )
-                )
-            }, onNavigateFaqDetail = { contentId ->
-                navController.navigate(
-                    DetailScreen.DoYouKnowContentDetail.createRoute(
-                        contentId = contentId
+                }, onNavigateFaqDetail = { contentId ->
+                    navController.navigate(
+                        DetailScreen.DoYouKnowContentDetail.createRoute(
+                            contentId = contentId
+                        )
                     )
-                )
-            })
+                })
         }
         composable(
-            route = DetailScreen.Category.route, arguments = listOf(navArgument(navCategoryId) {
-                type = NavType.StringType
-            }, navArgument(navCategoryStringRes) {
-                type = NavType.IntType
-            })
+            route = DetailScreen.Category.route,
+            arguments = listOf(
+                navArgument(navCategoryId) {
+                    type = NavType.StringType
+                },
+                navArgument(navCategoryStringRes) {
+                    type = NavType.IntType
+                }
+            )
         ) { backstackEntry ->
             val categoryId = backstackEntry.arguments?.getString(navCategoryId)
             val categoryStringRes = backstackEntry.arguments?.getInt(navCategoryStringRes)
@@ -247,19 +264,22 @@ fun MainNavGraph(
                             )
                         )
                     },
-                    onBack = { navController.navigateUp() },
+                    onBack = { navController.navigateUp() }
                 )
             }
         }
         composable(
             route = DetailScreen.BrandDetail.route,
-            arguments = listOf(navArgument(navBrandDetailBrandId) {
-                type = NavType.IntType
-            })
+            arguments = listOf(
+                navArgument(navBrandDetailBrandId) {
+                    type = NavType.IntType
+                }
+            )
         ) { backStackEntry ->
             val brandId = backStackEntry.arguments?.getInt(navBrandDetailBrandId)
             if (brandId != null) {
-                BrandDetailScreen(modifier = modifier,
+                BrandDetailScreen(
+                    modifier = modifier,
                     onBack = { navController.navigateUp() },
                     onNavigateCertificateDetail = { contentId ->
                         navController.navigate(
@@ -267,14 +287,17 @@ fun MainNavGraph(
                                 contentId = contentId
                             )
                         )
-                    })
+                    }
+                )
             }
         }
         composable(
             route = DetailScreen.DoYouKnowContentDetail.route,
-            arguments = listOf(navArgument(navDoYouKnowContentId) {
-                type = NavType.IntType
-            })
+            arguments = listOf(
+                navArgument(navDoYouKnowContentId) {
+                    type = NavType.IntType
+                }
+            )
         ) { backStackEntry ->
             val contentId = backStackEntry.arguments?.getInt(navDoYouKnowContentId)
             if (contentId != null) {
@@ -282,7 +305,8 @@ fun MainNavGraph(
             }
         }
         composable(route = DetailScreen.WhoWeAreScreen.route) {
-            WhoWeAreScreen(modifier = modifier,
+            WhoWeAreScreen(
+                modifier = modifier,
                 onBack = { navController.navigateUp() },
                 onSupportNavigation = {
                     navController.navigate(
@@ -293,7 +317,8 @@ fun MainNavGraph(
                     navController.navigate(
                         DetailScreen.DonationScreen.route
                     )
-                })
+                }
+            )
         }
         composable(route = DetailScreen.DonationScreen.route) {
             DonationScreen(modifier = modifier, onBack = { navController.navigateUp() })

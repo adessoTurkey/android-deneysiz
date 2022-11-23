@@ -1,13 +1,14 @@
 package com.deneyehayir.deneysiz.scene
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.deneyehayir.deneysiz.R
 import kotlinx.coroutines.CoroutineScope
-
 
 @Composable
 fun rememberMainAppState(
@@ -21,12 +22,12 @@ fun rememberMainAppState(
 
 @Stable
 class MainAppState(
-    val navController: NavHostController, val coroutineScope: CoroutineScope
+    val navController: NavHostController,
+    val coroutineScope: CoroutineScope
 ) {
 
     val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
-
 
     val shouldShowBottomNavBar: Boolean
         @Composable get() = currentDestination?.route in bottomNavTabs.map { it.route }
@@ -34,10 +35,9 @@ class MainAppState(
     val shouldShowTopAppBar: Boolean
         @Composable get() = currentDestination?.route in bottomNavTabs.map { it.route }
 
-
     val bottomNavTabs: List<MainScreen> = listOf(
-        MainScreen.SearchMain, MainScreen.Discover, MainScreen.DoYouKnow
+        MainScreen.SearchMain,
+        MainScreen.Discover,
+        MainScreen.DoYouKnow
     )
-
 }
-

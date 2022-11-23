@@ -7,7 +7,6 @@ import com.deneyehayir.deneysiz.domain.model.SearchResultDomainModel
 import com.deneyehayir.deneysiz.domain.model.SearchResultItemDomainModel
 import com.deneyehayir.deneysiz.scene.categorydetail.model.getScoreBackgroundColor
 
-
 @JvmInline
 value class SearchResultUiModel(
     val items: List<SearchResultItemUiModel>

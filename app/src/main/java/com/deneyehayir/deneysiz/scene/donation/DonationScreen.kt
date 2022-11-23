@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
@@ -49,7 +47,6 @@ import com.deneyehayir.deneysiz.ui.component.button.DeneysizButton
 import com.deneyehayir.deneysiz.ui.theme.Blue
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
-import com.deneyehayir.deneysiz.ui.theme.Orange
 import com.deneyehayir.deneysiz.ui.theme.White0
 import com.deneyehayir.deneysiz.ui.theme.White1
 import kotlinx.coroutines.launch
@@ -201,7 +198,7 @@ fun BankAccountInfoCard(
         modifier = modifier,
         backgroundColor = White1,
         shape = RoundedCornerShape(8.dp),
-        elevation = 4.dp,
+        elevation = 4.dp
     ) {
         Column {
             BankAccountInfoHeader(
@@ -294,11 +291,10 @@ fun BankAccountInfoIban(
                 .align(alignment = Alignment.CenterEnd),
             painter = painterResource(id = R.drawable.ic_clipboard),
             contentDescription = null,
-            tint = Blue,
+            tint = Blue
         )
     }
 }
-
 
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable

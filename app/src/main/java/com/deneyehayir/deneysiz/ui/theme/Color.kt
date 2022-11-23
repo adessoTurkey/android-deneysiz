@@ -28,7 +28,6 @@ val ScoreOrange = Color(0xFFF39C12)
 val ScoreYellow = Color(0xFFF1C40F)
 val ScoreRed = Color(0xFFE74C3C)
 
-
-val TextInputFieldBgColor= Color(0xFFECF0F1)
-val SearchTextInputContentColor= Color(0xFF7F8C8D)
-val SearchDetailTextButtonColor= Color(0xFF007AFF)
+val TextInputFieldBgColor = Color(0xFFECF0F1)
+val SearchTextInputContentColor = Color(0xFF7F8C8D)
+val SearchDetailTextButtonColor = Color(0xFF007AFF)

@@ -17,10 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.deneyehayir.deneysiz.R
-import com.deneyehayir.deneysiz.ui.component.button.DeneysizButton
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
 import com.deneyehayir.deneysiz.ui.theme.DeneysizTheme
-
 
 @Composable
 fun SearchErrorItem(
@@ -47,7 +45,6 @@ fun SearchErrorItem(
             color = DarkTextColor
         )
     }
-
 }
 
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)

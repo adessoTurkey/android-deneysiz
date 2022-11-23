@@ -1,6 +1,15 @@
 package com.deneyehayir.deneysiz.domain.repository
 
-import com.deneyehayir.deneysiz.domain.model.*
+import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDomainModel
+import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
+import com.deneyehayir.deneysiz.domain.model.DoYouKnowContentDomainModel
+import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
+import com.deneyehayir.deneysiz.domain.model.DonationDomainModel
+import com.deneyehayir.deneysiz.domain.model.SearchResultDomainModel
+import com.deneyehayir.deneysiz.domain.model.SupportDomainModel
+import com.deneyehayir.deneysiz.domain.model.WhoWeAreDomainModel
 
 interface Repository {
 

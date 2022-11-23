@@ -8,7 +8,15 @@ import com.deneyehayir.deneysiz.scene.search.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,26 +31,24 @@ class SearchViewModel @Inject constructor(
     var queryFlowText = MutableStateFlow("")
         private set
 
-
-    fun handleUiEvents(event: SearchDetailUiEvents) {
+    fun handleUiEvents(event: SearchUiEvents) {
         when (event) {
-            is SearchDetailUiEvents.QueryTextChange -> {
+            is SearchUiEvents.QueryTextChange -> {
                 queryFlowText.value = event.query
                 makeSearch()
-
             }
-            SearchDetailUiEvents.CancelButtonClick -> {
+            SearchUiEvents.CancelButtonClick -> {
                 _uiState.update {
                     it.cancelActions()
                 }
                 queryFlowText.value = ""
             }
-            SearchDetailUiEvents.ErrorCloseClick -> {
+            SearchUiEvents.ErrorCloseClick -> {
                 _uiState.update {
                     it.hideError()
                 }
             }
-            SearchDetailUiEvents.ErrorRetryClick -> {
+            SearchUiEvents.ErrorRetryClick -> {
                 _uiState.update {
                     it.hideError()
                 }
@@ -74,7 +80,7 @@ class SearchViewModel @Inject constructor(
                 _uiState.update {
                     it.showError(err.toErrorContentUiModel())
                 }
-            }.collect { result ->
+            }.collectLatest { result ->
                 if (result.shouldShowError) {
                     _uiState.update {
                         it.showBrandNotFoundError()

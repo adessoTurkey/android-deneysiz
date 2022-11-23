@@ -6,7 +6,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SearchBrandsResponse(
-    val status: Int?, val message: String?, val data: List<SearchBrandsItemResponse>?
+    val status: Int?,
+    val message: String?,
+    val data: List<SearchBrandsItemResponse>?
 )
 
 @Serializable
@@ -14,7 +16,7 @@ data class SearchBrandsItemResponse(
     val id: Int?,
     val name: String?,
     val score: Int?,
-    val parentCompany: ParentCompanyResponse?,
+    val parentCompany: ParentCompanyResponse?
 )
 
 fun SearchBrandsResponse.toSearchResultDomainModel() = SearchResultDomainModel(
@@ -25,6 +27,6 @@ fun SearchBrandsResponse.toSearchResultDomainModel() = SearchResultDomainModel(
             parentCompanyName = response.parentCompany?.name.orEmpty(),
             score = response.score ?: -1
         )
-    }.orEmpty(), shouldShowError = status != 200
+    }.orEmpty(),
+    shouldShowError = status != 200
 )
-
