@@ -79,7 +79,7 @@ sealed class DetailScreen(
     val route: String
 ) {
     object Category : DetailScreen(
-        route = "detail/category?categoryId={$navCategoryId}" + "&categoryStringRes={$navCategoryStringRes}"
+        route = "detail/category?categoryId={$navCategoryId}&categoryStringRes={$navCategoryStringRes}" // ktlint-disable max-line-length
     ) {
         fun createRoute(
             categoryId: String,
@@ -184,13 +184,15 @@ fun MainNavGraph(
                 navController.navigateToSearch()
             },
             nestedGraph = {
-                searchScreen(navigateToBrandDetail = { brandId ->
-                    navController.navigate(
-                        DetailScreen.BrandDetail.createRoute(
-                            brandId = brandId
+                searchScreen(
+                    navigateToBrandDetail = { brandId ->
+                        navController.navigate(
+                            DetailScreen.BrandDetail.createRoute(
+                                brandId = brandId
+                            )
                         )
-                    )
-                })
+                    }
+                )
             },
             navigateToWhoWeAre = {
                 navController.navigate(
