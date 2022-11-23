@@ -115,28 +115,7 @@ fun CategoryItem(
                 painter = painterResource(id = category.imageResource),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .drawWithCache {
-                        val gradient = Brush.horizontalGradient(
-                            colors = listOf(
-                                GradientDark,
-                                Transparent
-                            )
-                        )
-                        onDrawWithContent {
-                            drawContent()
-                            drawRect(gradient)
-                        }
-                    }
-                    .fillMaxSize()
-            )
-            Text(
-                text = stringResource(id = category.nameResource),
-                modifier = Modifier
-                    .padding(12.dp)
-                    .fillMaxWidth(textWidthFraction),
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                modifier = Modifier.fillMaxSize()
             )
         }
     }
