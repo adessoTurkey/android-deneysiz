@@ -175,10 +175,15 @@ fun MainNavGraph(
     navController: NavHostController,
     startDestination: String = splashScreenRoute
 ) {
-    NavHost(navController = navController, startDestination = startDestination) {
-        searchMainScreen(onInputFieldClick = {
-            navController.navigateToSearch()
-        }, nestedGraph = {
+    NavHost(
+        navController = navController,
+        startDestination = startDestination
+    ) {
+        searchMainScreen(
+            onInputFieldClick = {
+                navController.navigateToSearch()
+            },
+            nestedGraph = {
                 searchScreen(navigateToBrandDetail = { brandId ->
                     navController.navigate(
                         DetailScreen.BrandDetail.createRoute(
@@ -186,22 +191,26 @@ fun MainNavGraph(
                         )
                     )
                 })
-            }, navigateToWhoWeAre = {
+            },
+            navigateToWhoWeAre = {
                 navController.navigate(
                     DetailScreen.WhoWeAreScreen.route
                 )
-            })
+            }
+        )
 
         composable(splashScreenRoute) {
-            SplashScreen(onSplashComplete = {
-                navController.navigateToSearchMain(
-                    navOptions = navOptions {
-                        popUpTo(splashScreenRoute) {
-                            inclusive = true
+            SplashScreen(
+                onSplashComplete = {
+                    navController.navigateToSearchMain(
+                        navOptions = navOptions {
+                            popUpTo(splashScreenRoute) {
+                                inclusive = true
+                            }
                         }
-                    }
-                )
-            })
+                    )
+                }
+            )
         }
         composable(MainScreen.Discover.route) {
             DiscoverScreen(
@@ -223,23 +232,28 @@ fun MainNavGraph(
             )
         }
         composable(MainScreen.DoYouKnow.route) {
-            DoYouKnowScreen(modifier = modifier, navigateToWhoWeAre = {
-                navController.navigate(
-                    DetailScreen.WhoWeAreScreen.route
-                )
-            }, onNavigateCertificateDetail = { contentId ->
+            DoYouKnowScreen(
+                modifier = modifier,
+                navigateToWhoWeAre = {
+                    navController.navigate(
+                        DetailScreen.WhoWeAreScreen.route
+                    )
+                },
+                onNavigateCertificateDetail = { contentId ->
                     navController.navigate(
                         DetailScreen.DoYouKnowContentDetail.createRoute(
                             contentId = contentId
                         )
                     )
-                }, onNavigateFaqDetail = { contentId ->
+                },
+                onNavigateFaqDetail = { contentId ->
                     navController.navigate(
                         DetailScreen.DoYouKnowContentDetail.createRoute(
                             contentId = contentId
                         )
                     )
-                })
+                }
+            )
         }
         composable(
             route = DetailScreen.Category.route,
@@ -301,7 +315,10 @@ fun MainNavGraph(
         ) { backStackEntry ->
             val contentId = backStackEntry.arguments?.getInt(navDoYouKnowContentId)
             if (contentId != null) {
-                DoYouKnowContentScreen(modifier = modifier, onBack = { navController.navigateUp() })
+                DoYouKnowContentScreen(
+                    modifier = modifier,
+                    onBack = { navController.navigateUp() }
+                )
             }
         }
         composable(route = DetailScreen.WhoWeAreScreen.route) {

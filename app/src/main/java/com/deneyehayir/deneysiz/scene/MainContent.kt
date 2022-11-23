@@ -11,14 +11,16 @@ fun MainContent(
     appState: MainAppState = rememberMainAppState()
 ) {
     DeneysizTheme {
-        Scaffold(bottomBar = {
-            BottomNavBar(
-                bottomNavVisibilityState = appState.shouldShowBottomNavBar,
-                navController = appState.navController,
-                tabs = appState.bottomNavTabs,
-                currentDestination = appState.currentDestination
-            )
-        }) { innerPaddingModifier ->
+        Scaffold(
+            bottomBar = {
+                BottomNavBar(
+                    bottomNavVisibilityState = appState.shouldShowBottomNavBar,
+                    navController = appState.navController,
+                    tabs = appState.bottomNavTabs,
+                    currentDestination = appState.currentDestination
+                )
+            }
+        ) { innerPaddingModifier ->
             MainNavGraph(
                 navController = appState.navController,
                 modifier = Modifier.padding(innerPaddingModifier)

@@ -87,9 +87,12 @@ fun SearchScreen(
                 }
             )
 
-            TextButton(modifier = Modifier.weight(0.2f), onClick = {
-                onSearchDetailUiEvent.invoke(SearchUiEvents.CancelButtonClick)
-            }) {
+            TextButton(
+                modifier = Modifier.weight(0.2f),
+                onClick = {
+                    onSearchDetailUiEvent.invoke(SearchUiEvents.CancelButtonClick)
+                }
+            ) {
                 Text(
                     text = stringResource(
                         id = com.deneyehayir.deneysiz.R.string.search_cancel_button_text
@@ -104,11 +107,15 @@ fun SearchScreen(
                 LoadingScreen()
             }
             viewState.errorContent != null -> {
-                ErrorDialog(content = viewState.errorContent, onRetry = {
-                    onSearchDetailUiEvent.invoke(SearchUiEvents.ErrorRetryClick)
-                }, onClose = {
+                ErrorDialog(
+                    content = viewState.errorContent,
+                    onRetry = {
+                        onSearchDetailUiEvent.invoke(SearchUiEvents.ErrorRetryClick)
+                    },
+                    onClose = {
                         onSearchDetailUiEvent.invoke(SearchUiEvents.ErrorCloseClick)
-                    })
+                    }
+                )
             }
             viewState.isBrandNotFoundError -> {
                 Column(

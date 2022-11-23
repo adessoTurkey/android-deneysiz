@@ -3,7 +3,6 @@ package com.deneyehayir.deneysiz.scene.search
 import com.deneyehayir.deneysiz.scene.component.ErrorContentUiModel
 import com.deneyehayir.deneysiz.scene.search.model.SearchResultItemUiModel
 
-
 data class SearchUiState(
     val isLoading: Boolean,
     val isBrandNotFoundError: Boolean,
@@ -11,7 +10,8 @@ data class SearchUiState(
     val data: List<SearchResultItemUiModel>
 ) {
     fun updateSearchResult(searchResult: List<SearchResultItemUiModel>) = copy(
-        isLoading = false, data = searchResult
+        isLoading = false,
+        data = searchResult
     )
 
     fun showLoading() = copy(
@@ -19,19 +19,24 @@ data class SearchUiState(
     )
 
     fun showError(error: ErrorContentUiModel) = copy(
-        isLoading = false, errorContent = error
+        isLoading = false,
+        errorContent = error
     )
 
     fun hideError() = copy(
-        isLoading = false, errorContent = null
+        isLoading = false,
+        errorContent = null
     )
 
     fun cancelActions() = copy(
-        isLoading = false, data = listOf(), isBrandNotFoundError = false
+        isLoading = false,
+        data = listOf(),
+        isBrandNotFoundError = false
     )
 
     fun showBrandNotFoundError() = copy(
-        isLoading = false, isBrandNotFoundError = true
+        isLoading = false,
+        isBrandNotFoundError = true
     )
 
     fun hideBrandNotFoundError() = copy(
@@ -42,7 +47,6 @@ data class SearchUiState(
         isBrandNotFoundError = false,
         data = listOf()
     )
-
 
     companion object {
         val Initial = SearchUiState(
