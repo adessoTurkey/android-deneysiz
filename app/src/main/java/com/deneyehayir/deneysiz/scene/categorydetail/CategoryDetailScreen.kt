@@ -87,18 +87,21 @@ fun CategoryDetailScreen(
     )
     val context = LocalContext.current
 
-    Scaffold(modifier = modifier, topBar = {
-        CategoryDetailTopBar(
-            titleRes = viewModel.categoryStringRes,
-            onBack = onBack,
-            onSuggestBrand = {
-                context.navigateToEmailApp(
-                    mailAddressRes = R.string.support_mail_address,
-                    subjectRes = R.string.support_subject_suggest
-                )
-            }
-        )
-    }) {
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            CategoryDetailTopBar(
+                titleRes = viewModel.categoryStringRes,
+                onBack = onBack,
+                onSuggestBrand = {
+                    context.navigateToEmailApp(
+                        mailAddressRes = R.string.support_mail_address,
+                        subjectRes = R.string.support_subject_suggest
+                    )
+                }
+            )
+        }
+    ) {
         CategoryDetailScreen(
             viewState = viewState,
             onBrandDetail = onBrandDetail,
