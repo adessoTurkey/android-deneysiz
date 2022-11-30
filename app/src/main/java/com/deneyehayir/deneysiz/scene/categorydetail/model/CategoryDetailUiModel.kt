@@ -36,7 +36,7 @@ fun CategoryDetailItemDomainModel.toUiModel() = CategoryDetailItemUiModel(
     scoreBackgroundColor = score.getScoreBackgroundColor()
 )
 
-private fun Int.getScoreBackgroundColor(): Color {
+fun Int.getScoreBackgroundColor(): Color {
     return when (this) {
         in 4..5 -> ScoreYellow
         in 6..7 -> ScoreLightGreen

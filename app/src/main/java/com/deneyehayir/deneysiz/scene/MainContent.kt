@@ -19,6 +19,7 @@ fun MainContent() {
     DeneysizTheme {
         val tabs = remember {
             listOf(
+                MainScreen.SearchMain,
                 MainScreen.Discover,
                 MainScreen.DoYouKnow
             )

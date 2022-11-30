@@ -28,6 +28,9 @@ import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
 import com.deneyehayir.deneysiz.scene.donation.DonationScreen
 import com.deneyehayir.deneysiz.scene.doyouknow.DoYouKnowScreen
 import com.deneyehayir.deneysiz.scene.doyouknowcontent.DoYouKnowContentScreen
+import com.deneyehayir.deneysiz.scene.search.navigation.navigateSearch
+import com.deneyehayir.deneysiz.scene.search.navigation.searchScreen
+import com.deneyehayir.deneysiz.scene.searchmain.SearchMainRoute
 import com.deneyehayir.deneysiz.scene.splash.SplashScreen
 import com.deneyehayir.deneysiz.scene.support.SupportScreen
 import com.deneyehayir.deneysiz.scene.whoweare.WhoWeAreScreen
@@ -57,6 +60,12 @@ sealed class MainScreen(
         route = "main/doyouknow",
         titleResource = R.string.bottom_nav_tab_do_you_know,
         iconResource = R.drawable.ic_do_you_know
+    )
+
+    object SearchMain : MainScreen(
+        route = "main/searchmain",
+        titleResource = R.string.bottom_nav_tab_search,
+        iconResource = R.drawable.ic_search
     )
 }
 
@@ -149,14 +158,14 @@ fun BottomNavBar(
 fun MainNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = splashScreenRoute,
+    startDestination: String = splashScreenRoute
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
         composable(splashScreenRoute) {
             SplashScreen(
                 onSplashComplete = {
                     navController.navigate(
-                        MainScreen.Discover.route
+                        MainScreen.SearchMain.route
                     ) {
                         popUpTo(splashScreenRoute) {
                             inclusive = true
@@ -208,6 +217,30 @@ fun MainNavGraph(
                 }
             )
         }
+
+        composable(MainScreen.SearchMain.route) {
+            SearchMainRoute(
+                navigateToWhoWeAre = {
+                    navController.navigate(
+                        DetailScreen.WhoWeAreScreen.route
+                    )
+                },
+                onInputFieldClick = {
+                    navController.navigateSearch()
+                }
+            )
+        }
+
+        searchScreen(
+            navigateToBrandDetail = { brandId ->
+                navController.navigate(
+                    DetailScreen.BrandDetail.createRoute(
+                        brandId = brandId
+                    )
+                )
+            }
+        )
+
         composable(
             route = DetailScreen.Category.route,
             arguments = listOf(
@@ -231,7 +264,7 @@ fun MainNavGraph(
                             )
                         )
                     },
-                    onBack = { navController.navigateUp() },
+                    onBack = { navController.navigateUp() }
                 )
             }
         }
