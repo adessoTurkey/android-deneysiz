@@ -156,7 +156,7 @@ fun BottomNavBar(
 fun MainNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = splashScreenRoute,
+    startDestination: String = splashScreenRoute
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
         composable(splashScreenRoute) {
@@ -252,7 +252,7 @@ fun MainNavGraph(
                             )
                         )
                     },
-                    onBack = { navController.navigateUp() },
+                    onBack = { navController.navigateUp() }
                 )
             }
         }

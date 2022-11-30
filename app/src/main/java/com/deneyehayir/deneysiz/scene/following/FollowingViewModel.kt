@@ -35,7 +35,7 @@ class FollowingViewModel @Inject constructor(
                 } else {
                     _uiState.value = FollowingUiState.Success(data = list.map { it.toUiModel() })
                 }
-            }.onFailure { throwable ->
+            }.onFailure {
                 // no-op
             }
         }

@@ -69,7 +69,8 @@ android {
         jvmTarget = "11"
         freeCompilerArgs = listOf(
             "-Xopt-in=kotlin.RequiresOptIn",
-            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi"
+            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
         )
     }
 

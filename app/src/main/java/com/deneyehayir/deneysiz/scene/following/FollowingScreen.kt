@@ -83,12 +83,12 @@ fun FollowingScreen(
     navigateToBrandDetail: (Int) -> Unit,
     onDeleteClick: (Int) -> Unit
 ) {
-
     Scaffold(
         modifier = modifier,
         topBar = {
             MainTopAppBar(
-                titleRes = R.string.top_bar_title_following, titleColor = DarkTextColor
+                titleRes = R.string.top_bar_title_following,
+                titleColor = DarkTextColor
             )
         }
     ) { padding ->
@@ -149,7 +149,8 @@ fun BrandRowFollowing(
                 cardHeight = it.size.height
             }
             .swipeable(
-                state = swipeableState, anchors = anchors,
+                state = swipeableState,
+                anchors = anchors,
                 thresholds = { from, to ->
                     FractionalThreshold(0.3f)
                 },
@@ -172,7 +173,8 @@ fun BrandRowFollowing(
                 brandParentCompanyName = item.parentCompanyName
             )
             ScoreBox(
-                backgroundColor = item.scoreBackgroundColor, score = item.score
+                backgroundColor = item.scoreBackgroundColor,
+                score = item.score
             )
         }
         BrandSwipeActionRowFollowing(
@@ -228,7 +230,8 @@ fun FollowingEmptyItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_empty_following), contentDescription = null
+            painter = painterResource(id = R.drawable.ic_empty_following),
+            contentDescription = null
         )
         Text(
             modifier = Modifier.padding(top = 24.dp),
