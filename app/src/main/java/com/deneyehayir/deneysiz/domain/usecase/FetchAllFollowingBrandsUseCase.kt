@@ -7,12 +7,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 class FetchAllFollowingBrandsUseCase @Inject constructor(
-    private val repository: Repository, @IoDispatcher dispatcher: CoroutineDispatcher
-) : UseCase<List<CategoryDetailItemDomainModel>, FetchAllFollowingBrandsUseCase.Params>(dispatcher) {
+    private val repository: Repository,
+    @IoDispatcher dispatcher: CoroutineDispatcher
+) : UseCase<
+    List<CategoryDetailItemDomainModel>,
+    FetchAllFollowingBrandsUseCase.Params>(dispatcher) {
 
     override suspend fun execute(params: Params): List<CategoryDetailItemDomainModel> =
         repository.fetchFollowingBrands()
 
     object Params
-
 }

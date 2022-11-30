@@ -8,7 +8,7 @@ import javax.inject.Inject
 class RemoveBrandFromFollowingUseCase @Inject constructor(
     @IoDispatcher dispatcher: CoroutineDispatcher,
     private val repository: Repository
-): UseCase<Unit, RemoveBrandFromFollowingUseCase.Params>(dispatcher) {
+) : UseCase<Unit, RemoveBrandFromFollowingUseCase.Params>(dispatcher) {
 
     override suspend fun execute(params: Params) {
         repository.removeBrandFromFollowing(params.brandId)
@@ -17,5 +17,4 @@ class RemoveBrandFromFollowingUseCase @Inject constructor(
     data class Params(
         val brandId: Int
     )
-
 }

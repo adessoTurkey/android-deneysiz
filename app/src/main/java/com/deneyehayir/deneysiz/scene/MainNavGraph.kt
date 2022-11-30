@@ -218,7 +218,7 @@ fun MainNavGraph(
 
         composable(
             MainScreen.Following.route
-        ){
+        ) {
             FollowingRoute(
                 navigateToBrandDetail = { brandId ->
                     navController.navigate(

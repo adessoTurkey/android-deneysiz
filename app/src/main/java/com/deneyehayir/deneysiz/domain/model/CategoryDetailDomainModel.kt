@@ -13,7 +13,7 @@ data class CategoryDetailItemDomainModel(
     val parentCompanyName: String,
     val score: Int,
     val isFavorite: Boolean
-){
+) {
     fun toEntity() = BrandEntity(
         brandId = id,
         brandName = brandName,

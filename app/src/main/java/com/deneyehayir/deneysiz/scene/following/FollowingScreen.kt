@@ -63,7 +63,8 @@ fun FollowingRoute(
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navigateToBrandDetail: (Int) -> Unit
 ) {
-    val uiState by rememberFlowWithLifecycle(viewModel.uiState).collectAsState(initial = FollowingUiState.Loading)
+    val uiState by rememberFlowWithLifecycle(viewModel.uiState)
+        .collectAsState(initial = FollowingUiState.Loading)
 
     FollowingScreen(
         modifier = modifier,
@@ -83,11 +84,14 @@ fun FollowingScreen(
     onDeleteClick: (Int) -> Unit
 ) {
 
-    Scaffold(modifier = modifier, topBar = {
-        MainTopAppBar(
-            titleRes = R.string.top_bar_title_following, titleColor = DarkTextColor
-        )
-    }) { padding ->
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            MainTopAppBar(
+                titleRes = R.string.top_bar_title_following, titleColor = DarkTextColor
+            )
+        }
+    ) { padding ->
         when (uiState) {
             FollowingUiState.Loading -> {
                 LoadingScreen()
@@ -138,25 +142,30 @@ fun BrandRowFollowing(
     var cardHeight by remember { mutableStateOf(0) }
     val actionHeightDp = LocalDensity.current.run { cardHeight.toDp() }
 
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .onGloballyPositioned {
-            cardHeight = it.size.height
-        }
-        .swipeable(
-            state = swipeableState, anchors = anchors, thresholds = { from, to ->
-                FractionalThreshold(0.3f)
-            }, orientation = Orientation.Horizontal
-        )
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .onGloballyPositioned {
+                cardHeight = it.size.height
+            }
+            .swipeable(
+                state = swipeableState, anchors = anchors,
+                thresholds = { from, to ->
+                    FractionalThreshold(0.3f)
+                },
+                orientation = Orientation.Horizontal
+            )
     ) {
-        Row(modifier = Modifier
-            .clickable(onClick = { navigateToBrandDetail(item.id) })
-            .background(color = RowColor)
-            .padding(16.dp)
-            .align(Alignment.Center)
-            .offset {
-                IntOffset(swipeableState.offset.value.roundToInt(), 0)
-            }) {
+        Row(
+            modifier = Modifier
+                .clickable(onClick = { navigateToBrandDetail(item.id) })
+                .background(color = RowColor)
+                .padding(16.dp)
+                .align(Alignment.Center)
+                .offset {
+                    IntOffset(swipeableState.offset.value.roundToInt(), 0)
+                }
+        ) {
             BrandDetail(
                 modifier = Modifier.weight(1f),
                 brandName = item.brandName,
@@ -166,34 +175,40 @@ fun BrandRowFollowing(
                 backgroundColor = item.scoreBackgroundColor, score = item.score
             )
         }
-        BrandSwipeActionRowFollowing(modifier = Modifier
-            .width(56.dp)
-            .height(actionHeightDp)
-            .align(Alignment.CenterEnd)
-            .offset(x = (56).dp)
-            .offset {
-                IntOffset(swipeableState.offset.value.roundToInt(), 0)
-            },
+        BrandSwipeActionRowFollowing(
+            modifier = Modifier
+                .width(56.dp)
+                .height(actionHeightDp)
+                .align(Alignment.CenterEnd)
+                .offset(x = (56).dp)
+                .offset {
+                    IntOffset(swipeableState.offset.value.roundToInt(), 0)
+                },
             brandId = item.id,
             onDeleteClick = { id ->
                 coroutineScope.launch {
                     swipeableState.animateTo(0f)
                 }
                 onDeleteClick(id)
-        })
+            }
+        )
     }
 }
 
 @Composable
 fun BrandSwipeActionRowFollowing(
-    modifier: Modifier = Modifier, brandId: Int, onDeleteClick: (Int) -> Unit
+    modifier: Modifier = Modifier,
+    brandId: Int,
+    onDeleteClick: (Int) -> Unit
 ) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .background(Orange)
-        .clickable {
-            onDeleteClick.invoke(brandId)
-        }) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Orange)
+            .clickable {
+                onDeleteClick.invoke(brandId)
+            }
+    ) {
         Icon(
             modifier = Modifier.align(Alignment.Center),
             painter = painterResource(id = R.drawable.ic_delete),

@@ -27,8 +27,7 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideBrandsDao(deneysizDatabase: DeneysizDatabase) : BrandsDao {
+    fun provideBrandsDao(deneysizDatabase: DeneysizDatabase): BrandsDao {
         return deneysizDatabase.brandsDao()
     }
-
 }

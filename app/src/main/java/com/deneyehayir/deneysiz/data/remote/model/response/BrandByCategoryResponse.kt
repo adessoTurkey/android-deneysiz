@@ -33,7 +33,7 @@ data class BrandByCategoryItemResponse(
     val veganProduct: Boolean?,
     val score: Int?,
     val description: String?,
-    val createdAt: String?,
+    val createdAt: String?
 )
 
 @Serializable
@@ -48,7 +48,7 @@ data class CertificateResponse(
     val valid: Boolean?
 )
 
-fun BrandByCategoryResponse.toCategoryDetailDomain(favoriteList: List<BrandEntity>) = CategoryDetailDomainModel(
+fun BrandByCategoryResponse.toCategoryDetailDomain(favoriteList: List<BrandEntity>) = CategoryDetailDomainModel( // ktlint-disable max-line-length
     items = data?.map { response ->
         CategoryDetailItemDomainModel(
             id = response.id ?: -1,

@@ -41,7 +41,7 @@ class FollowingViewModel @Inject constructor(
         }
     }
 
-    fun handleDeleteClick(brandId: Int){
+    fun handleDeleteClick(brandId: Int) {
         viewModelScope.launch {
             removeBrandFromFollowingUseCase(
                 RemoveBrandFromFollowingUseCase.Params(
@@ -52,7 +52,6 @@ class FollowingViewModel @Inject constructor(
             }
         }
     }
-
 }
 
 sealed interface FollowingUiState {

@@ -31,9 +31,11 @@ interface Repository {
 
     suspend fun fetchDoYouKnowContentData(): DoYouKnowContentDomainModel
 
-    suspend fun addBrandToFollowing(categoryDetailItemDomainModel: CategoryDetailItemDomainModel): Long
+    suspend fun addBrandToFollowing(
+        categoryDetailItemDomainModel: CategoryDetailItemDomainModel
+    ): Long
 
     suspend fun removeBrandFromFollowing(brandId: Int)
 
-    suspend fun fetchFollowingBrands() : List<CategoryDetailItemDomainModel>
+    suspend fun fetchFollowingBrands(): List<CategoryDetailItemDomainModel>
 }

@@ -17,5 +17,4 @@ class AddBrandToFollowingUseCase @Inject constructor(
     data class Params(
         val brand: CategoryDetailItemDomainModel
     )
-
 }

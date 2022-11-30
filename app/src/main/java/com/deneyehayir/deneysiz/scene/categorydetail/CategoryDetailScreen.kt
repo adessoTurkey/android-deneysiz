@@ -81,7 +81,9 @@ import kotlin.math.roundToInt
 
 @Composable
 fun CategoryDetailScreen(
-    modifier: Modifier = Modifier, onBrandDetail: (Int) -> Unit, onBack: () -> Unit
+    modifier: Modifier = Modifier,
+    onBrandDetail: (Int) -> Unit,
+    onBack: () -> Unit
 ) {
     val viewModel = hiltViewModel<CategoryDetailViewModel>()
     val viewState by rememberFlowWithLifecycle(viewModel.categoryDetailViewState).collectAsState(
@@ -89,16 +91,21 @@ fun CategoryDetailScreen(
     )
     val context = LocalContext.current
 
-    Scaffold(modifier = modifier, topBar = {
-        CategoryDetailTopBar(titleRes = viewModel.categoryStringRes,
-            onBack = onBack,
-            onSuggestBrand = {
-                context.navigateToEmailApp(
-                    mailAddressRes = R.string.support_mail_address,
-                    subjectRes = R.string.support_subject_suggest
-                )
-            })
-    }) { padding ->
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            CategoryDetailTopBar(
+                titleRes = viewModel.categoryStringRes,
+                onBack = onBack,
+                onSuggestBrand = {
+                    context.navigateToEmailApp(
+                        mailAddressRes = R.string.support_mail_address,
+                        subjectRes = R.string.support_subject_suggest
+                    )
+                }
+            )
+        }
+    ) { padding ->
         padding
         CategoryDetailScreen(
             viewState = viewState,
@@ -128,14 +135,17 @@ private fun CategoryDetailScreen(
         }
         viewState.errorContent != null -> {
             ErrorDialog(
-                content = viewState.errorContent, onRetry = onRetry, onClose = onErrorClose
+                content = viewState.errorContent,
+                onRetry = onRetry,
+                onClose = onErrorClose
             )
         }
         viewState.sortedBrandsList.isNotEmpty() -> {
             val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
             val scope = rememberCoroutineScope()
 
-            ModalBottomSortSelection(state = state,
+            ModalBottomSortSelection(
+                state = state,
                 scope = scope,
                 sortOptions = viewState.sortingOptions,
                 onSortSelected = onSortSelected,
@@ -148,7 +158,8 @@ private fun CategoryDetailScreen(
                         navigateToBrandDetail = onBrandDetail,
                         onFollowClick = onFollowClick
                     )
-                })
+                }
+            )
         }
     }
 }
@@ -180,10 +191,17 @@ private fun CategoryDetailList(
         item {
             Text(
                 modifier = Modifier.padding(
-                    top = 16.dp, start = 16.dp, bottom = 8.dp
-                ), text = stringResource(
-                    id = R.string.category_detail_found_count, categoryDetails.size
-                ), color = DarkBlue, fontWeight = FontWeight.Normal, fontSize = 12.sp
+                    top = 16.dp,
+                    start = 16.dp,
+                    bottom = 8.dp
+                ),
+                text = stringResource(
+                    id = R.string.category_detail_found_count,
+                    categoryDetails.size
+                ),
+                color = DarkBlue,
+                fontWeight = FontWeight.Normal,
+                fontSize = 12.sp
             )
         }
         items(categoryDetails) { item ->
@@ -229,7 +247,8 @@ fun BottomSheetContent(
     onSortSelected: (SortOption) -> Unit
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(8.dp), verticalArrangement = Arrangement.spacedBy(0.dp)
+        contentPadding = PaddingValues(8.dp),
+        verticalArrangement = Arrangement.spacedBy(0.dp)
     ) {
         itemsIndexed(sortOptions) { index, sort ->
             Text(
@@ -257,7 +276,8 @@ fun BottomSheetContent(
 
 @Composable
 fun SortSelectionButton(
-    sortLabelRes: Int, onSortButtonClicked: () -> Unit
+    sortLabelRes: Int,
+    onSortButtonClicked: () -> Unit
 ) {
     OutlinedButton(
         onClick = { onSortButtonClicked() },
@@ -274,15 +294,20 @@ fun SortSelectionButton(
         Spacer(modifier = Modifier.size(8.dp))
         Text(
             text = stringResource(
-                id = R.string.category_detail_sort, stringResource(id = sortLabelRes)
-            ), color = Blue, fontSize = 17.sp
+                id = R.string.category_detail_sort,
+                stringResource(id = sortLabelRes)
+            ),
+            color = Blue,
+            fontSize = 17.sp
         )
     }
 }
 
 @Composable
 fun CategoryDetailTopBar(
-    @StringRes titleRes: Int, onBack: () -> Unit, onSuggestBrand: () -> Unit
+    @StringRes titleRes: Int,
+    onBack: () -> Unit,
+    onSuggestBrand: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -340,32 +365,39 @@ fun BrandRow(
     var cardHeight by remember { mutableStateOf(0) }
     val actionHeightDp = LocalDensity.current.run { cardHeight.toDp() }
 
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .onGloballyPositioned {
-            cardHeight = it.size.height
-        }
-        .swipeable(
-            state = swipeableState, anchors = anchors, thresholds = { from, to ->
-                FractionalThreshold(0.3f)
-            }, orientation = Orientation.Horizontal
-        )
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .onGloballyPositioned {
+                cardHeight = it.size.height
+            }
+            .swipeable(
+                state = swipeableState,
+                anchors = anchors,
+                thresholds = { from, to ->
+                    FractionalThreshold(0.3f)
+                },
+                orientation = Orientation.Horizontal
+            )
     ) {
-        Row(modifier = Modifier
-            .clickable(onClick = { navigateToBrandDetail(item.id) })
-            .background(color = RowColor)
-            .padding(16.dp)
-            .align(Alignment.Center)
-            .offset {
-                IntOffset(swipeableState.offset.value.roundToInt(), 0)
-            }) {
+        Row(
+            modifier = Modifier
+                .clickable(onClick = { navigateToBrandDetail(item.id) })
+                .background(color = RowColor)
+                .padding(16.dp)
+                .align(Alignment.Center)
+                .offset {
+                    IntOffset(swipeableState.offset.value.roundToInt(), 0)
+                }
+        ) {
             BrandDetail(
                 modifier = Modifier.weight(1f),
                 brandName = item.brandName,
                 brandParentCompanyName = item.parentCompanyName
             )
             ScoreBox(
-                backgroundColor = item.scoreBackgroundColor, score = item.score
+                backgroundColor = item.scoreBackgroundColor,
+                score = item.score
             )
         }
         BrandSwipeActionRow(
@@ -376,12 +408,14 @@ fun BrandRow(
                 .offset(x = (56).dp)
                 .offset {
                     IntOffset(swipeableState.offset.value.roundToInt(), 0)
-                }, item = item, onFollowClick = { model ->
-                    scope.launch {
-                        swipeableState.animateTo(0f)
-                    }
-                    onFollowClick(model)
+                },
+            item = item,
+            onFollowClick = { model ->
+                scope.launch {
+                    swipeableState.animateTo(0f)
                 }
+                onFollowClick(model)
+            }
         )
     }
 }
@@ -392,24 +426,31 @@ fun BrandSwipeActionRow(
     item: CategoryDetailItemUiModel,
     onFollowClick: (CategoryDetailItemUiModel) -> Unit
 ) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .background(Blue)
-        .clickable {
-            onFollowClick.invoke(item)
-        }) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Blue)
+            .clickable {
+                onFollowClick.invoke(item)
+            }
+    ) {
         Icon(
-            modifier = Modifier.align(Alignment.Center), painter = painterResource(
+            modifier = Modifier.align(Alignment.Center),
+            painter = painterResource(
                 id = if (item.isFavorite) R.drawable.ic_bookmark_favorite
                 else R.drawable.ic_bookmark
-            ), contentDescription = null, tint = White0
+            ),
+            contentDescription = null,
+            tint = White0
         )
     }
 }
 
 @Composable
 fun BrandDetail(
-    modifier: Modifier, brandName: String, brandParentCompanyName: String
+    modifier: Modifier,
+    brandName: String,
+    brandParentCompanyName: String
 ) {
     Column(modifier = modifier) {
         Text(
@@ -430,12 +471,15 @@ fun BrandDetail(
 
 @Composable
 fun ScoreBox(
-    backgroundColor: Color, score: Int
+    backgroundColor: Color,
+    score: Int
 ) {
     Box(
-        contentAlignment = Alignment.Center, modifier = Modifier
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
             .background(
-                color = backgroundColor, shape = RoundedCornerShape(8.dp)
+                color = backgroundColor,
+                shape = RoundedCornerShape(8.dp)
             )
             .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
     ) {
@@ -451,16 +495,19 @@ fun ScoreBox(
 @Composable
 private fun ListDivider() {
     Divider(
-        color = DividerColor, thickness = 1.dp
+        color = DividerColor,
+        thickness = 1.dp
     )
 }
 
 @Preview
 @Composable
 fun CenteredTopBarPreview() {
-    CategoryDetailTopBar(titleRes = R.string.discover_category_makeup,
+    CategoryDetailTopBar(
+        titleRes = R.string.discover_category_makeup,
         onBack = {},
-        onSuggestBrand = {})
+        onSuggestBrand = {}
+    )
 }
 
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
@@ -474,31 +521,43 @@ fun BrandRowPreview() {
         score = 7,
         isFavorite = true
     )
-    BrandRow(item = tempItem, navigateToBrandDetail = {}, onFollowClick = {}, scope = rememberCoroutineScope())
+    BrandRow(
+        item = tempItem,
+        navigateToBrandDetail = {},
+        onFollowClick = {},
+        scope = rememberCoroutineScope()
+    )
 }
 
 @Preview(backgroundColor = 0xFFFFFF, showBackground = true)
 @Composable
 fun CategoryDetailListPreview() {
     DeneysizTheme {
-        CategoryDetailScreen(viewState = CategoryDetailViewState(
-            isLoading = false,
-            errorContent = null,
-            brandsList = mutableListOf<CategoryDetailItemUiModel>().apply {
-                repeat(5) {
-                    add(
-                        CategoryDetailItemUiModel(
-                            id = 1,
-                            brandName = "Hawaiian Tropic",
-                            parentCompanyName = "Rossmann",
-                            score = 7,
-                            scoreBackgroundColor = ScoreLightGreen,
-                            isFavorite = false
+        CategoryDetailScreen(
+            viewState = CategoryDetailViewState(
+                isLoading = false,
+                errorContent = null,
+                brandsList = mutableListOf<CategoryDetailItemUiModel>().apply {
+                    repeat(5) {
+                        add(
+                            CategoryDetailItemUiModel(
+                                id = 1,
+                                brandName = "Hawaiian Tropic",
+                                parentCompanyName = "Rossmann",
+                                score = 7,
+                                scoreBackgroundColor = ScoreLightGreen,
+                                isFavorite = false
+                            )
                         )
-                    )
-                }
-            },
-            sortOption = SortOption.SCORE_DESC
-        ), onBrandDetail = {}, onSortSelected = {}, onRetry = {}, onErrorClose = {}, onFollowClick = {})
+                    }
+                },
+                sortOption = SortOption.SCORE_DESC
+            ),
+            onBrandDetail = {},
+            onSortSelected = {},
+            onRetry = {},
+            onErrorClose = {},
+            onFollowClick = {}
+        )
     }
 }

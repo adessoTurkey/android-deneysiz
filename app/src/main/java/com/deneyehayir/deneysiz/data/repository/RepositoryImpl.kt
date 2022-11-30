@@ -75,7 +75,9 @@ class RepositoryImpl @Inject constructor(
     override suspend fun fetchDoYouKnowContentData(): DoYouKnowContentDomainModel =
         assetDataSource.getDoYouKnowContentData().toDomain()
 
-    override suspend fun addBrandToFollowing(categoryDetailItemDomainModel: CategoryDetailItemDomainModel): Long =
+    override suspend fun addBrandToFollowing(
+        categoryDetailItemDomainModel: CategoryDetailItemDomainModel
+    ): Long =
         brandsDao.addBrandToFavorite(categoryDetailItemDomainModel.toEntity())
 
     override suspend fun removeBrandFromFollowing(brandId: Int) {
@@ -84,5 +86,4 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun fetchFollowingBrands(): List<CategoryDetailItemDomainModel> =
         brandsDao.fetchFavoriteBrands().map { it.toDomainModel() }
-
 }

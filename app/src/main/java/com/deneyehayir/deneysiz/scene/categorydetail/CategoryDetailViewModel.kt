@@ -84,7 +84,9 @@ class CategoryDetailViewModel @Inject constructor(
                         brandId = categoryDetailItemUiModel.id
                     )
                 ).onSuccess {
-                   viewState = viewState.updateForRemoveFavorite(brandId = categoryDetailItemUiModel.id)
+                    viewState = viewState.updateForRemoveFavorite(
+                        brandId = categoryDetailItemUiModel.id
+                    )
                     _categoryDetailViewState.value = viewState
                 }.onFailure { throwable ->
                     viewState = viewState.showError(throwable.toErrorContentUiModel())
@@ -96,14 +98,14 @@ class CategoryDetailViewModel @Inject constructor(
                         brand = categoryDetailItemUiModel.toDomainModel()
                     )
                 ).onSuccess {
-                    viewState = viewState.updateForAddFavorite(brandId = categoryDetailItemUiModel.id)
+                    viewState = viewState.updateForAddFavorite(
+                        brandId = categoryDetailItemUiModel.id
+                    )
                     _categoryDetailViewState.value = viewState
                 }.onFailure { throwable ->
                     viewState = viewState.showError(throwable.toErrorContentUiModel())
                     _categoryDetailViewState.value = viewState
                 }
             }
-
-
         }
 }

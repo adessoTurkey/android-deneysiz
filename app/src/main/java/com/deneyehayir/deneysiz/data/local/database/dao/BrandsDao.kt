@@ -16,10 +16,9 @@ interface BrandsDao {
 
     @Transaction
     @Query("SELECT * FROM brands")
-    suspend fun fetchFavoriteBrands() : List<BrandEntity>
+    suspend fun fetchFavoriteBrands(): List<BrandEntity>
 
     @Transaction
     @Query("DELETE FROM brands WHERE brand_id = :brandId")
     suspend fun deleteBrandFromFavorite(brandId: Int)
-
 }
