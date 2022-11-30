@@ -151,7 +151,7 @@ fun BrandRowFollowing(
             .swipeable(
                 state = swipeableState,
                 anchors = anchors,
-                thresholds = { from, to ->
+                thresholds = { _, _ ->
                     FractionalThreshold(0.3f)
                 },
                 orientation = Orientation.Horizontal

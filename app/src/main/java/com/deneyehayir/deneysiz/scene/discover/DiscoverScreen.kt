@@ -68,16 +68,18 @@ fun DiscoverScreen(
             )
         }
     ) {
-        DiscoverScreen(
-            modifier = modifier,
-            navigateToSearch = navigateToSearch,
-            navigateToCategory = navigateToCategory,
-            navigateToWhoWeAre = navigateToWhoWeAre,
-            discoveryViewState = discoveryViewState
-        )
+        when {
+            discoveryViewState.isLoading -> {}
+            discoveryViewState.shouldShowError -> {}
+            else -> CategoryContent(
+                categoryData = discoveryViewState.categoryUiModel,
+                navigateToCategory = navigateToCategory
+            )
+        }
     }
 }
 
+/*
 @Composable
 private fun DiscoverScreen(
     modifier: Modifier = Modifier,
@@ -95,7 +97,7 @@ private fun DiscoverScreen(
             navigateToCategory = navigateToCategory
         )
     }
-}
+}*/
 
 @Composable
 fun CategoryItem(
