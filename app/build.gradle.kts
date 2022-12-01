@@ -70,7 +70,10 @@ android {
         freeCompilerArgs = listOf(
             "-Xopt-in=kotlin.RequiresOptIn",
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
-            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-Xopt-in= kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in= kotlinx.coroutines.FlowPreview"
         )
     }
 

@@ -6,8 +6,10 @@ import com.deneyehayir.deneysiz.data.local.model.toDomain
 import com.deneyehayir.deneysiz.data.remote.datasource.RemoteDataSource
 import com.deneyehayir.deneysiz.data.remote.model.request.BrandDetailRequestBody
 import com.deneyehayir.deneysiz.data.remote.model.request.CategoryDetailRequestBody
+import com.deneyehayir.deneysiz.data.remote.model.request.SearchBrandsRequestBody
 import com.deneyehayir.deneysiz.data.remote.model.response.toBrandDetailDomain
 import com.deneyehayir.deneysiz.data.remote.model.response.toCategoryDetailDomain
+import com.deneyehayir.deneysiz.data.remote.model.response.toSearchResultDomainModel
 import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailItemDomainModel
@@ -16,6 +18,7 @@ import com.deneyehayir.deneysiz.domain.model.CertificatesDomainModel
 import com.deneyehayir.deneysiz.domain.model.DoYouKnowContentDomainModel
 import com.deneyehayir.deneysiz.domain.model.DoYouKnowDomainModel
 import com.deneyehayir.deneysiz.domain.model.DonationDomainModel
+import com.deneyehayir.deneysiz.domain.model.SearchResultDomainModel
 import com.deneyehayir.deneysiz.domain.model.SupportDomainModel
 import com.deneyehayir.deneysiz.domain.model.WhoWeAreDomainModel
 import com.deneyehayir.deneysiz.domain.repository.Repository
@@ -74,6 +77,10 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun fetchDoYouKnowContentData(): DoYouKnowContentDomainModel =
         assetDataSource.getDoYouKnowContentData().toDomain()
+
+    override suspend fun fetchSearchResult(query: String): SearchResultDomainModel =
+        remoteDataSource.fetchSearchResult(SearchBrandsRequestBody(query = query))
+            .toSearchResultDomainModel()
 
     override suspend fun addBrandToFollowing(
         categoryDetailItemDomainModel: CategoryDetailItemDomainModel

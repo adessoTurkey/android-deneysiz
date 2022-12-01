@@ -29,6 +29,9 @@ import com.deneyehayir.deneysiz.scene.donation.DonationScreen
 import com.deneyehayir.deneysiz.scene.doyouknow.DoYouKnowScreen
 import com.deneyehayir.deneysiz.scene.doyouknowcontent.DoYouKnowContentScreen
 import com.deneyehayir.deneysiz.scene.following.FollowingRoute
+import com.deneyehayir.deneysiz.scene.search.navigation.navigateSearch
+import com.deneyehayir.deneysiz.scene.search.navigation.searchScreen
+import com.deneyehayir.deneysiz.scene.searchmain.SearchMainRoute
 import com.deneyehayir.deneysiz.scene.splash.SplashScreen
 import com.deneyehayir.deneysiz.scene.support.SupportScreen
 import com.deneyehayir.deneysiz.scene.whoweare.WhoWeAreScreen
@@ -64,6 +67,12 @@ sealed class MainScreen(
         route = "main/following",
         titleResource = R.string.bottom_nav_tab_following,
         iconResource = R.drawable.ic_bookmark
+    )
+
+    object SearchMain : MainScreen(
+        route = "main/searchmain",
+        titleResource = R.string.bottom_nav_tab_search,
+        iconResource = R.drawable.ic_search
     )
 }
 
@@ -163,7 +172,7 @@ fun MainNavGraph(
             SplashScreen(
                 onSplashComplete = {
                     navController.navigate(
-                        MainScreen.Discover.route
+                        MainScreen.SearchMain.route
                     ) {
                         popUpTo(splashScreenRoute) {
                             inclusive = true
@@ -229,6 +238,30 @@ fun MainNavGraph(
                 }
             )
         }
+
+        composable(MainScreen.SearchMain.route) {
+            SearchMainRoute(
+                navigateToWhoWeAre = {
+                    navController.navigate(
+                        DetailScreen.WhoWeAreScreen.route
+                    )
+                },
+                onInputFieldClick = {
+                    navController.navigateSearch()
+                }
+            )
+        }
+
+        searchScreen(
+            navigateToBrandDetail = { brandId ->
+                navController.navigate(
+                    DetailScreen.BrandDetail.createRoute(
+                        brandId = brandId
+                    )
+                )
+            }
+        )
+
         composable(
             route = DetailScreen.Category.route,
             arguments = listOf(

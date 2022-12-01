@@ -45,7 +45,7 @@ fun CategoryDetailItemDomainModel.toUiModel() = CategoryDetailItemUiModel(
     isFavorite = isFavorite
 )
 
-private fun Int.getScoreBackgroundColor(): Color {
+fun Int.getScoreBackgroundColor(): Color {
     return when (this) {
         in 4..5 -> ScoreYellow
         in 6..7 -> ScoreLightGreen
