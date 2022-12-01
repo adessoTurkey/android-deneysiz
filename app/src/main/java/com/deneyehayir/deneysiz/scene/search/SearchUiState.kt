@@ -48,6 +48,30 @@ data class SearchUiState(
         data = listOf()
     )
 
+    fun updateForRemoveFavorite(brandId: Int) = copy(
+        data = data.map { item ->
+            if (item.id == brandId) {
+                item.copy(
+                    isFavorite = false
+                )
+            } else {
+                item
+            }
+        }
+    )
+
+    fun updateForAddFavorite(brandId: Int) = copy(
+        data = data.map { item ->
+            if (item.id == brandId) {
+                item.copy(
+                    isFavorite = true
+                )
+            } else {
+                item
+            }
+        }
+    )
+
     companion object {
         val Initial = SearchUiState(
             isLoading = false,

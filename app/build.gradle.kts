@@ -72,8 +72,8 @@ android {
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
             "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
-            "-Xopt-in= kotlinx.coroutines.ExperimentalCoroutinesApi",
-            "-Xopt-in= kotlinx.coroutines.FlowPreview"
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in=kotlinx.coroutines.FlowPreview"
         )
     }
 

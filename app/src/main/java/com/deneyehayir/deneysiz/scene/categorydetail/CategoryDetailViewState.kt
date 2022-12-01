@@ -41,23 +41,25 @@ data class CategoryDetailViewState(
 
     fun updateForRemoveFavorite(brandId: Int) = copy(
         brandsList = brandsList.map { item ->
-            if (item.id == brandId)
+            if (item.id == brandId) {
                 item.copy(
                     isFavorite = false
                 )
-            else
+            } else {
                 item
+            }
         }
     )
 
     fun updateForAddFavorite(brandId: Int) = copy(
         brandsList = brandsList.map { item ->
-            if (item.id == brandId)
+            if (item.id == brandId) {
                 item.copy(
                     isFavorite = true
                 )
-            else
+            } else {
                 item
+            }
         }
     )
 

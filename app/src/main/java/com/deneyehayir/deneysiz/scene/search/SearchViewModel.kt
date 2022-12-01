@@ -2,8 +2,11 @@ package com.deneyehayir.deneysiz.scene.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.deneyehayir.deneysiz.domain.usecase.AddBrandToFollowingUseCase
 import com.deneyehayir.deneysiz.domain.usecase.FetchSearchResultUseCase
+import com.deneyehayir.deneysiz.domain.usecase.RemoveBrandFromFollowingUseCase
 import com.deneyehayir.deneysiz.internal.extension.toErrorContentUiModel
+import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
 import com.deneyehayir.deneysiz.scene.search.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +23,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val fetchSearchResultUseCase: FetchSearchResultUseCase
+    private val fetchSearchResultUseCase: FetchSearchResultUseCase,
+    private val addFavoriteUseCase: AddBrandToFollowingUseCase,
+    private val removeFavoriteUseCase: RemoveBrandFromFollowingUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SearchUiState.Initial)
@@ -93,4 +98,41 @@ class SearchViewModel @Inject constructor(
             }
         }
     }
+
+    fun handleFollowClick(categoryDetailItemUiModel: CategoryDetailItemUiModel) =
+        viewModelScope.launch {
+            if (categoryDetailItemUiModel.isFavorite) {
+                removeFavoriteUseCase(
+                    RemoveBrandFromFollowingUseCase.Params(
+                        brandId = categoryDetailItemUiModel.id
+                    )
+                ).onSuccess {
+                    _uiState.update {
+                        it.updateForRemoveFavorite(
+                            brandId = categoryDetailItemUiModel.id
+                        )
+                    }
+                }.onFailure { throwable ->
+                    _uiState.update {
+                        it.showError(throwable.toErrorContentUiModel())
+                    }
+                }
+            } else {
+                addFavoriteUseCase(
+                    AddBrandToFollowingUseCase.Params(
+                        brand = categoryDetailItemUiModel.toDomainModel()
+                    )
+                ).onSuccess {
+                    _uiState.update {
+                        it.updateForAddFavorite(
+                            brandId = categoryDetailItemUiModel.id
+                        )
+                    }
+                }.onFailure { throwable ->
+                    _uiState.update {
+                        it.showError(throwable.toErrorContentUiModel())
+                    }
+                }
+            }
+        }
 }

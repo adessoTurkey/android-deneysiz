@@ -22,12 +22,10 @@ import com.deneyehayir.deneysiz.domain.model.SearchResultDomainModel
 import com.deneyehayir.deneysiz.domain.model.SupportDomainModel
 import com.deneyehayir.deneysiz.domain.model.WhoWeAreDomainModel
 import com.deneyehayir.deneysiz.domain.repository.Repository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class RepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val assetDataSource: AssetDataSource,
@@ -78,9 +76,17 @@ class RepositoryImpl @Inject constructor(
     override suspend fun fetchDoYouKnowContentData(): DoYouKnowContentDomainModel =
         assetDataSource.getDoYouKnowContentData().toDomain()
 
-    override suspend fun fetchSearchResult(query: String): SearchResultDomainModel =
-        remoteDataSource.fetchSearchResult(SearchBrandsRequestBody(query = query))
-            .toSearchResultDomainModel()
+    override suspend fun fetchSearchResult(query: String): SearchResultDomainModel {
+        val favoriteList = coroutineScope {
+            async {
+                brandsDao.fetchFavoriteBrands()
+            }
+        }
+
+        return remoteDataSource.fetchSearchResult(
+            SearchBrandsRequestBody(query = query)
+        ).toSearchResultDomainModel(favoriteList.await())
+    }
 
     override suspend fun addBrandToFollowing(
         categoryDetailItemDomainModel: CategoryDetailItemDomainModel

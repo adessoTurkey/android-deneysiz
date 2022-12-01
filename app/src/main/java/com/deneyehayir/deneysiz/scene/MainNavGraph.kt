@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -140,7 +141,11 @@ fun BottomNavBar(
                     )
                 },
                 label = {
-                    Text(text = stringResource(id = tab.titleResource))
+                    Text(
+                        text = stringResource(id = tab.titleResource),
+                        softWrap = false,
+                        fontSize = 10.sp
+                    )
                 },
                 selectedContentColor = Orange,
                 unselectedContentColor = Gray,
