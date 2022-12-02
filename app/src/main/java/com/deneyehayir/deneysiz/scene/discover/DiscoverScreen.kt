@@ -46,7 +46,6 @@ import com.deneyehayir.deneysiz.ui.theme.Transparent
 @Composable
 fun DiscoverScreen(
     modifier: Modifier = Modifier,
-    navigateToSearch: () -> Unit,
     navigateToCategory: (CategoryItemUiModel) -> Unit,
     navigateToWhoWeAre: () -> Unit
 ) {
@@ -154,7 +153,6 @@ fun CategoryContent(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-
         item {
             CategoryItem(
                 modifier = Modifier.fillMaxWidth(),

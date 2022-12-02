@@ -189,7 +189,6 @@ fun MainNavGraph(
         composable(MainScreen.Discover.route) {
             DiscoverScreen(
                 modifier = modifier,
-                navigateToSearch = {},
                 navigateToCategory = { categoryItem ->
                     navController.navigate(
                         DetailScreen.Category.createRoute(
