@@ -61,7 +61,7 @@ fun BrandByCategoryResponse.toCategoryDetailDomain(favoriteList: List<BrandEntit
     shouldShowError = status != 200
 )
 
-fun BrandByCategoryResponse.toBrandDetailDomain() = BrandDetailDomainModel(
+fun BrandByCategoryResponse.toBrandDetailDomain(favoriteList: List<BrandEntity>) = BrandDetailDomainModel( // ktlint-disable max-line-length
     id = data?.firstOrNull()?.id ?: -1,
     name = data?.firstOrNull()?.name.orEmpty(),
     parentCompany = data?.firstOrNull()?.parentCompany.toParentCompanyType(),
@@ -74,7 +74,8 @@ fun BrandByCategoryResponse.toBrandDetailDomain() = BrandDetailDomainModel(
     score = data?.firstOrNull()?.score ?: -1,
     description = data?.firstOrNull()?.description.orEmpty(),
     updateDate = data?.firstOrNull()?.createdAt.orEmpty(),
-    shouldShowError = status != 200
+    shouldShowError = status != 200,
+    isFavorite = (data?.firstOrNull()?.id ?: -1) in favoriteList.map { it.brandId }
 )
 
 fun ParentCompanyResponse?.toParentCompanyType(): ParentCompanyType {

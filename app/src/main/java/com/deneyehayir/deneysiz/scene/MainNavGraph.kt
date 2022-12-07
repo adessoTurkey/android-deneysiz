@@ -47,6 +47,8 @@ const val navBrandDetailBrandId = "brandId"
 const val navDoYouKnowContentId = "doYouKnowContentId"
 const val splashScreenRoute = "splash"
 
+const val isComingBackFavorite = "isComingBackFavorite"
+
 sealed class MainScreen(
     val route: String,
     @StringRes val titleResource: Int,
@@ -233,6 +235,7 @@ fun MainNavGraph(
             MainScreen.Following.route
         ) {
             FollowingRoute(
+                navController = navController,
                 navigateToBrandDetail = { brandId ->
                     navController.navigate(
                         DetailScreen.BrandDetail.createRoute(
@@ -257,6 +260,7 @@ fun MainNavGraph(
         }
 
         searchScreen(
+            navController = navController,
             navigateToBrandDetail = { brandId ->
                 navController.navigate(
                     DetailScreen.BrandDetail.createRoute(
@@ -282,6 +286,7 @@ fun MainNavGraph(
             if (categoryId != null && categoryStringRes != null) {
                 CategoryDetailScreen(
                     modifier = modifier,
+                    navController = navController,
                     onBrandDetail = { brandId ->
                         navController.navigate(
                             DetailScreen.BrandDetail.createRoute(
@@ -305,7 +310,13 @@ fun MainNavGraph(
             if (brandId != null) {
                 BrandDetailScreen(
                     modifier = modifier,
-                    onBack = { navController.navigateUp() },
+                    onBack = {
+                        with(navController) {
+                            previousBackStackEntry
+                                ?.savedStateHandle?.set(isComingBackFavorite, true)
+                            navigateUp()
+                        }
+                    },
                     onNavigateCertificateDetail = { contentId ->
                         navController.navigate(
                             DetailScreen.DoYouKnowContentDetail.createRoute(

@@ -25,7 +25,6 @@ import com.deneyehayir.deneysiz.domain.repository.Repository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
-
 class RepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val assetDataSource: AssetDataSource,
@@ -48,12 +47,19 @@ class RepositoryImpl @Inject constructor(
         ).toCategoryDetailDomain(favoriteList.await())
     }
 
-    override suspend fun fetchBrandDetail(brandId: Int): BrandDetailDomainModel =
-        remoteDataSource.fetchBrandDetail(
+    override suspend fun fetchBrandDetail(brandId: Int): BrandDetailDomainModel {
+        val favoriteList = coroutineScope {
+            async {
+                brandsDao.fetchFavoriteBrands()
+            }
+        }
+
+        return remoteDataSource.fetchBrandDetail(
             requestBody = BrandDetailRequestBody(
                 id = brandId
             )
-        ).toBrandDetailDomain()
+        ).toBrandDetailDomain(favoriteList.await())
+    }
 
     override suspend fun fetchCategories(): CategoryDomainModel =
         assetDataSource.getCategories().toDomain()

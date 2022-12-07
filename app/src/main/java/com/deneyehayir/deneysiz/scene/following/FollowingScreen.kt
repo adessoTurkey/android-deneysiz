@@ -23,6 +23,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,13 +42,16 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.deneyehayir.deneysiz.R
+import com.deneyehayir.deneysiz.internal.extension.getResultOnce
 import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
 import com.deneyehayir.deneysiz.scene.categorydetail.BrandDetail
 import com.deneyehayir.deneysiz.scene.categorydetail.ScoreBox
 import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
 import com.deneyehayir.deneysiz.scene.component.LoadingScreen
 import com.deneyehayir.deneysiz.scene.component.MainTopAppBar
+import com.deneyehayir.deneysiz.scene.isComingBackFavorite
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
 import com.deneyehayir.deneysiz.ui.theme.Orange
 import com.deneyehayir.deneysiz.ui.theme.RowColor
@@ -60,11 +64,24 @@ import kotlin.math.roundToInt
 fun FollowingRoute(
     modifier: Modifier = Modifier,
     viewModel: FollowingViewModel = hiltViewModel(),
+    navController: NavController,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navigateToBrandDetail: (Int) -> Unit
 ) {
     val uiState by rememberFlowWithLifecycle(viewModel.uiState)
         .collectAsState(initial = FollowingUiState.Loading)
+
+    DisposableEffect(Unit) {
+        navController.getResultOnce<Boolean>(
+            keyResult = isComingBackFavorite,
+            onResult = { state ->
+                if (state) {
+                    viewModel.handleComingBackDetailState()
+                }
+            }
+        )
+        onDispose { }
+    }
 
     FollowingScreen(
         modifier = modifier,

@@ -91,4 +91,6 @@
     <string name="search_result_score">%d/10</string>
     <string name="search_suggest_brand_mail_address">info@deneyehayir.org</string>
     <string name="search_suggest_brand_mail_subject">Yeni Marka Önermek İstiyorum</string>
+
+    <string name="follow_button_item_text">Takip Et</string>
 </resources>

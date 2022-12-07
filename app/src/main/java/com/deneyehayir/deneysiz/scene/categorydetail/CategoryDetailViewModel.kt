@@ -108,4 +108,8 @@ class CategoryDetailViewModel @Inject constructor(
                 }
             }
         }
+
+    fun handleComingBackDetailState() {
+        fetchCategoryDetailData()
+    }
 }

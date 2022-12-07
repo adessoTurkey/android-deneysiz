@@ -60,6 +60,7 @@ import com.deneyehayir.deneysiz.scene.branddetail.model.CertificateUiModel
 import com.deneyehayir.deneysiz.scene.branddetail.model.ScoreUiModel
 import com.deneyehayir.deneysiz.scene.component.ErrorDialog
 import com.deneyehayir.deneysiz.scene.component.LoadingScreen
+import com.deneyehayir.deneysiz.ui.component.FollowButtonItem
 import com.deneyehayir.deneysiz.ui.theme.BlueTextColor
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
@@ -109,7 +110,8 @@ fun BrandDetailScreen(
             onScoreDetail = viewModel.onScoreDetail,
             onNavigateCertificateDetail = onNavigateCertificateDetail,
             onRetry = viewModel.onRetry,
-            onErrorClose = viewModel.onErrorClose
+            onErrorClose = viewModel.onErrorClose,
+            onFollowClick = viewModel::handleFollowClick
         )
         Spacer(modifier = Modifier.size(24.dp))
     }
@@ -125,6 +127,7 @@ private fun BrandDetailScreen(
     onNavigateCertificateDetail: (Int) -> Unit,
     onRetry: () -> Unit,
     onErrorClose: () -> Unit,
+    onFollowClick: (BrandDetailUiModel) -> Unit
 ) {
     when {
         viewState.isLoading -> {
@@ -147,7 +150,8 @@ private fun BrandDetailScreen(
                         brandDetailData = viewState.brandDetailData,
                         shouldScoreDetailDialogShown = viewState.shouldScoreDetailDialogShown,
                         onScoreDetail = onScoreDetail,
-                        onNavigateCertificateDetail = onNavigateCertificateDetail
+                        onNavigateCertificateDetail = onNavigateCertificateDetail,
+                        onFollowClick = onFollowClick
                     )
                 }
             )
@@ -160,7 +164,8 @@ private fun BrandDetailScreenContent(
     brandDetailData: BrandDetailUiModel,
     shouldScoreDetailDialogShown: Boolean,
     onScoreDetail: () -> Unit,
-    onNavigateCertificateDetail: (Int) -> Unit
+    onNavigateCertificateDetail: (Int) -> Unit,
+    onFollowClick: (BrandDetailUiModel) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -191,6 +196,13 @@ private fun BrandDetailScreenContent(
         )
         DescriptionText(description = brandDetailData.description)
         UpdateDateText(date = brandDetailData.updateDate)
+        Spacer(modifier = Modifier.height(24.dp))
+        FollowButtonItem(
+            favoriteStatus = brandDetailData.isFavorite,
+            onFollowClick = {
+                onFollowClick.invoke(brandDetailData)
+            }
+        )
     }
 }
 

@@ -36,6 +36,7 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,13 +59,16 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.deneyehayir.deneysiz.R
+import com.deneyehayir.deneysiz.internal.extension.getResultOnce
 import com.deneyehayir.deneysiz.internal.extension.navigateToEmailApp
 import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
 import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
 import com.deneyehayir.deneysiz.scene.categorydetail.model.SortOption
 import com.deneyehayir.deneysiz.scene.component.ErrorDialog
 import com.deneyehayir.deneysiz.scene.component.LoadingScreen
+import com.deneyehayir.deneysiz.scene.isComingBackFavorite
 import com.deneyehayir.deneysiz.ui.theme.Blue
 import com.deneyehayir.deneysiz.ui.theme.DarkBlue
 import com.deneyehayir.deneysiz.ui.theme.DarkTextColor
@@ -82,6 +86,7 @@ import kotlin.math.roundToInt
 @Composable
 fun CategoryDetailScreen(
     modifier: Modifier = Modifier,
+    navController: NavController,
     onBrandDetail: (Int) -> Unit,
     onBack: () -> Unit
 ) {
@@ -90,6 +95,18 @@ fun CategoryDetailScreen(
         initial = CategoryDetailViewState.Initial
     )
     val context = LocalContext.current
+
+    DisposableEffect(Unit) {
+        navController.getResultOnce<Boolean>(
+            keyResult = isComingBackFavorite,
+            onResult = { state ->
+                if (state) {
+                    viewModel.handleComingBackDetailState()
+                }
+            }
+        )
+        onDispose { }
+    }
 
     Scaffold(
         modifier = modifier,

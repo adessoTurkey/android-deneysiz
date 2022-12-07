@@ -13,11 +13,15 @@ fun NavController.navigateSearch(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.searchScreen(
+    navController: NavController,
     navigateToBrandDetail: (Int) -> Unit
 ) {
     composable(
         route = searchRoute
     ) {
-        SearchRoute(navigateToBrandDetail = navigateToBrandDetail)
+        SearchRoute(
+            navController = navController,
+            navigateToBrandDetail = navigateToBrandDetail
+        )
     }
 }

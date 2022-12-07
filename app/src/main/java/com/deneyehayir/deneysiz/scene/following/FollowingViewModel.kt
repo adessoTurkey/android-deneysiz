@@ -52,6 +52,10 @@ class FollowingViewModel @Inject constructor(
             }
         }
     }
+
+    fun handleComingBackDetailState() {
+        initFollowingItems()
+    }
 }
 
 sealed interface FollowingUiState {

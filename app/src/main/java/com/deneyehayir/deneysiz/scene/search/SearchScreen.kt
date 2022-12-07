@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -21,13 +22,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.deneyehayir.deneysiz.R
+import com.deneyehayir.deneysiz.internal.extension.getResultOnce
 import com.deneyehayir.deneysiz.internal.extension.navigateToEmailApp
 import com.deneyehayir.deneysiz.internal.util.rememberFlowWithLifecycle
 import com.deneyehayir.deneysiz.scene.categorydetail.BrandRow
 import com.deneyehayir.deneysiz.scene.categorydetail.model.CategoryDetailItemUiModel
 import com.deneyehayir.deneysiz.scene.component.ErrorDialog
 import com.deneyehayir.deneysiz.scene.component.LoadingScreen
+import com.deneyehayir.deneysiz.scene.isComingBackFavorite
 import com.deneyehayir.deneysiz.ui.component.DeneysizButton
 import com.deneyehayir.deneysiz.ui.component.SearchErrorItem
 import com.deneyehayir.deneysiz.ui.component.SearchTextInputItem
@@ -38,6 +42,7 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun SearchRoute(
     modifier: Modifier = Modifier,
+    navController: NavController,
     viewModel: SearchViewModel = hiltViewModel(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navigateToBrandDetail: (Int) -> Unit
@@ -49,6 +54,19 @@ fun SearchRoute(
         initial = ""
     )
     val context = LocalContext.current
+
+    DisposableEffect(Unit) {
+        navController.getResultOnce<Boolean>(
+            keyResult = isComingBackFavorite,
+            onResult = { state ->
+                if (state) {
+                    viewModel.handleComingBackDetailState()
+                }
+            }
+        )
+        onDispose { }
+    }
+
     SearchScreen(
         modifier = modifier,
         viewState = viewState,

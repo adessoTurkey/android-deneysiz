@@ -135,4 +135,24 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
+
+    fun handleComingBackDetailState() {
+        if (_uiState.value.data.isEmpty().not() && queryFlowText.value.isEmpty().not()) {
+            viewModelScope.launch {
+                fetchSearchResultUseCase.execute(
+                    FetchSearchResultUseCase.Params(
+                        query = queryFlowText.value
+                    )
+                ).catch { err ->
+                    _uiState.update {
+                        it.showError(err.toErrorContentUiModel())
+                    }
+                }.collectLatest { result ->
+                    _uiState.update { state ->
+                        state.updateSearchResult(result.toUiModel().items)
+                    }
+                }
+            }
+        }
+    }
 }
