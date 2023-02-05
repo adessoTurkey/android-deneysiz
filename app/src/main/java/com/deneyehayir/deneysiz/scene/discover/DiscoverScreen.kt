@@ -66,11 +66,12 @@ fun DiscoverScreen(
                 }
             )
         }
-    ) {
+    ) { paddingValues ->
         when {
             discoveryViewState.isLoading -> {}
             discoveryViewState.shouldShowError -> {}
             else -> CategoryContent(
+                modifier = Modifier.padding(paddingValues),
                 categoryData = discoveryViewState.categoryUiModel,
                 navigateToCategory = navigateToCategory
             )
@@ -145,6 +146,7 @@ fun CategoryItem(
 
 @Composable
 fun CategoryContent(
+    modifier: Modifier = Modifier,
     categoryData: CategoryUiModel,
     navigateToCategory: (CategoryItemUiModel) -> Unit
 ) {

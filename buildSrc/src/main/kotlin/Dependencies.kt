@@ -7,7 +7,7 @@ object Dependencies {
     const val lottie = "com.airbnb.android:lottie-compose:5.0.1"
 
     object Kotlin {
-        private const val version = "1.6.10"
+        private const val version = "1.7.10"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
     }
 

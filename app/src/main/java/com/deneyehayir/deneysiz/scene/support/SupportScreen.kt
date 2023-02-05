@@ -67,8 +67,9 @@ fun SupportScreen(
     Scaffold(
         modifier = modifier,
         topBar = { SupportTopBar(onBack = onBack) }
-    ) {
+    ) { paddingValues ->
         SupportScreen(
+            modifier = Modifier.padding(paddingValues),
             viewState = viewState,
             onExpandableToggleClick = { supportAction ->
                 viewModel.updateExpandedState(supportAction)
@@ -82,6 +83,7 @@ fun SupportScreen(
 
 @Composable
 fun SupportScreen(
+    modifier: Modifier = Modifier,
     viewState: SupportViewState,
     onExpandableToggleClick: (supportAction: SupportActionUiModel) -> Unit,
     onSocialMediaNavigation: (String) -> Unit

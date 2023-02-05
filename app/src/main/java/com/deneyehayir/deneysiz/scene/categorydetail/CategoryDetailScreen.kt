@@ -122,8 +122,9 @@ fun CategoryDetailScreen(
                 }
             )
         }
-    ) {
+    ) { paddingValues ->
         CategoryDetailScreen(
+            modifier = Modifier.padding(paddingValues),
             viewState = viewState,
             onBrandDetail = onBrandDetail,
             onSortSelected = { sortOption ->
@@ -138,6 +139,7 @@ fun CategoryDetailScreen(
 
 @Composable
 private fun CategoryDetailScreen(
+    modifier: Modifier = Modifier,
     viewState: CategoryDetailViewState,
     onBrandDetail: (Int) -> Unit,
     onSortSelected: (SortOption) -> Unit,

@@ -96,8 +96,9 @@ fun BrandDetailScreen(
                 }
             )
         }
-    ) {
+    ) { paddingValues ->
         BrandDetailScreen(
+            modifier = Modifier.padding(paddingValues),
             bottomSheetState = bottomSheetState,
             scope = scope,
             viewState = viewState,
@@ -119,6 +120,7 @@ fun BrandDetailScreen(
 
 @Composable
 private fun BrandDetailScreen(
+    modifier: Modifier = Modifier,
     bottomSheetState: ModalBottomSheetState,
     scope: CoroutineScope,
     viewState: BrandDetailViewState,

@@ -61,8 +61,9 @@ fun WhoWeAreScreen(
     Scaffold(
         modifier = modifier,
         topBar = { WhoWeAreTopBar(onBack = onBack) }
-    ) {
+    ) { paddingValues ->
         WhoWeAreScreen(
+            modifier = Modifier.padding(paddingValues),
             viewState = viewState,
             onBrowserNavigate = { url ->
                 context.openWebPage(url)
@@ -84,6 +85,7 @@ fun WhoWeAreScreen(
 
 @Composable
 private fun WhoWeAreScreen(
+    modifier: Modifier = Modifier,
     viewState: WhoWeAreViewState,
     onBrowserNavigate: (String) -> Unit,
     onContactNavigation: () -> Unit,

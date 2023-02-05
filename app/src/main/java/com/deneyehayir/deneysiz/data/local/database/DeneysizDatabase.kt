@@ -7,7 +7,8 @@ import com.deneyehayir.deneysiz.data.local.database.entity.BrandEntity
 
 @Database(
     entities = [BrandEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class DeneysizDatabase : RoomDatabase() {
     abstract fun brandsDao(): BrandsDao

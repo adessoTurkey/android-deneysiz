@@ -82,8 +82,8 @@ android {
     composeOptions { kotlinCompilerExtensionVersion = Dependencies.AndroidX.Compose.version }
 
     lint {
-        isAbortOnError = true
-        isAbsolutePaths = false
+        abortOnError = true
+        absolutePaths = false
         lintConfig = file("$rootDir/config/lint/lint.xml")
     }
 }

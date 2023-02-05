@@ -69,8 +69,9 @@ fun DoYouKnowScreen(
                 }
             )
         }
-    ) {
+    ) { paddingValues ->
         DoYouKnowScreen(
+            modifier = Modifier.padding(paddingValues),
             viewState = viewState,
             onNavigateCertificateDetail = onNavigateCertificateDetail,
             onNavigateFaqDetail = onNavigateFaqDetail
@@ -80,6 +81,7 @@ fun DoYouKnowScreen(
 
 @Composable
 private fun DoYouKnowScreen(
+    modifier: Modifier = Modifier,
     viewState: DoYouKnowViewState,
     onNavigateCertificateDetail: (Int) -> Unit,
     onNavigateFaqDetail: (Int) -> Unit
