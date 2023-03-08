@@ -9,5 +9,6 @@ data class SearchResultItemDomainModel(
     val id: Int,
     val brandName: String,
     val parentCompanyName: String,
-    val score: Int
+    val score: Int,
+    val isFavorite: Boolean
 )

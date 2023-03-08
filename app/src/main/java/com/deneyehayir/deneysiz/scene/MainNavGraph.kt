@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -28,6 +29,7 @@ import com.deneyehayir.deneysiz.scene.discover.DiscoverScreen
 import com.deneyehayir.deneysiz.scene.donation.DonationScreen
 import com.deneyehayir.deneysiz.scene.doyouknow.DoYouKnowScreen
 import com.deneyehayir.deneysiz.scene.doyouknowcontent.DoYouKnowContentScreen
+import com.deneyehayir.deneysiz.scene.following.FollowingRoute
 import com.deneyehayir.deneysiz.scene.search.navigation.navigateSearch
 import com.deneyehayir.deneysiz.scene.search.navigation.searchScreen
 import com.deneyehayir.deneysiz.scene.searchmain.SearchMainRoute
@@ -45,6 +47,8 @@ const val navBrandDetailBrandId = "brandId"
 const val navDoYouKnowContentId = "doYouKnowContentId"
 const val splashScreenRoute = "splash"
 
+const val isComingBackFavorite = "isComingBackFavorite"
+
 sealed class MainScreen(
     val route: String,
     @StringRes val titleResource: Int,
@@ -60,6 +64,12 @@ sealed class MainScreen(
         route = "main/doyouknow",
         titleResource = R.string.bottom_nav_tab_do_you_know,
         iconResource = R.drawable.ic_do_you_know
+    )
+
+    object Following : MainScreen(
+        route = "main/following",
+        titleResource = R.string.bottom_nav_tab_following,
+        iconResource = R.drawable.ic_bookmark
     )
 
     object SearchMain : MainScreen(
@@ -133,7 +143,11 @@ fun BottomNavBar(
                     )
                 },
                 label = {
-                    Text(text = stringResource(id = tab.titleResource))
+                    Text(
+                        text = stringResource(id = tab.titleResource),
+                        softWrap = false,
+                        fontSize = 10.sp
+                    )
                 },
                 selectedContentColor = Orange,
                 unselectedContentColor = Gray,
@@ -177,7 +191,6 @@ fun MainNavGraph(
         composable(MainScreen.Discover.route) {
             DiscoverScreen(
                 modifier = modifier,
-                navigateToSearch = {},
                 navigateToCategory = { categoryItem ->
                     navController.navigate(
                         DetailScreen.Category.createRoute(
@@ -218,6 +231,21 @@ fun MainNavGraph(
             )
         }
 
+        composable(
+            MainScreen.Following.route
+        ) {
+            FollowingRoute(
+                navController = navController,
+                navigateToBrandDetail = { brandId ->
+                    navController.navigate(
+                        DetailScreen.BrandDetail.createRoute(
+                            brandId = brandId
+                        )
+                    )
+                }
+            )
+        }
+
         composable(MainScreen.SearchMain.route) {
             SearchMainRoute(
                 navigateToWhoWeAre = {
@@ -232,6 +260,7 @@ fun MainNavGraph(
         }
 
         searchScreen(
+            navController = navController,
             navigateToBrandDetail = { brandId ->
                 navController.navigate(
                     DetailScreen.BrandDetail.createRoute(
@@ -257,6 +286,7 @@ fun MainNavGraph(
             if (categoryId != null && categoryStringRes != null) {
                 CategoryDetailScreen(
                     modifier = modifier,
+                    navController = navController,
                     onBrandDetail = { brandId ->
                         navController.navigate(
                             DetailScreen.BrandDetail.createRoute(
@@ -280,7 +310,13 @@ fun MainNavGraph(
             if (brandId != null) {
                 BrandDetailScreen(
                     modifier = modifier,
-                    onBack = { navController.navigateUp() },
+                    onBack = {
+                        with(navController) {
+                            previousBackStackEntry
+                                ?.savedStateHandle?.set(isComingBackFavorite, true)
+                            navigateUp()
+                        }
+                    },
                     onNavigateCertificateDetail = { contentId ->
                         navController.navigate(
                             DetailScreen.DoYouKnowContentDetail.createRoute(

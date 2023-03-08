@@ -39,6 +39,30 @@ data class CategoryDetailViewState(
         errorContent = null
     )
 
+    fun updateForRemoveFavorite(brandId: Int) = copy(
+        brandsList = brandsList.map { item ->
+            if (item.id == brandId) {
+                item.copy(
+                    isFavorite = false
+                )
+            } else {
+                item
+            }
+        }
+    )
+
+    fun updateForAddFavorite(brandId: Int) = copy(
+        brandsList = brandsList.map { item ->
+            if (item.id == brandId) {
+                item.copy(
+                    isFavorite = true
+                )
+            } else {
+                item
+            }
+        }
+    )
+
     companion object {
         val Initial = CategoryDetailViewState(
             isLoading = true,

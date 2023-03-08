@@ -21,7 +21,8 @@ fun MainContent() {
             listOf(
                 MainScreen.SearchMain,
                 MainScreen.Discover,
-                MainScreen.DoYouKnow
+                MainScreen.DoYouKnow,
+                MainScreen.Following
             )
         }
         val navController = rememberNavController()

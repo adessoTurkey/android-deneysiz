@@ -13,7 +13,8 @@ data class BrandDetailDomainModel(
     val score: Int,
     val description: String,
     val updateDate: String,
-    val shouldShowError: Boolean
+    val shouldShowError: Boolean,
+    val isFavorite: Boolean
 )
 
 data class CertificateDomainModel(

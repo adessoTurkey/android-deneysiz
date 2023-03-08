@@ -1,5 +1,6 @@
 package com.deneyehayir.deneysiz.data.remote.model.response
 
+import com.deneyehayir.deneysiz.data.local.database.entity.BrandEntity
 import com.deneyehayir.deneysiz.domain.model.BEAUTY_WITHOUT_BUNNIES
 import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
 import com.deneyehayir.deneysiz.domain.model.CategoryDetailDomainModel
@@ -32,7 +33,7 @@ data class BrandByCategoryItemResponse(
     val veganProduct: Boolean?,
     val score: Int?,
     val description: String?,
-    val createdAt: String?,
+    val createdAt: String?
 )
 
 @Serializable
@@ -47,19 +48,20 @@ data class CertificateResponse(
     val valid: Boolean?
 )
 
-fun BrandByCategoryResponse.toCategoryDetailDomain() = CategoryDetailDomainModel(
+fun BrandByCategoryResponse.toCategoryDetailDomain(favoriteList: List<BrandEntity>) = CategoryDetailDomainModel( // ktlint-disable max-line-length
     items = data?.map { response ->
         CategoryDetailItemDomainModel(
             id = response.id ?: -1,
             brandName = response.name.orEmpty(),
             parentCompanyName = response.parentCompany?.name.orEmpty(),
-            score = response.score ?: -1
+            score = response.score ?: -1,
+            isFavorite = response.id in favoriteList.map { it.brandId }
         )
     }.orEmpty(),
     shouldShowError = status != 200
 )
 
-fun BrandByCategoryResponse.toBrandDetailDomain() = BrandDetailDomainModel(
+fun BrandByCategoryResponse.toBrandDetailDomain(favoriteList: List<BrandEntity>) = BrandDetailDomainModel( // ktlint-disable max-line-length
     id = data?.firstOrNull()?.id ?: -1,
     name = data?.firstOrNull()?.name.orEmpty(),
     parentCompany = data?.firstOrNull()?.parentCompany.toParentCompanyType(),
@@ -72,7 +74,8 @@ fun BrandByCategoryResponse.toBrandDetailDomain() = BrandDetailDomainModel(
     score = data?.firstOrNull()?.score ?: -1,
     description = data?.firstOrNull()?.description.orEmpty(),
     updateDate = data?.firstOrNull()?.createdAt.orEmpty(),
-    shouldShowError = status != 200
+    shouldShowError = status != 200,
+    isFavorite = (data?.firstOrNull()?.id ?: -1) in favoriteList.map { it.brandId }
 )
 
 fun ParentCompanyResponse?.toParentCompanyType(): ParentCompanyType {

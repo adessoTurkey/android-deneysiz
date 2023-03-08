@@ -71,8 +71,9 @@ fun DonationScreen(
         modifier = modifier,
         topBar = { DonationTopBar(onBack = onBack) },
         scaffoldState = scaffoldState
-    ) {
+    ) { paddingValues ->
         DonationScreen(
+            modifier = Modifier.padding(paddingValues),
             viewState = viewState,
             onDonationClick = { url ->
                 context.openWebPage(url)
@@ -93,6 +94,7 @@ fun DonationScreen(
 
 @Composable
 private fun DonationScreen(
+    modifier: Modifier = Modifier,
     viewState: DonationViewState,
     onDonationClick: (String) -> Unit,
     onCopyToClipboard: (String) -> Unit

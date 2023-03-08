@@ -46,7 +46,6 @@ import com.deneyehayir.deneysiz.ui.theme.Transparent
 @Composable
 fun DiscoverScreen(
     modifier: Modifier = Modifier,
-    navigateToSearch: () -> Unit,
     navigateToCategory: (CategoryItemUiModel) -> Unit,
     navigateToWhoWeAre: () -> Unit
 ) {
@@ -67,17 +66,20 @@ fun DiscoverScreen(
                 }
             )
         }
-    ) {
-        DiscoverScreen(
-            modifier = modifier,
-            navigateToSearch = navigateToSearch,
-            navigateToCategory = navigateToCategory,
-            navigateToWhoWeAre = navigateToWhoWeAre,
-            discoveryViewState = discoveryViewState
-        )
+    ) { paddingValues ->
+        when {
+            discoveryViewState.isLoading -> {}
+            discoveryViewState.shouldShowError -> {}
+            else -> CategoryContent(
+                modifier = Modifier.padding(paddingValues),
+                categoryData = discoveryViewState.categoryUiModel,
+                navigateToCategory = navigateToCategory
+            )
+        }
     }
 }
 
+/*
 @Composable
 private fun DiscoverScreen(
     modifier: Modifier = Modifier,
@@ -95,7 +97,7 @@ private fun DiscoverScreen(
             navigateToCategory = navigateToCategory
         )
     }
-}
+}*/
 
 @Composable
 fun CategoryItem(
@@ -144,6 +146,7 @@ fun CategoryItem(
 
 @Composable
 fun CategoryContent(
+    modifier: Modifier = Modifier,
     categoryData: CategoryUiModel,
     navigateToCategory: (CategoryItemUiModel) -> Unit
 ) {
@@ -152,7 +155,6 @@ fun CategoryContent(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-
         item {
             CategoryItem(
                 modifier = Modifier.fillMaxWidth(),

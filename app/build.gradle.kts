@@ -70,8 +70,10 @@ android {
         freeCompilerArgs = listOf(
             "-Xopt-in=kotlin.RequiresOptIn",
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
-            "-Xopt-in= kotlinx.coroutines.ExperimentalCoroutinesApi",
-            "-Xopt-in= kotlinx.coroutines.FlowPreview"
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in=kotlinx.coroutines.FlowPreview"
         )
     }
 
@@ -80,8 +82,8 @@ android {
     composeOptions { kotlinCompilerExtensionVersion = Dependencies.AndroidX.Compose.version }
 
     lint {
-        isAbortOnError = true
-        isAbsolutePaths = false
+        abortOnError = true
+        absolutePaths = false
         lintConfig = file("$rootDir/config/lint/lint.xml")
     }
 }
@@ -138,6 +140,9 @@ dependencies {
     implementation(platform(Dependencies.Firebase.firebaseBom))
     implementation(Dependencies.Firebase.analytics)
     implementation(Dependencies.Firebase.crashlytics)
+
+    implementation(Dependencies.Room.room)
+    kapt(Dependencies.Room.roomCompiler)
 
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.KotlinX.Coroutines.test)

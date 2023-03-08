@@ -30,6 +30,12 @@ data class BrandDetailViewState(
         errorContent = null
     )
 
+    fun updateForFollowAction() = copy(
+        brandDetailData = brandDetailData?.copy(
+            isFavorite = !brandDetailData.isFavorite
+        )
+    )
+
     companion object {
         val Initial = BrandDetailViewState(
             isLoading = true,

@@ -67,16 +67,14 @@ fun SupportScreen(
     Scaffold(
         modifier = modifier,
         topBar = { SupportTopBar(onBack = onBack) }
-    ) {
+    ) { paddingValues ->
         SupportScreen(
+            modifier = Modifier.padding(paddingValues),
             viewState = viewState,
             onExpandableToggleClick = { supportAction ->
                 viewModel.updateExpandedState(supportAction)
             },
             onSocialMediaNavigation = { url ->
-                context.openWebPage(url)
-            },
-            onVolunteerApplyClick = { url ->
                 context.openWebPage(url)
             }
         )
@@ -85,10 +83,10 @@ fun SupportScreen(
 
 @Composable
 fun SupportScreen(
+    modifier: Modifier = Modifier,
     viewState: SupportViewState,
     onExpandableToggleClick: (supportAction: SupportActionUiModel) -> Unit,
-    onSocialMediaNavigation: (String) -> Unit,
-    onVolunteerApplyClick: (String) -> Unit
+    onSocialMediaNavigation: (String) -> Unit
 ) {
     when {
         viewState.isLoading -> {}
@@ -97,8 +95,7 @@ fun SupportScreen(
             SupportScreenContent(
                 uiModel = viewState.supportUiModel,
                 onExpandableToggleClick = onExpandableToggleClick,
-                onSocialMediaNavigation = onSocialMediaNavigation,
-                onVolunteerApplyClick = onVolunteerApplyClick
+                onSocialMediaNavigation = onSocialMediaNavigation
             )
         }
     }
@@ -108,8 +105,7 @@ fun SupportScreen(
 private fun SupportScreenContent(
     uiModel: SupportUiModel,
     onExpandableToggleClick: (supportAction: SupportActionUiModel) -> Unit,
-    onSocialMediaNavigation: (String) -> Unit,
-    onVolunteerApplyClick: (String) -> Unit
+    onSocialMediaNavigation: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -409,7 +405,6 @@ fun SupportScreenContentPreview() {
             )
         ),
         onExpandableToggleClick = {},
-        onSocialMediaNavigation = {},
-        onVolunteerApplyClick = {}
+        onSocialMediaNavigation = {}
     )
 }

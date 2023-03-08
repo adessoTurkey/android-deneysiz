@@ -57,8 +57,9 @@ fun DoYouKnowContentScreen(
         .collectAsState(initial = DoYouKnowContentViewState.Initial)
     val context = LocalContext.current
 
-    Scaffold(modifier = modifier) {
+    Scaffold(modifier = modifier) { paddingValues ->
         DoYouKnowContentScreen(
+            modifier = Modifier.padding(paddingValues),
             viewState = viewState,
             onLinkClick = { url ->
                 context.openWebPage(url)
@@ -70,6 +71,7 @@ fun DoYouKnowContentScreen(
 
 @Composable
 private fun DoYouKnowContentScreen(
+    modifier: Modifier = Modifier,
     viewState: DoYouKnowContentViewState,
     onLinkClick: (String) -> Unit,
     onBack: () -> Unit

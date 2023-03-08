@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import com.deneyehayir.deneysiz.R
 import com.deneyehayir.deneysiz.domain.model.BrandDetailDomainModel
+import com.deneyehayir.deneysiz.domain.model.CategoryDetailItemDomainModel
 import com.deneyehayir.deneysiz.domain.model.CertificateType
 import com.deneyehayir.deneysiz.domain.model.ParentCompanyType
 import com.deneyehayir.deneysiz.ui.theme.ScoreDarkGreen
@@ -20,8 +21,17 @@ data class BrandDetailUiModel(
     val certificateList: List<CertificateUiModel>,
     val brandInfoList: List<BrandInfoUiModel>,
     val description: String,
-    val updateDate: String
-)
+    val updateDate: String,
+    val isFavorite: Boolean
+) {
+    fun toFollowDomainModel() = CategoryDetailItemDomainModel(
+        id = id,
+        brandName = brandName,
+        parentCompanyName = parentCompany.name,
+        score = scoreData.totalValue,
+        isFavorite = isFavorite
+    )
+}
 
 data class BrandDetailParentCompanyUiModel(
     val isAvailable: Boolean,
@@ -79,7 +89,8 @@ fun BrandDetailDomainModel.toUiModel() = BrandDetailUiModel(
     },
     brandInfoList = populateBrandInfoList(),
     description = description,
-    updateDate = updateDate
+    updateDate = updateDate,
+    isFavorite = isFavorite
 )
 
 fun ParentCompanyType.toUiModel(): BrandDetailParentCompanyUiModel {

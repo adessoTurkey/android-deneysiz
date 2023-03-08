@@ -11,6 +11,7 @@
     <string name="top_bar_title_discover">Keşfet</string>
     <string name="top_bar_title_who_we_are">Biz Kimiz?</string>
     <string name="top_bar_title_do_you_know">Biliyor Musun?</string>
+    <string name="top_bar_title_following">Takiptekiler</string>
     <string name="top_bar_title_search">Deneysiz</string>
     <string name="top_bar_action_who_we_are">Biz Kimiz</string>
 
@@ -77,6 +78,8 @@
     <string name="error_dialog_description_no_internet">Lütfen internet bağlantınızı kontrol ederek tekrar deneyiniz.</string>
     <string name="error_dialog_description_error">Şu anda işleminiz gerçekleştirilemiyor.Lütfen daha sonra tekrar deneyiniz.</string>
     <string name="error_dialog_button_text">Tekrar Deneyin</string>
+    <string name="following_empty_title">Hop, hop, hop...</string>
+    <string name="following_empty_desc">Görünüşe göre takip ettiğin bir marka yok, hemen keşfete zıpla ve takibe başla!</string>
 
     <string name="search_main_input_field_hint">Marka ya da Çatı Marka Ara</string>
     <string name="search_input_field_hint">Ara</string>
@@ -88,4 +91,6 @@
     <string name="search_result_score">%d/10</string>
     <string name="search_suggest_brand_mail_address">info@deneyehayir.org</string>
     <string name="search_suggest_brand_mail_subject">Yeni Marka Önermek İstiyorum</string>
+
+    <string name="follow_button_item_text">Takip Et</string>
 </resources>
